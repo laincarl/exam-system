@@ -5,8 +5,6 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const LessThemePlugin = require('webpack-less-theme-plugin');
-const lessToJs = require('less-vars-to-js');
-const themeVariables = lessToJs(fs.readFileSync(path.join(__dirname, './theme.less'), 'utf8'));
 module.exports = {
   // devtool: 'cheap-module-eval-source-map',
   devtool: 'eval',
@@ -53,7 +51,6 @@ module.exports = {
             loader: 'less-loader',
             options: {
               sourceMap: process.env.NODE_ENV === 'production' ? false : true,
-              // modifyVars:themeVariables//定制antd主题
             },
           },
         ],
@@ -105,22 +102,12 @@ module.exports = {
     stats: 'errors-only',
     open: true,
     proxy: {
-      // '/kanban/*': {
-      //   target: 'http://localhost:8000',
-      //   changeOrigin: true,
-      //   pathRewrite: { '^/kanban': '' },
-      // },
+      // /api/test => http://localhost:8000/test
       '/api': {
         target: 'http://localhost:8000',
         changeOrigin: true,
         pathRewrite: {'^/api' : ''}
       },
-      // proxy: {
-      //   '/api/**': {
-      //     target: 'http://123.207.142.127:8378',
-      //     changeOrigin: true,
-      //   },
-      // },
     },
   },
   plugins: [

@@ -1,5 +1,5 @@
 node_modules/
 dist/
 npm-debug.log
-bundle.js
+stats.json
 yarn.lock

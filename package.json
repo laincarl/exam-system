@@ -5,6 +5,7 @@
     "scripts": {
         "dev": "webpack-dev-server --hot",
         "build": "npm run clean && webpack --config ./webpack.production.js",
+        "build-pro": "npm run clean && webpack --config ./webpack.production.js --profile --json > stats.json",
         "clean": "rimraf ./dist/*"
     },
     "author": "",
@@ -26,6 +27,7 @@
         "webpack-less-theme-plugin": "^2.0.1"
     },
     "dependencies": {
+        "antd": "^3.2.3",
         "babel-plugin-import": "^1.6.3",
         "babel-polyfill": "^6.26.0",
         "extract-text-webpack-plugin": "^3.0.2",
