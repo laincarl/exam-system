@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import { AppContainer } from 'react-hot-loader'
+import { AppContainer } from 'react-hot-loader';
 import App from './App';
 
-const render = (Component) => {
+const render = (Cmt) => {
   ReactDOM.render(
     <AppContainer key={Math.random()}>
-      <Component />
+      <Cmt />
     </AppContainer>,
     document.getElementById('root'),
-  )
-}
-render(App)
+  );
+};
+render(App);
 
 // Webpack Hot Module Replacement API
 if (module.hot) {
-  module.hot.accept('./App', () => { render(App) })
+  module.hot.accept('./App', () => { render(App); });
 }

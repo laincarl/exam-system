@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { withRouter } from 'react-router';
 import { Button } from 'antd';
+
 @inject('routing')
 class MenuTest extends Component {
   render() {

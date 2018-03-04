@@ -29,7 +29,7 @@ module.exports = {
     modules: [path.resolve(__dirname, 'node_modules')], //优化webpack文件搜索范围
     extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.less'],
     alias: {
-      Loading: path.resolve(__dirname, './src/component/common/Loading.js'),      
+      Loading: path.resolve(__dirname, './src/component/common/Loading.js'),
     },
   },
   module: {
@@ -56,7 +56,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: [{
           loader: 'react-hot-loader/webpack',
@@ -65,6 +65,8 @@ module.exports = {
           query: {
             plugins: [['import', { libraryName: 'antd', style: true }]], // style: true 会加载 less 文件 style: 'css' 会加载 css 文件
           },
+        }, {
+          loader: 'eslint-loader'
         }
         ],
       },
@@ -106,7 +108,7 @@ module.exports = {
       '/api': {
         target: 'http://localhost:8000',
         changeOrigin: true,
-        pathRewrite: {'^/api' : ''}
+        pathRewrite: { '^/api': '' }
       },
     },
   },

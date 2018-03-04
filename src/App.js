@@ -6,6 +6,7 @@ import { Provider } from 'mobx-react';
 import MainMenu from './component/common/MainMenu';
 import DevRouter from './Router';
 import menuStore from './store/menuStore';
+
 const stores = {
   // Key can be whatever you want
   routing: menuStore,
@@ -13,7 +14,6 @@ const stores = {
 };
 
 export default class App extends Component {
-
   render() {
     return (
       <Provider {...stores}>
