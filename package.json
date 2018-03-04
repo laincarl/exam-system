@@ -1,8 +1,7 @@
 {
-    "name": "my-tests",
+    "name": "webpack-react-mobx-boilerplate",
     "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
+    "description": "React的一个简单模板，支持热更新，异步路由，antd主题热更改等",
     "scripts": {
         "dev": "webpack-dev-server --hot",
         "build": "npm run clean && webpack --config ./webpack.production.js",
