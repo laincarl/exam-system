@@ -49,8 +49,6 @@
         "jsx-a11y/href-no-hash": "off",
         "react/require-default-props": "off",
         "no-restricted-globals": "off",
-        "no-unused-vars": "off",
-        "no-console": "error",
         "no-debugger": "off",
         "jsx-a11y/anchor-is-valid": [
             "warn",

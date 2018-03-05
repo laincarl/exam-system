@@ -1,10 +1,11 @@
-var path = require('path');
-const fs = require('fs')
+const path = require('path');
+const fs = require('fs');
 const webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const LessThemePlugin = require('webpack-less-theme-plugin');
+
 module.exports = {
   // devtool: 'cheap-module-eval-source-map',
   devtool: 'eval',
@@ -15,7 +16,7 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',//以保证 hot reloading 会在嵌套的路由有效。
+    publicPath: '/', // 以保证 hot reloading 会在嵌套的路由有效。
     filename: 'app/[name]_[hash:8].js',
     chunkFilename: 'app/chunks/[name].[chunkhash:5].chunk.js',
   },
@@ -26,10 +27,13 @@ module.exports = {
     child_process: 'empty',
   },
   resolve: {
-    modules: [path.resolve(__dirname, 'node_modules')], //优化webpack文件搜索范围
+    modules: [path.resolve(__dirname, 'node_modules')], // 优化webpack文件搜索范围
     extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.less'],
     alias: {
       Loading: path.resolve(__dirname, './src/component/common/Loading.js'),
+      Spin: path.resolve(__dirname, './src/component/common/Spin.js'),
+      AppState: path.resolve(__dirname, './src/store/AppState.js'),
+      CheckPermission: path.resolve(__dirname, './src/component/common/CheckPermission.js'),
     },
   },
   module: {
@@ -50,7 +54,7 @@ module.exports = {
           {
             loader: 'less-loader',
             options: {
-              sourceMap: process.env.NODE_ENV === 'production' ? false : true,
+              sourceMap: process.env.NODE_ENV !== 'production',
             },
           },
         ],
@@ -66,8 +70,8 @@ module.exports = {
             plugins: [['import', { libraryName: 'antd', style: true }]], // style: true 会加载 less 文件 style: 'css' 会加载 css 文件
           },
         }, {
-          loader: 'eslint-loader'
-        }
+          loader: 'eslint-loader',
+        },
         ],
       },
       {
@@ -99,8 +103,8 @@ module.exports = {
     contentBase: path.resolve(__dirname, 'dist'),
     compress: true,
     port: 3000,
-    host: '0.0.0.0',//允许局域网通过ip访问
-    public: 'localhost:3000',//加了host之后，open会打开0.0.0.0，所以需要定义public
+    host: '0.0.0.0', // 允许局域网通过ip访问
+    public: 'localhost:3000', // 加了host之后，open会打开0.0.0.0，所以需要定义public
     stats: 'errors-only',
     open: true,
     proxy: {
@@ -108,15 +112,15 @@ module.exports = {
       '/api': {
         target: 'http://localhost:8000',
         changeOrigin: true,
-        pathRewrite: { '^/api': '' }
+        pathRewrite: { '^/api': '' },
       },
     },
   },
   plugins: [
-    new LessThemePlugin({ theme: './theme.less' }),//使antd主题可以热加载
+    new LessThemePlugin({ theme: './theme.less' }), // 使antd主题可以热加载
     new ExtractTextPlugin('styles.css'),
     new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor', 'manifest'], //name是提取公共代码块后js文件的名字。
+      names: ['vendor', 'manifest'], // name是提取公共代码块后js文件的名字。
       // chunks: ['vendor'] //只有在vendor中配置的文件才会提取公共代码块至manifest的js文件中
     }),
     new HtmlWebpackPlugin({

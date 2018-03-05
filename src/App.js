@@ -1,15 +1,23 @@
+/*
+ * @Author: LainCarl 
+ * @Date: 2018-03-05 20:33:32 
+ * @Last Modified by:   LainCarl 
+ * @Last Modified time: 2018-03-05 20:33:32 
+ */
+
 import React, { Component } from 'react';
-import { inject, observer } from 'mobx-react';
 import { createBrowserHistory } from 'history';
 import { HashRouter as Router } from 'react-router-dom';
 import { Provider } from 'mobx-react';
-import MainMenu from './component/common/MainMenu';
-import DevRouter from './Router';
-import menuStore from './store/menuStore';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { Home, NotFoundPage, Login, Manage } from './container';
+import RouterContainer from './RouterContainer';
+import AppState from './store/AppState';
+import './App.css';
 
 const stores = {
   // Key can be whatever you want
-  routing: menuStore,
+  AppState,
   // ...other stores
 };
 
@@ -18,14 +26,17 @@ export default class App extends Component {
     return (
       <Provider {...stores}>
         <Router history={createBrowserHistory}>
-          <div>
-            <div>
-              <MainMenu />
-            </div>
-            <div>
-              <DevRouter />
-            </div>
-          </div>
+          <RouterContainer>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/login" component={Login} />
+              <Route path="/manage" component={Manage} />
+              <Route path="/404" component={NotFoundPage} />
+              {/* 其他重定向到 404 */}
+              <Redirect from="*" to="/404" />
+            </Switch>
+          </RouterContainer>
+          {/* <ChangeTracker /> */}
         </Router>
       </Provider>
     );
