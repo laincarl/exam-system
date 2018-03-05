@@ -1,7 +1,7 @@
 {
-    "name": "webpack-react-mobx-boilerplate",
+    "name": "exam-system",
     "version": "1.0.0",
-    "description": "React的一个简单模板，支持热更新，异步路由，antd主题热更改等",
+    "description": "",
     "scripts": {
         "dev": "webpack-dev-server --hot",
         "build": "npm run clean && webpack --config ./webpack.production.js",
