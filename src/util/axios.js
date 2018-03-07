@@ -1,0 +1,47 @@
+import axios from 'axios';
+import { message } from 'antd';
+
+// axios 配置
+axios.defaults.timeout = 10000;
+// axios.defaults.baseURL = "http://123.207.142.127:8378";
+// history.go(0);
+// http request 拦截器);
+axios.interceptors.request.use(
+  (config) => {
+    const newConfig = config;
+    newConfig.headers['Content-Type'] = 'application/json';
+    newConfig.headers.Accept = 'application/json';      
+    return newConfig;
+  },
+  (err) => {
+    const error = err;
+    return Promise.reject(error);
+  },
+);
+// http response 拦截器
+axios.interceptors.response.use(
+  (response) => {
+    if (response.status === 204) {
+      return Promise.resolve(response);
+    }
+    // continue sending response to the then() method
+    return Promise.resolve(response.data);
+  },
+  (error) => {
+    const { response } = error;
+    if (response) {
+      const { status } = response;
+      switch (status) {
+        case 500: {
+          message.error('服务器内部错误', 'Server Internal Error');
+          break;
+        }
+        default:
+          break;
+      }
+    }
+    // request is rejected and will direct logic to the catch() method
+    return Promise.reject(error);
+  },
+);
+export default axios;

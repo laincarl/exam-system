@@ -15,7 +15,7 @@ class ManageMenu extends Component {
   render() {
     const { AppState, match, history } = this.props;
     const currentMenu = AppState.currentLocation.pathname;
-    console.log(match.url, AppState.currentLocation.pathname);
+    console.log(AppState.currentLocation.pathname);
     return (
       <Menu
         mode="inline"
@@ -28,9 +28,10 @@ class ManageMenu extends Component {
           }
         }}
       >
-        <Menu.Item key={`${match.url}`}>首页</Menu.Item>
-        <Menu.Item key={`${match.url}/test`}>test</Menu.Item>
-       
+        <Menu.Item key={`${match.url}/main`}>基本信息</Menu.Item>
+        <Menu.Item key={`${match.url}/examlist`}>考试管理</Menu.Item>
+        <Menu.Item key={`${match.url}/paperlist`}>试卷管理</Menu.Item>
+        <Menu.Item key={`${match.url}/analyze`}>统计信息</Menu.Item>
       </Menu>
     );
   }

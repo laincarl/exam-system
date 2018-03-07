@@ -1,8 +1,8 @@
 /*
  * @Author: LainCarl 
  * @Date: 2018-03-05 20:34:58 
- * @Last Modified by:   LainCarl 
- * @Last Modified time: 2018-03-05 20:34:58 
+ * @Last Modified by: LainCarl
+ * @Last Modified time: 2018-03-06 16:05:18
  */
 
 import Loadable from 'react-loadable';
@@ -22,5 +22,9 @@ export const Login = Loadable({
 });
 export const Manage = Loadable({
   loader: () => import('./manage/Manage'),
+  loading: Loading,
+});
+export const ExamPage = Loadable({
+  loader: () => import('./ExamPage'),
   loading: Loading,
 });

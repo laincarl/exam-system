@@ -1,5 +1,8 @@
 body {
-    margin: 0;
-    padding: 0;
-    font-family: "微软雅黑", "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+    /* background: #faf7f7 !important; */
+}
+
+.flex-space {
+    flex: 1;
+    visibility: hidden;
 }

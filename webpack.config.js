@@ -1,6 +1,4 @@
 const path = require('path');
-const fs = require('fs');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -31,6 +29,8 @@ module.exports = {
     extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.less'],
     alias: {
       Loading: path.resolve(__dirname, './src/component/common/Loading.js'),
+      Axios: path.resolve(__dirname, './src/util/axios.js'),      
+      Header: path.resolve(__dirname, './src/component/common/Header.js'),
       Spin: path.resolve(__dirname, './src/component/common/Spin.js'),
       AppState: path.resolve(__dirname, './src/store/AppState.js'),
       CheckPermission: path.resolve(__dirname, './src/component/common/CheckPermission.js'),
@@ -119,7 +119,7 @@ module.exports = {
   plugins: [
     new LessThemePlugin({ theme: './theme.less' }), // 使antd主题可以热加载
     new ExtractTextPlugin('styles.css'),
-    new webpack.optimize.CommonsChunkPlugin({
+    new CommonsChunkPlugin({
       names: ['vendor', 'manifest'], // name是提取公共代码块后js文件的名字。
       // chunks: ['vendor'] //只有在vendor中配置的文件才会提取公共代码块至manifest的js文件中
     }),

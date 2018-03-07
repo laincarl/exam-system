@@ -35,6 +35,7 @@
     },
     "dependencies": {
         "antd": "^3.2.3",
+        "axios": "^0.18.0",
         "babel-plugin-import": "^1.6.3",
         "babel-polyfill": "^6.26.0",
         "extract-text-webpack-plugin": "^3.0.2",
