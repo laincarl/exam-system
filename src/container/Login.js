@@ -2,35 +2,59 @@
  * @Author: LainCarl 
  * @Date: 2018-03-05 20:35:03 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-07 21:55:14
+ * @Last Modified time: 2018-03-08 17:05:54
  */
 
 import React, { Component } from 'react';
-
 import { Form, Icon, Input, Button, message } from 'antd';
+import { withRouter } from 'react-router';
+import { inject } from 'mobx-react';
 import axios from 'Axios';
 import Spin from 'Spin';
 
 const FormItem = Form.Item;
+@inject('AppState')
 class Login extends Component {
-  state = {
-    spinning: false,
+  constructor(props) {
+    super(props);
+    this.state = {
+      spinning: false,
+    };
   }
+  componentDidMount() {
+    // 登录过后，就跳出去
+    const { history, AppState } = this.props;
+    if (AppState.userAuth) {
+      history.goBack();
+    }
+  }
+
   handleSubmit = (e) => {
+    const { history, AppState } = this.props;
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
         this.setState({
           spinning: true,
         });
-        axios.post('/api/login', values).then((data) => {
+        axios.post('/api/user/accesstoken', values).then((data) => {
           console.log(data);
           this.setState({
             spinning: false,
           });
           message.success('登录成功');
+          AppState.setUserAuth(true);
+          history.goBack();
         }).catch((error) => {
-          console.log(error);
+          this.setState({
+            spinning: false,
+          });
+          if (error.response) {
+            console.log(error.response.data.message);
+            message.error(error.response.data.message);
+          } else {
+            console.log(error);
+          }
         });
         console.log('Received values of form: ', values);
       }
@@ -50,7 +74,7 @@ class Login extends Component {
           <div style={{ fontSize: '20px', marginBottom: '20px' }}>帐号登录</div>
           <Form onSubmit={this.handleSubmit}>
             <FormItem label="学号">
-              {getFieldDecorator('username', {
+              {getFieldDecorator('name', {
                 rules: [{ required: true, message: '请输入学号!' }],
               })(<Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} />)}
             </FormItem>
@@ -62,6 +86,7 @@ class Login extends Component {
             <Button type="primary" htmlType="submit" style={{ width: '100%' }}>
               立即登录
             </Button>
+
             <div style={{
               background: '#F8F9FA',
               color: '#B6B6B7',
@@ -72,7 +97,7 @@ class Login extends Component {
             }}
             >
               首次使用学号登录，初始密码为学号的后六位
-            </div>
+            </div>            
           </Form>
         </Spin>
       </div>
@@ -80,4 +105,4 @@ class Login extends Component {
   }
 }
 
-export default Form.create()(Login);
+export default withRouter(Form.create()(Login));

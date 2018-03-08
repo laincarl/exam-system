@@ -1,6 +1,9 @@
 import axios from 'axios';
 import { message } from 'antd';
+import Cookies from 'universal-cookie';
 
+const cookies = new Cookies();
+const accessTokens = cookies.get('token');
 // axios 配置
 axios.defaults.timeout = 10000;
 // axios.defaults.baseURL = "http://123.207.142.127:8378";
@@ -10,7 +13,8 @@ axios.interceptors.request.use(
   (config) => {
     const newConfig = config;
     newConfig.headers['Content-Type'] = 'application/json';
-    newConfig.headers.Accept = 'application/json';      
+    newConfig.headers.Accept = 'application/json';
+    newConfig.headers.Authorization = `bearer ${accessTokens}`;
     return newConfig;
   },
   (err) => {
