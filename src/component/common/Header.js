@@ -2,13 +2,14 @@
  * @Author: LainCarl 
  * @Date: 2018-03-06 11:10:23 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-08 18:10:21
+ * @Last Modified time: 2018-03-08 19:57:40
  */
 import React, { Component } from 'react';
-import { Popover } from 'antd';
+import { Popover, Button, Icon } from 'antd';
 import { withRouter } from 'react-router';
-import { inject } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 import axios from 'Axios';
+import Cookies from 'js-cookie';
 import './Header.css';
 
 const styles = {
@@ -17,7 +18,7 @@ const styles = {
     alignItems: 'center',
     height: 50,
     // boxShadow: '0 -10px 50px #888',
-    marginBottom: 15,
+    // marginBottom: 15,
     borderBottom: '1px solid #ddd',
   },
   headIcon: {
@@ -33,6 +34,7 @@ const styles = {
   },
 };
 @inject('AppState')
+@observer
 class Header extends Component {
   handleClick = () => {
     axios.post('/api/login', { test: 'sss' }).then((data) => {
@@ -45,55 +47,32 @@ class Header extends Component {
     const { history } = this.props;
     history.push(url);
   }
+  signOut = () => {
+    Cookies.remove('token');
+    // 退出登录，刷新页面
+    window.location.reload();
+  }
   render() {
     const { AppState } = this.props;
     const account = (
-      <div style={{ width: 170 }}>
+      <div style={{ width: 190 }}>
         <div style={{ textAlign: 'center' }}>
           <img
             style={styles.headIconBig}
             src="https://i2.hdslb.com/bfs/face/ceb81f37a132d604be006558b5a85f9e055e4c5a.jpg@72w_72h.webp"
             alt=""
           />
+          <div style={{ marginTop: 10 }}>这里是名字</div>
         </div>
-        <div style={{ marginTop: 10 }}>
-          <div style={{ display: 'flex' }}>
-            <div
-              className="to-mainPage"
-              style={{
-                padding: 5, flex: 1, cursor: 'pointer', userSelect: 'none', textAlign: 'center',
-              }}
-            >个人中心
-            </div>
-            <div
-              className="to-mainPage"
-              style={{
-                padding: 5, flex: 1, cursor: 'pointer', userSelect: 'none', textAlign: 'center',
-              }}
-            >个人中心
-            </div>
-          </div>
-          <div style={{ display: 'flex' }}>
-            <div
-              className="to-mainPage"
-              style={{
-                padding: 5, flex: 1, cursor: 'pointer', userSelect: 'none', textAlign: 'center',
-              }}
-            >个人中心
-            </div>
-            <div
-              className="to-mainPage"
-              style={{
-                padding: 5, flex: 1, cursor: 'pointer', userSelect: 'none', textAlign: 'center',
-              }}
-            >个人中心
-            </div>
-          </div>
+
+        <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: 20 }}>
+          <Button style={{ fontSize: 12 }}>个人中心</Button>
+          <Button style={{ fontSize: 12 }} type="primary" onClick={this.signOut}>退出登录</Button>
         </div>
       </div>
     );
     return (
-      <div style={styles.container}>
+      <div style={styles.container} className="header">
         <div
           role="none"
           className="to-mainPage"
@@ -107,7 +86,7 @@ class Header extends Component {
           }}
           onClick={() => { this.to('/'); }}
         >
-          主页
+          <Icon type="home" />  主页
         </div>
         <div role="none" onClick={this.handleClick}>
           测试

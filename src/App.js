@@ -2,7 +2,7 @@
  * @Author: LainCarl 
  * @Date: 2018-03-05 20:33:32 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-06 16:11:22
+ * @Last Modified time: 2018-03-08 19:11:10
  */
 
 import React, { Component } from 'react';
@@ -14,6 +14,7 @@ import { Home, NotFoundPage, Login, Manage, ExamPage } from './container';
 import RouterContainer from './RouterContainer';
 import AppState from './store/AppState';
 import './App.css';
+import './main.less';
 
 const stores = {
   // Key can be whatever you want

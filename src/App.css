@@ -2,7 +2,18 @@ body {
     /* background: #faf7f7 !important; */
 }
 
+#root {
+    height: 100%;
+}
+
 .flex-space {
     flex: 1;
     visibility: hidden;
+}
+
+
+/* 覆盖ant默认样式 */
+
+.ant-menu-item-selected:after {
+    border: none;
 }

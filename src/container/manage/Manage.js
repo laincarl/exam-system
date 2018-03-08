@@ -2,7 +2,7 @@
  * @Author: LainCarl 
  * @Date: 2018-03-05 20:33:52 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-06 11:12:31
+ * @Last Modified time: 2018-03-08 19:00:00
  */
 
 import React, { Component } from 'react';
@@ -16,11 +16,11 @@ import Test from './Test';
 class Manage extends Component {
   render() {
     const { match } = this.props;
-    console.log(this.props);
+    // console.log(this.props);
     return (
-      <div>
+      <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
         <Header />
-        <div style={{ display: 'flex' }}>
+        <div style={{ display: 'flex', flex: 1 }}>
           <ManageMenu match />
           <Switch>
             <Route exact path={`${match.url}/main`} component={Main} />

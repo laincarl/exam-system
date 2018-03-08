@@ -2,13 +2,14 @@
  * @Author: LainCarl 
  * @Date: 2018-03-05 20:35:03 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-08 17:05:54
+ * @Last Modified time: 2018-03-08 20:03:21
  */
 
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, message } from 'antd';
 import { withRouter } from 'react-router';
 import { inject } from 'mobx-react';
+import Header from 'Header';
 import axios from 'Axios';
 import Spin from 'Spin';
 
@@ -63,31 +64,34 @@ class Login extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <div style={{
+      <div>
+        <Header />
+        <div style={{ paddingTop: 100 }} />
+        <div style={{
         width: 400,
-        margin: '100px auto',
+        margin: '0 auto',
         padding: '20px 40px',
         boxShadow: '0 1px 6px rgba(0, 0, 0, .2)',
       }}
-      >
-        <Spin spinning={this.state.spinning}>
-          <div style={{ fontSize: '20px', marginBottom: '20px' }}>帐号登录</div>
-          <Form onSubmit={this.handleSubmit}>
-            <FormItem label="学号">
-              {getFieldDecorator('name', {
+        >
+          <Spin spinning={this.state.spinning}>
+            <div style={{ fontSize: '20px', marginBottom: '20px' }}>帐号登录</div>
+            <Form onSubmit={this.handleSubmit}>
+              <FormItem label="学号">
+                {getFieldDecorator('name', {
                 rules: [{ required: true, message: '请输入学号!' }],
               })(<Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} />)}
-            </FormItem>
-            <FormItem label="密码">
-              {getFieldDecorator('password', {
+              </FormItem>
+              <FormItem label="密码">
+                {getFieldDecorator('password', {
                 rules: [{ required: true, message: '请输入密码!' }],
               })(<Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" />)}
-            </FormItem>
-            <Button type="primary" htmlType="submit" style={{ width: '100%' }}>
+              </FormItem>
+              <Button type="primary" htmlType="submit" style={{ width: '100%' }}>
               立即登录
-            </Button>
+              </Button>
 
-            <div style={{
+              <div style={{
               background: '#F8F9FA',
               color: '#B6B6B7',
               fontSize: '12px',
@@ -95,11 +99,12 @@ class Login extends Component {
               textAlign: 'center',
               marginTop: '20px',
             }}
-            >
+              >
               首次使用学号登录，初始密码为学号的后六位
-            </div>            
-          </Form>
-        </Spin>
+              </div>            
+            </Form>
+          </Spin>
+        </div>
       </div>
     );
   }

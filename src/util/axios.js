@@ -1,9 +1,8 @@
 import axios from 'axios';
 import { message } from 'antd';
-import Cookies from 'universal-cookie';
+import Cookies from 'js-cookie';
 
-const cookies = new Cookies();
-const accessTokens = cookies.get('token');
+const accessTokens = Cookies.get('token');
 // axios 配置
 axios.defaults.timeout = 10000;
 // axios.defaults.baseURL = "http://123.207.142.127:8378";
