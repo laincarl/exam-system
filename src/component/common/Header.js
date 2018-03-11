@@ -2,7 +2,7 @@
  * @Author: LainCarl 
  * @Date: 2018-03-06 11:10:23 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-08 19:57:40
+ * @Last Modified time: 2018-03-08 20:44:38
  */
 import React, { Component } from 'react';
 import { Popover, Button, Icon } from 'antd';
@@ -10,7 +10,7 @@ import { withRouter } from 'react-router';
 import { inject, observer } from 'mobx-react';
 import axios from 'Axios';
 import Cookies from 'js-cookie';
-import './Header.css';
+import './Header.less';
 
 const styles = {
   container: {
@@ -80,7 +80,8 @@ class Header extends Component {
             userSelect: 'none',
             cursor: 'pointer',
             height: '100%',
-            width: 100,
+            width: 80,
+            marginLeft: 20,
             textAlign: 'center',
             lineHeight: '50px',
           }}

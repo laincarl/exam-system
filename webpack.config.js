@@ -29,8 +29,10 @@ module.exports = {
     extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.less'],
     alias: {
       Loading: path.resolve(__dirname, './src/component/common/Loading.js'),
+      Action: path.resolve(__dirname, './src/component/common/Action.js'),
       Axios: path.resolve(__dirname, './src/util/axios.js'),      
       Header: path.resolve(__dirname, './src/component/common/Header.js'),
+      SecHeader: path.resolve(__dirname, './src/component/common/SecHeader.js'),
       Spin: path.resolve(__dirname, './src/component/common/Spin.js'),
       AppState: path.resolve(__dirname, './src/store/AppState.js'),
       CheckPermission: path.resolve(__dirname, './src/component/common/CheckPermission.js'),

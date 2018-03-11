@@ -12,6 +12,7 @@ import Header from 'Header';
 import ManageMenu from '../../component/manage/ManageMenu';
 import Main from './Main';
 import Test from './Test';
+import QuestionBank from './QuestionBank';
 
 class Manage extends Component {
   render() {
@@ -27,6 +28,7 @@ class Manage extends Component {
             <Route path={`${match.url}/examlist`} component={Test} />
             <Route path={`${match.url}/paperlist`} component={Test} />
             <Route path={`${match.url}/analyze`} component={Test} />
+            <Route path={`${match.url}/questionbank`} component={QuestionBank} />
             <Redirect from={`${match.url}`} to={`${match.url}/main`} />
           </Switch>
         </div>        

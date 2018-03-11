@@ -11,9 +11,18 @@ body {
     visibility: hidden;
 }
 
+.text-dot {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
-/* 覆盖ant默认样式 */
+.header-btn {
+    border: none !important;
+    font-size: 12px !important;
+    padding: 0 8px !important;
+}
 
-.ant-menu-item-selected:after {
-    border: none;
+.header-btn:hover {
+    background-color: #EEEEEE !important;
 }
