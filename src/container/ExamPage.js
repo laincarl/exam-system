@@ -2,11 +2,11 @@
  * @Author: LainCarl 
  * @Date: 2018-03-06 16:03:55 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-06 16:14:22
+ * @Last Modified time: 2018-03-11 16:32:36
  */
 
 import React, { Component } from 'react';
-import Header from 'Header';
+import MainHeader from 'MainHeader';
 import SelectQuestion from '../component/exam/SelectQuestion';
 
 const questions = [{
@@ -23,7 +23,7 @@ class ExamPage extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <MainHeader />
         <div style={{
         width: '500px',
         margin: '20px auto',

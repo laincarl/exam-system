@@ -2,14 +2,14 @@
  * @Author: LainCarl 
  * @Date: 2018-03-05 20:35:03 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-08 20:03:21
+ * @Last Modified time: 2018-03-11 16:32:43
  */
 
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, message } from 'antd';
 import { withRouter } from 'react-router';
 import { inject } from 'mobx-react';
-import Header from 'Header';
+import MainHeader from 'MainHeader';
 import axios from 'Axios';
 import Spin from 'Spin';
 
@@ -65,7 +65,7 @@ class Login extends Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <div>
-        <Header />
+        <MainHeader />
         <div style={{ paddingTop: 100 }} />
         <div style={{
         width: 400,

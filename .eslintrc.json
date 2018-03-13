@@ -50,6 +50,8 @@
         "react/require-default-props": "off",
         "no-restricted-globals": "off",
         "no-debugger": "off",
+        "no-cond-assign": "off",
+        "no-param-reassign": "off",
         "jsx-a11y/anchor-is-valid": [
             "warn",
             {

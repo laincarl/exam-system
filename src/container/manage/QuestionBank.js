@@ -2,12 +2,12 @@
  * @Author: LainCarl 
  * @Date: 2018-03-11 15:34:18 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-11 15:46:34
+ * @Last Modified time: 2018-03-11 16:47:40
  */
 
 import React, { Component } from 'react';
 import { Icon } from 'antd';
-import SecHeader from 'SecHeader';
+import Header from 'Header';
 import Bank from '../../component/manage/Bank';
 
 
@@ -37,7 +37,7 @@ class QuestionBank extends Component {
   render() {
     return (
       <div>
-        <SecHeader
+        <Header
           title="题库管理"
           prefix={<Icon type="file-add" />}
           text="新建题库"

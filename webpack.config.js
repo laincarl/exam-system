@@ -5,8 +5,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const LessThemePlugin = require('webpack-less-theme-plugin');
 
 module.exports = {
-  // devtool: 'cheap-module-eval-source-map',
-  devtool: 'eval',
+  devtool: 'cheap-module-eval-source-map',
+  // devtool: 'eval',
   entry: {
     app: ['react-hot-loader/patch', 'babel-polyfill', './src/index.js'],
     // vendor: ['react', 'react-dom'], //分离第三方库
@@ -31,8 +31,8 @@ module.exports = {
       Loading: path.resolve(__dirname, './src/component/common/Loading.js'),
       Action: path.resolve(__dirname, './src/component/common/Action.js'),
       Axios: path.resolve(__dirname, './src/util/axios.js'),      
+      MainHeader: path.resolve(__dirname, './src/component/common/MainHeader.js'),
       Header: path.resolve(__dirname, './src/component/common/Header.js'),
-      SecHeader: path.resolve(__dirname, './src/component/common/SecHeader.js'),
       Spin: path.resolve(__dirname, './src/component/common/Spin.js'),
       AppState: path.resolve(__dirname, './src/store/AppState.js'),
       CheckPermission: path.resolve(__dirname, './src/component/common/CheckPermission.js'),

@@ -1,12 +1,13 @@
 /*
  * @Author: LainCarl 
  * @Date: 2018-03-11 15:34:09 
- * @Last Modified by:   LainCarl 
- * @Last Modified time: 2018-03-11 15:34:09 
+ * @Last Modified by: LainCarl
+ * @Last Modified time: 2018-03-11 16:40:04
  */
 
 import React, { Component } from 'react';
 import Action from 'Action';
+import { withRouter } from 'react-router';
 import BankIcon from '../../assets/image/questionbank.png';
 import './Bank.css';
 
@@ -14,11 +15,17 @@ class Bank extends Component {
   test = () => {
     console.log('test');
   }
+  openDetail = () => {
+    const { history } = this.props;
+    history.push(`/manage/bankdetail/${this.props.data.id}`);
+  }
   render() {
     const { data } = this.props;
     const { title } = data;
     return (
       <div
+        role="none"
+        onClick={this.openDetail}
         className="hover-deeper"
         style={{
           boxShadow: '0 1px 6px rgba(0, 0, 0, .2)',
@@ -33,6 +40,8 @@ class Bank extends Component {
           <img src={BankIcon} alt="" style={{ width: 90 }} />
         </div>
         <div
+          role="none"
+          onClick={(e) => { e.stopPropagation(); }}
           style={{ position: 'absolute', top: 5, right: 10 }}
         >
           <Action data={[{
@@ -41,8 +50,8 @@ class Bank extends Component {
           }]}
           />
         </div>
-        <div 
-          className="text-dot" 
+        <div
+          className="text-dot"
           style={{ padding: '15px 10px', fontWeight: 'bold', marginTop: 16 }}
         >
           {title}
@@ -57,4 +66,4 @@ Bank.propTypes = {
 
 };
 
-export default Bank;
+export default withRouter(Bank);

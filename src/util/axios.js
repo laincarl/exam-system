@@ -36,7 +36,11 @@ axios.interceptors.response.use(
       const { status } = response;
       switch (status) {
         case 500: {
-          message.error('服务器内部错误', 'Server Internal Error');
+          message.error('服务器内部错误');
+          break;
+        }
+        case 504: {
+          message.error('服务器内部错误');
           break;
         }
         default:
