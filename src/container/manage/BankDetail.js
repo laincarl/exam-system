@@ -25,7 +25,7 @@ class BankDetail extends Component {
         const { description } = values;
         const questionReg = /[0-9]+、([^]*?)(?=[0-9]+、|$)/g;
         const titleReg = /[0-9]+、([^]*?)\*?[A-Z]+、/g;
-        const selectsReg = /([A-Z])+、([^]*?)(?=[A-Z]+、|$)/g;
+        const selectsReg = /([A-Z])+、([^]*?)(?=\*?[A-Z]+、|$)/g;
         const answersReg = /\*([A-Z])+、/g;
         let result;
         const questions = [];

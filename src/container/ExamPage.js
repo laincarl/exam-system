@@ -4,10 +4,12 @@
  * @Last Modified by: LainCarl
  * @Last Modified time: 2018-03-11 16:32:36
  */
-
+/*eslint-disable */
 import React, { Component } from 'react';
 import MainHeader from 'MainHeader';
+import axios from 'Axios';
 import SelectQuestion from '../component/exam/SelectQuestion';
+import QuestionShow from '../component/common/QuestionShow';
 
 const questions = [{
   title: '在网页中，必须使用（）标记来完成超级链接。',
@@ -20,23 +22,40 @@ const questions = [{
   choices: ['第一个h1设置了特定的属性', '第二个h1用了系统默认的属性', '“hello!Nice to meet you!”的字体颜色是浅绿色', 'this is the default display of an h1 element”的字体大小为30'],
 }];
 class ExamPage extends Component {
+  constructor() {
+    super();
+    this.state = {
+      questions: [],
+    }
+  }
+  componentDidMount() {
+    axios.get('/api/questions').then(questions => {
+      console.log(questions);
+      this.setState({
+        questions
+      })
+    })
+  }
+
   render() {
+    const { questions } = this.state;
     return (
       <div>
         <MainHeader />
         <div style={{
-        width: '500px',
-        margin: '20px auto',
-        padding: '20px 40px',
-        boxShadow: '0 1px 6px rgba(0, 0, 0, .2)',
-      }}
+          width: '700px',
+          margin: '20px auto',
+          padding: '20px 40px',
+          boxShadow: '0 1px 6px rgba(0, 0, 0, .2)',
+        }}
         >
           {
-          questions.map((one, i) => <SelectQuestion num={i + 1} data={one} />)
-        }
+            // questions.map((one, i) => <SelectQuestion num={i + 1} data={one} />)
+            questions.map((one, i) => <QuestionShow num={i + 1} data={one} />)            
+          }
         </div>
       </div>
-      
+
     );
   }
 }
