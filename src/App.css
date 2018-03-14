@@ -27,3 +27,9 @@ body {
 .header-btn:hover {
     background-color: #EEEEEE !important;
 }
+
+.input-upload {
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}

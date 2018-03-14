@@ -2,7 +2,7 @@
  * @Author: LainCarl 
  * @Date: 2018-03-05 20:34:01 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-14 16:22:21
+ * @Last Modified time: 2018-03-14 17:07:35
  */
 import { observable, action } from 'mobx';
 import axios from 'Axios';
@@ -24,7 +24,6 @@ class AppState {
   @action
   setUserInfo(userInfo) {
     this.userInfo = { ...this.userInfo, ...userInfo };
-    console.log('sssss', this.userInfo.name);
   }
   @action
   setUserName(name) {
