@@ -2,13 +2,13 @@
  * @Author: LainCarl 
  * @Date: 2018-03-06 11:10:23 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-11 16:32:33
+ * @Last Modified time: 2018-03-14 16:21:39
  */
 import React, { Component } from 'react';
 import { Popover, Button, Icon } from 'antd';
 import { withRouter } from 'react-router';
 import { inject, observer } from 'mobx-react';
-import axios from 'Axios';
+// import axios from 'Axios';
 import Cookies from 'js-cookie';
 import './MainHeader.less';
 
@@ -36,13 +36,6 @@ const styles = {
 @inject('AppState')
 @observer
 class MainHeader extends Component {
-  handleClick = () => {
-    axios.post('/api/login', { test: 'sss' }).then((data) => {
-      console.log(data);
-    }).catch((err) => {
-      console.log(err);
-    });
-  }
   to = (url) => {
     const { history } = this.props;
     history.push(url);
@@ -54,19 +47,21 @@ class MainHeader extends Component {
   }
   render() {
     const { AppState } = this.props;
+    const { name, url } = AppState.userInfo;
+    console.log('get', name, url);
     const account = (
       <div style={{ width: 190 }}>
         <div style={{ textAlign: 'center' }}>
           <img
             style={styles.headIconBig}
-            src="https://i2.hdslb.com/bfs/face/ceb81f37a132d604be006558b5a85f9e055e4c5a.jpg@72w_72h.webp"
+            src={url}
             alt=""
           />
-          <div style={{ marginTop: 10 }}>这里是名字</div>
+          <div style={{ marginTop: 10 }}>{name}</div>
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: 20 }}>
-          <Button style={{ fontSize: 12 }}>个人中心</Button>
+          <Button style={{ fontSize: 12 }} onClick={() => { this.to('/account'); }}>个人中心</Button>
           <Button style={{ fontSize: 12 }} type="primary" onClick={this.signOut}>退出登录</Button>
         </div>
       </div>
@@ -89,15 +84,13 @@ class MainHeader extends Component {
         >
           <Icon type="home" />  主页
         </div>
-        <div role="none" onClick={this.handleClick}>
-          测试
-        </div>
+
         <div className="flex-space" />
         {AppState.userAuth ?
           <Popover placement="bottomRight" title={null} content={account} trigger="click">
             <img
               style={styles.headIcon}
-              src="https://i2.hdslb.com/bfs/face/ceb81f37a132d604be006558b5a85f9e055e4c5a.jpg@72w_72h.webp"
+              src={url}
               alt=""
             />
           </Popover>

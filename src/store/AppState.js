@@ -2,7 +2,7 @@
  * @Author: LainCarl 
  * @Date: 2018-03-05 20:34:01 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-08 16:24:52
+ * @Last Modified time: 2018-03-14 16:22:21
  */
 import { observable, action } from 'mobx';
 import axios from 'Axios';
@@ -10,14 +10,21 @@ import axios from 'Axios';
 class AppState {
   @observable userAuth = false;
   @observable userName = null;
+  @observable userInfo = {};
   @observable currentLocation = null;
   constructor() {
-    axios.get('/api/users/info').then((data) => {
-      if (data) {
-        this.setUserName(data.name);
+    axios.get('/api/user/info').then((userInfo) => {
+      if (userInfo) {
+        // console.log('origin', userInfo);
+        this.setUserInfo(userInfo);
         this.setUserAuth(true);
       }
     });
+  }
+  @action
+  setUserInfo(userInfo) {
+    this.userInfo = { ...this.userInfo, ...userInfo };
+    console.log('sssss', this.userInfo.name);
   }
   @action
   setUserName(name) {

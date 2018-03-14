@@ -28,3 +28,7 @@ export const ExamPage = Loadable({
   loader: () => import('./ExamPage'),
   loading: Loading,
 });
+export const Account = Loadable({
+  loader: () => import('./account/Account'),
+  loading: Loading,
+});
