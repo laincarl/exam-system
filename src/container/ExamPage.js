@@ -51,7 +51,7 @@ class ExamPage extends Component {
         >
           {
             // questions.map((one, i) => <SelectQuestion num={i + 1} data={one} />)
-            questions.map((one, i) => <QuestionShow num={i + 1} data={one} />)            
+            questions.map((one, i) => <QuestionShow num={i + 1} data={one} />)
           }
         </div>
       </div>
