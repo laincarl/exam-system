@@ -9,16 +9,20 @@ import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
 import MainHeader from 'MainHeader';
+import { Button } from 'antd';
+// import axios from 'Axios';
 
 class Home extends Component {
+  generateExam=() => {
+    // axios.get
+  }
   render() {
     return (
       <div>
         <MainHeader />
-       Home
-        <Link to="login" >登录</Link>
-        <Link to="manage" >manage</Link>
+        Home        
         <Link to="exampage">示例</Link>
+        <Button onClick={this.generateExam}>进入考试</Button>
       </div>
     );
   }

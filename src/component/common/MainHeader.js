@@ -70,7 +70,7 @@ class MainHeader extends Component {
       <div style={styles.container} className="header">
         <div
           role="none"
-          className="to-mainPage"
+          className="header_btn"
           style={{
             userSelect: 'none',
             cursor: 'pointer',
@@ -86,6 +86,26 @@ class MainHeader extends Component {
         </div>
 
         <div className="flex-space" />
+        {
+          AppState.userAuth &&
+          <div
+            role="none"
+            className="header_btn"
+            style={{
+              userSelect: 'none',
+              cursor: 'pointer',
+              height: '100%',
+              width: 80,
+              marginRight: 30,
+              textAlign: 'center',
+              lineHeight: '50px',
+            }}
+            onClick={() => { this.to('/manage'); }}
+          >
+            管理
+          </div>
+        }
+
         {AppState.userAuth ?
           <Popover placement="bottomRight" title={null} content={account} trigger="click">
             <img

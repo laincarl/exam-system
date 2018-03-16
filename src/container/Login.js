@@ -26,7 +26,7 @@ class Login extends Component {
     // 登录过后，就跳出去
     const { history, AppState } = this.props;
     if (AppState.userAuth) {
-      history.goBack();
+      history.push('/');
     }
   }
 
@@ -43,9 +43,10 @@ class Login extends Component {
           this.setState({
             spinning: false,
           });
-          message.success('登录成功');
+          message.success('登录成功'); 
           AppState.setUserAuth(true);
-          history.goBack();
+          history.push('/');
+          window.location.reload();
         }).catch((error) => {
           this.setState({
             spinning: false,

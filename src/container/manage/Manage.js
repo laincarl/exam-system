@@ -12,6 +12,7 @@ import MainHeader from 'MainHeader';
 import ManageMenu from '../../component/manage/ManageMenu';
 import Main from './Main';
 import Test from './Test';
+import Exams from './Exams';
 import QuestionBank from './QuestionBank';
 import BankDetail from './BankDetail';
 
@@ -27,7 +28,7 @@ class Manage extends Component {
           <div style={{ flex: 1 }}>
             <Switch>
               <Route exact path={`${match.url}/main`} component={Main} />
-              <Route path={`${match.url}/examlist`} component={Test} />
+              <Route path={`${match.url}/examlist`} component={Exams} />
               <Route path={`${match.url}/paperlist`} component={Test} />
               <Route path={`${match.url}/analyze`} component={Test} />
               <Route path={`${match.url}/questionbank`} component={QuestionBank} />
