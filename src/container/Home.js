@@ -8,19 +8,20 @@
 import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
-import MainHeader from 'MainHeader';
 import { Button } from 'antd';
+import AppState from 'AppState';
 // import axios from 'Axios';
+// import To from '../component/common/CommonFunction';
 
 class Home extends Component {
-  generateExam=() => {
+  generateExam = () => {
     // axios.get
+    AppState.history.push('/exam/main/10');
   }
   render() {
     return (
       <div>
-        <MainHeader />
-        Home        
+        Home
         <Link to="exampage">示例</Link>
         <Button onClick={this.generateExam}>进入考试</Button>
       </div>

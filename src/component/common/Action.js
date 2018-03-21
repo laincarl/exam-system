@@ -1,8 +1,8 @@
 /*
  * @Author: LainCarl 
  * @Date: 2018-03-11 15:33:55 
- * @Last Modified by:   LainCarl 
- * @Last Modified time: 2018-03-11 15:33:55 
+ * @Last Modified by: LainCarl
+ * @Last Modified time: 2018-03-16 20:07:49
  */
 
 import React, { Component } from 'react';
@@ -46,7 +46,7 @@ class Action extends Component {
     );
     return (
       <Dropdown overlay={menu} trigger={['click']}>
-        <Icon type="ellipsis" style={{ fontWeight: 'bold' }} />        
+        <Icon type="ellipsis" style={{ cursor: 'pointer', fontWeight: 'bold', transform: 'rotateZ(90deg)' }} />
       </Dropdown>);
   }
 }

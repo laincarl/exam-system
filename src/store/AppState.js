@@ -10,6 +10,7 @@ import axios from 'Axios';
 class AppState {
   @observable userAuth = false;
   @observable userName = null;
+  @observable history = null;
   @observable userInfo = {};
   @observable currentLocation = null;
   constructor() {
@@ -32,6 +33,10 @@ class AppState {
   @action
   setUserAuth(flag) {
     this.userAuth = flag;
+  }
+  @action 
+  setHistory(history) {
+    this.history = history;
   }
   @action
   setCurrentLocation(currentLocation) {

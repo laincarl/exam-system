@@ -13,6 +13,7 @@ import { inject } from 'mobx-react';
 class RouterContainer extends Component {
   render() { 
     const { AppState } = this.props;
+    AppState.setHistory(this.props.history);
     AppState.setCurrentLocation(this.props.location);
     return this.props.children;
   }

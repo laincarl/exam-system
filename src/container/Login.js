@@ -9,7 +9,6 @@ import React, { Component } from 'react';
 import { Form, Icon, Input, Button, message } from 'antd';
 import { withRouter } from 'react-router';
 import { inject } from 'mobx-react';
-import MainHeader from 'MainHeader';
 import axios from 'Axios';
 import Spin from 'Spin';
 
@@ -66,7 +65,6 @@ class Login extends Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <div>
-        <MainHeader />
         <div style={{ paddingTop: 100 }} />
         <div style={{
         width: 400,

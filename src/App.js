@@ -10,8 +10,10 @@ import { createBrowserHistory } from 'history';
 import { HashRouter as Router } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { Home, NotFoundPage, Login, Manage, Account, ExamPage } from './container';
+import MainHeader from 'MainHeader';
+import { Home, NotFoundPage, Login, ManageRoute, Account, ExamRoute } from './container';
 import RouterContainer from './RouterContainer';
+
 import AppState from './store/AppState';
 import './App.css';
 import './main.less';
@@ -27,18 +29,22 @@ export default class App extends Component {
     return (
       <Provider {...stores}>
         <Router history={createBrowserHistory}>
-          <RouterContainer>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/login" component={Login} />
-              <Route path="/manage" component={Manage} />
-              <Route path="/account" component={Account} />              
-              <Route path="/exampage" component={ExamPage} />              
-              <Route path="/404" component={NotFoundPage} />
-              {/* 其他重定向到 404 */}
-              <Redirect from="*" to="/404" />
-            </Switch>
-          </RouterContainer>
+          <div style={{ height: '100%' }}>
+            <MainHeader />
+            <RouterContainer>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route path="/login" component={Login} />
+                <Route path="/manage" component={ManageRoute} />
+                <Route path="/account" component={Account} />   
+                <Route path="/exam" component={ExamRoute} />
+                <Route path="/404" component={NotFoundPage} />
+                {/* 其他重定向到 404 */}
+                <Redirect from="*" to="/404" />
+              </Switch>
+            </RouterContainer>
+          </div>
+            
           {/* <ChangeTracker /> */}
         </Router>
       </Provider>

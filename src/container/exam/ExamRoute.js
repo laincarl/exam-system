@@ -8,22 +8,23 @@
 import React, { Component } from 'react';
 import CheckPermission from 'CheckPermission';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import Home from './Home';
+import ExamPage from './ExamPage';
+import Result from './Result';
 
-class Account extends Component {
+
+class ExamRoute extends Component {
   render() {
     const { match } = this.props;
     // console.log(this.props);
     return (
-      <div>
-        <Switch>
-          <Route exact path={`${match.url}/home`} component={Home} />
-          <Redirect from={`${match.url}`} to={`${match.url}/home`} />
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path={`${match.url}/main/:id`} component={ExamPage} />
+        <Route path={`${match.url}/result`} component={Result} />
+        <Redirect from={`${match.url}`} to={`${match.url}/main`} />
+      </Switch>
     );
   }
 }
 
 
-export default CheckPermission(Account);
+export default CheckPermission(ExamRoute);

@@ -20,12 +20,12 @@ export const Login = Loadable({
   loader: () => import('./Login'),
   loading: Loading,
 });
-export const Manage = Loadable({
-  loader: () => import('./manage/Manage'),
+export const ManageRoute = Loadable({
+  loader: () => import('./manage/ManageRoute'),
   loading: Loading,
 });
-export const ExamPage = Loadable({
-  loader: () => import('./ExamPage'),
+export const ExamRoute = Loadable({
+  loader: () => import('./exam/ExamRoute'),
   loading: Loading,
 });
 export const Account = Loadable({
