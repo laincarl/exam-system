@@ -27,4 +27,4 @@ class ExamRoute extends Component {
 }
 
 
-export default CheckPermission(ExamRoute);
+export default CheckPermission(ExamRoute, ['admin', 'student']);

@@ -14,6 +14,7 @@ import Test from './Test';
 import Exams from './Exams';
 import QuestionBank from './QuestionBank';
 import BankDetail from './BankDetail';
+import UserManage from './UserManage';
 
 class Manage extends Component {
   render() {
@@ -29,6 +30,7 @@ class Manage extends Component {
             <Route path={`${match.url}/paperlist`} component={Test} />
             <Route path={`${match.url}/analyze`} component={Test} />
             <Route path={`${match.url}/questionbank`} component={QuestionBank} />
+            <Route path={`${match.url}/user`} component={UserManage} />
             <Route path={`${match.url}/bankdetail/:id?`} component={BankDetail} />
             <Redirect from={`${match.url}`} to={`${match.url}/main`} />
           </Switch>
@@ -42,4 +44,4 @@ Manage.propTypes = {
 
 };
 
-export default CheckPermission(Manage);
+export default CheckPermission(Manage, 'admin');

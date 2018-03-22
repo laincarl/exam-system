@@ -30,6 +30,7 @@ class ManageMenu extends Component {
         }}
         >
           <Menu.Item key={`${match.url}/main`}><Icon type="home" />基本信息</Menu.Item>
+          <Menu.Item key={`${match.url}/user`}><Icon type="home" />用户管理</Menu.Item>
           <Menu.Item key={`${match.url}/examlist`}><Icon type="switcher" />考试管理</Menu.Item>
           <Menu.Item key={`${match.url}/questionbank`}><Icon type="switcher" />题库管理</Menu.Item>
           <Menu.Item key={`${match.url}/paperlist`}><Icon type="copy" />试卷管理</Menu.Item>

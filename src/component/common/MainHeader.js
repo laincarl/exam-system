@@ -87,7 +87,7 @@ class MainHeader extends Component {
 
         <div className="flex-space" />
         {
-          AppState.userAuth &&
+          AppState.userAuth && AppState.userInfo.role === 'admin' &&
           <div
             role="none"
             className="header_btn"

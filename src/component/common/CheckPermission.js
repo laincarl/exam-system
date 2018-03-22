@@ -10,7 +10,7 @@ import { withRouter } from 'react-router';
 import { observer } from 'mobx-react';
 import AppState from 'AppState';
 
-const CheckPermission = (WrappedComponent) => {
+const CheckPermission = (WrappedComponent, role = []) => {
   @observer
   class WrapComponent extends Component {
     componentDidMount() {
@@ -26,9 +26,8 @@ const CheckPermission = (WrappedComponent) => {
       }
     }
     render() {
-      const { userAuth } = AppState;
-      
-      return userAuth ? <WrappedComponent {...this.props} /> : null;
+      const { userAuth, userInfo } = AppState;      
+      return userAuth && role.includes(userInfo.role) ? <WrappedComponent {...this.props} /> : null;
     }
   }
 
