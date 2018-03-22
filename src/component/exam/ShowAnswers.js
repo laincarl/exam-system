@@ -16,7 +16,9 @@ class ShowAnswers extends Component {
     this.setTime();
     this.start();
   }
-
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
   setTime = () => {
     const startTime = new Date();
     startTime.setMinutes(startTime.getMinutes() + 1);
@@ -39,7 +41,7 @@ class ShowAnswers extends Component {
 
 
   render() {
-    const { questions } = ExamStore;
+    const { questions } = ExamStore.currentExam;
     const { time } = this.state;
     const { sec, min, hour } = time;
     // console.log(questions);

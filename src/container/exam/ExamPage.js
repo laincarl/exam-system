@@ -2,14 +2,15 @@
  * @Author: LainCarl 
  * @Date: 2018-03-06 16:03:55 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-11 16:32:36
+ * @Last Modified time: 2018-03-22 14:46:33
  */
 
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import axios from 'Axios';
 import Spin from 'Spin';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
+import AppState from 'AppState';
 import ShowAnswers from '../../component/exam/ShowAnswers';
 import SelectQuestion from '../../component/exam/SelectQuestion';
 // import QuestionShow from '../component/common/QuestionShow';
@@ -24,12 +25,23 @@ class ExamPage extends Component {
     };
   }
   componentDidMount() {
-    axios.get('/api/exams/exam?id=10').then((exam) => {
+    const { id } = this.props.match.params;
+    axios.get(`/api/exams/exam?id=${id}`).then((exam) => {
       console.log(exam);
-      ExamStore.setQuestions(exam.questions.map(one => ({ ...one, ...{ answers: [] } })));
+      ExamStore.setCurrentExam({
+        ...exam,
+        ...{ questions: exam.questions.map(one => ({ ...one, ...{ answers: [] } })) },
+      });
       this.setState({
         loading: false,
       });
+    }).catch((error) => {
+      if (error.response) {
+        message.error(error.response.data.message);
+        AppState.history.push('/404');
+      } else {
+        console.log(error);
+      }
     });
     // axios.get('/api/questions').then(questions => {
     //   console.log(questions);
@@ -39,21 +51,24 @@ class ExamPage extends Component {
     // })
   }
   handleSubmit = () => {
-    const { questions } = ExamStore;
-    console.log(questions);
+    const { currentExam } = ExamStore;
+    console.log(currentExam);
     this.setState({
       loading: true,
-    });    
-    axios.post('/api/exams/submit', questions).then((result) => {
+    });
+    axios.post('/api/exams/submit', currentExam).then((result) => {
       console.log(result);
+      // const { score, results } = result;
       this.setState({
         loading: false,
       });
+      // ExamStore.setResult(result);
+      AppState.history.push(`/exam/result/${currentExam.id}`);
     });
   }
   render() {
     const { loading } = this.state;
-    const { questions } = ExamStore;
+    const { questions } = ExamStore.currentExam;
     console.log(questions);
     return (
       <div>
