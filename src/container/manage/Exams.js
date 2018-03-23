@@ -2,8 +2,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
-
-import { Table, Modal, Icon, Form, message, Input, Button, DatePicker } from 'antd';
+import { Table, Modal, Icon, Form, message, Input, Button, DatePicker, InputNumber } from 'antd';
 import Header from 'Header';
 import axios from 'Axios';
 import Action from 'Action';
@@ -197,6 +196,17 @@ class Exams extends Component {
                 }}
                 format="YYYY-MM-DD HH:mm:ss"
               />)}
+            </FormItem>
+            <FormItem
+              label="考试时间"
+            >
+              {getFieldDecorator('limit_time', {
+                rules: [{
+                  required: true, message: '请填写考试时间',
+                }],
+              })(<div>
+                <InputNumber min={1} max={500} defaultValue={50} />{" "}分钟
+              </div>)}
             </FormItem>
             <FormItem>
               <div style={{ textAlign: 'right' }}>

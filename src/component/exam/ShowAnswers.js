@@ -106,8 +106,8 @@ class ShowAnswers extends Component {
               <OneQuestionBlock key={one.id} checked={one.answers.length > 0} num={i + 1} />)
           }
         </div>
-        <div style={{ margin: '15px 0 5px 0' }}>剩余时间</div>
-        <div>{`${hour}时${min}分${sec}秒`}</div>
+        <div style={{ margin: '15px 0 5px 0' }}>考试倒计时</div>
+        <div>{`${hour}:${min}:${sec}`}</div>
         <div className="flex-space" />
         <Button
           loading={loading}

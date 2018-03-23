@@ -2,7 +2,7 @@
  * @Author: LainCarl 
  * @Date: 2018-03-05 20:33:32 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-14 14:05:17
+ * @Last Modified time: 2018-03-23 17:24:50
  */
 
 import React, { Component } from 'react';
@@ -29,7 +29,7 @@ export default class App extends Component {
     return (
       <Provider {...stores}>
         <Router history={createBrowserHistory}>
-          <div style={{ height: '100%' }}>
+          <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
             <MainHeader />
             <RouterContainer>
               <Switch>

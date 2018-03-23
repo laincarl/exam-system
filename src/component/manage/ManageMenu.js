@@ -2,7 +2,7 @@
  * @Author: LainCarl 
  * @Date: 2018-03-05 20:33:56 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-08 19:07:40
+ * @Last Modified time: 2018-03-23 17:09:35
  */
 
 import React, { Component } from 'react';
@@ -17,10 +17,10 @@ class ManageMenu extends Component {
     const currentMenu = AppState.currentLocation.pathname;
     // console.log(AppState.currentLocation.pathname);
     return (
-      <div style={{ borderRight: '1px solid rgb(211, 211, 211)', background: '#fafafa' }}>
+      <div style={{ borderRight: '1px solid rgb(211, 211, 211)', background: 'white' }}>
         <Menu
           mode="inline"
-          style={{ width: 256, background: '#fafafa' }}
+          style={{ width: 256, background: 'white' }}
           selectedKeys={[currentMenu]}
           onClick={({ key }) => {
           // console.log(key);
