@@ -30,7 +30,6 @@ const CheckPermission = (WrappedComponent, role = []) => {
       return userAuth && role.includes(userInfo.role) ? <WrappedComponent {...this.props} /> : null;
     }
   }
-
   return withRouter(WrapComponent);
 };
 

@@ -26,4 +26,4 @@ class Account extends Component {
 }
 
 
-export default CheckPermission(Account);
+export default CheckPermission(Account, ['admin', 'student']);

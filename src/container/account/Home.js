@@ -55,8 +55,8 @@ class Home extends Component {
     const { name, url } = AppState.userInfo;
 
     return (
-      <div>
-        个人中心
+      <div style={{ margin: '20px 100px', padding: 20, boxShadow: '0 1px 6px rgba(0, 0, 0, .2)' }}>
+        <h2>个人中心</h2>
         <div>{name}</div>
         <div style={{ width: 100, height: 100, position: 'relative' }}>
           <input

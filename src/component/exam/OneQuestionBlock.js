@@ -10,7 +10,7 @@ class OneQuestionBlock extends Component {
         boxShadow: '1px 0 0 0 #ddd,0 1px 0 0 #ddd, 1px 1px 0 0 #ddd, 1px 0 0 0 #ddd inset, 0 1px 0 0 #ddd inset',
         lineHeight: '40px',
         textAlign: 'center',
-        background: checked && 'green',
+        background: checked && '#52c41a',
         color: checked && 'white',
       }}
       >

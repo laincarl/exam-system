@@ -2,7 +2,7 @@
  * @Author: LainCarl 
  * @Date: 2018-03-22 14:20:44 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-22 14:23:05
+ * @Last Modified time: 2018-03-23 15:54:38
  * @Feature:展示单个问题考试结果  
  */
 
@@ -34,8 +34,9 @@ class ResultShow extends Component {
         style={{ margin: '18px 0', position: 'relative', paddingRight: 50 }}       
       >
         <div><span style={{ fontWeight: 'bold' }}>{num}.</span> {title}</div>
+        {choices.length === 0 || !choices[0] ? <div style={{ color: 'red', marginTop: 5 }}>未作答</div> : null}
         <div style={{ marginTop: '8px' }}>
-          {Object.keys(selects).map((key, i) => (
+          {Object.keys(selects).map(key => (
             <div style={{
               display: 'flex',
               alignItems: 'center',
@@ -43,7 +44,7 @@ class ResultShow extends Component {
             }
             }
             >
-              <div style={{ width: '30px', overflow: 'hidden', fontWeight: 'bold' }}>{String.fromCharCode(65 + i)} . </div>
+              <div style={{ width: '30px', overflow: 'hidden', fontWeight: 'bold' }}>{key} . </div>
               {/* {answers.includes(key) && <Icon type="check-circle" />} */}
               <div style={radioStyle} >{selects[key]}</div>
             </div>))

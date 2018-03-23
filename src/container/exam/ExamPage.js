@@ -2,14 +2,14 @@
  * @Author: LainCarl 
  * @Date: 2018-03-06 16:03:55 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-22 14:46:33
+ * @Last Modified time: 2018-03-23 15:42:28
  */
 
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import axios from 'Axios';
 import Spin from 'Spin';
-import { Button, message } from 'antd';
+import { message } from 'antd';
 import AppState from 'AppState';
 import ShowAnswers from '../../component/exam/ShowAnswers';
 import SelectQuestion from '../../component/exam/SelectQuestion';
@@ -50,22 +50,7 @@ class ExamPage extends Component {
     //   })
     // })
   }
-  handleSubmit = () => {
-    const { currentExam } = ExamStore;
-    console.log(currentExam);
-    this.setState({
-      loading: true,
-    });
-    axios.post('/api/exams/submit', currentExam).then((result) => {
-      console.log(result);
-      // const { score, results } = result;
-      this.setState({
-        loading: false,
-      });
-      // ExamStore.setResult(result);
-      AppState.history.push(`/exam/result/${currentExam.id}`);
-    });
-  }
+
   render() {
     const { loading } = this.state;
     const { questions } = ExamStore.currentExam;
@@ -86,9 +71,6 @@ class ExamPage extends Component {
               questions.map((one, i) => <SelectQuestion key={one.id} num={i + 1} data={one} />)
               // questions.map((one, i) => <QuestionShow num={i + 1} data={one} />)
             }
-            <div style={{ textAlign: 'center' }}>
-              <Button onClick={this.handleSubmit} type="primary" loading={loading}>提交</Button>
-            </div>
           </div>
         </Spin>
       </div>

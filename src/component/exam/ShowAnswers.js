@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
+import { Button, Modal } from 'antd';
+import axios from 'Axios';
+import AppState from 'AppState';
 import OneQuestionBlock from './OneQuestionBlock';
 import ExamStore from '../../store/exam/ExamStore';
 
+const { confirm } = Modal;
 @observer
 class ShowAnswers extends Component {
   state = {
@@ -11,6 +15,7 @@ class ShowAnswers extends Component {
       min: 0,
       hour: 0,
     },
+    loading: false,
   }
   componentDidMount() {
     this.setTime();
@@ -38,11 +43,38 @@ class ShowAnswers extends Component {
       }
     }, 1000);
   }
-
+  handleSubmit = () => {
+    const { currentExam } = ExamStore;
+    console.log(currentExam);
+    this.setState({
+      loading: true,
+    });
+    axios.post('/api/exams/submit', currentExam).then((result) => {
+      console.log(result);
+      // const { score, results } = result;
+      this.setState({
+        loading: false,
+      });
+      // ExamStore.setResult(result);
+      AppState.history.push(`/exam/finish/${currentExam.id}`);
+    });
+  }
+  showConfirm = () => {
+    confirm({
+      title: '确认交卷?',
+      content: '交卷后将不可重新答题',
+      okText: '确定',
+      cancelText: '取消',
+      onOk: this.handleSubmit,
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+  }
 
   render() {
     const { questions } = ExamStore.currentExam;
-    const { time } = this.state;
+    const { time, loading } = this.state;
     const { sec, min, hour } = time;
     // console.log(questions);
     return (
@@ -54,18 +86,41 @@ class ShowAnswers extends Component {
         left: 20,
         zIndex: 10,
         width: 250,
-        height: 250,
+        // height: 350,
         padding: '5px',
         display: 'flex',
-        flexWrap: 'wrap',
-        alignContent: 'flex-start',
+        flexDirection: 'column',
+        alignItems: 'center',
       }}
       >
-        {
-          questions.map((one, i) =>
-            <OneQuestionBlock key={one.id} checked={one.answers.length > 0} num={i + 1} />)
-        }
+
+        <div style={{ fontSize: 18, fontWeight: 'bold', margin: '10px 0' }}>正在考试中</div>
+        <div style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignContent: 'flex-start',
+        }}
+        >
+          {
+            questions.map((one, i) =>
+              <OneQuestionBlock key={one.id} checked={one.answers.length > 0} num={i + 1} />)
+          }
+        </div>
+        <div style={{ margin: '15px 0 5px 0' }}>剩余时间</div>
         <div>{`${hour}时${min}分${sec}秒`}</div>
+        <div className="flex-space" />
+        <Button
+          loading={loading}
+          style={{
+            marginTop: 10,
+            marginBottom: 10,
+            background: '#52c41a',
+            color: 'white',
+            width: '90%',
+          }}
+          onClick={this.showConfirm}
+        >交卷
+        </Button>
       </div>
     );
   }

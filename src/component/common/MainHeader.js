@@ -2,7 +2,7 @@
  * @Author: LainCarl 
  * @Date: 2018-03-06 11:10:23 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-14 16:21:39
+ * @Last Modified time: 2018-03-23 15:18:38
  */
 import React, { Component } from 'react';
 import { Popover, Button, Icon } from 'antd';
@@ -17,9 +17,15 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     height: 50,
-    // boxShadow: '0 -10px 50px #888',
-    // marginBottom: 15,
-    borderBottom: '1px solid #ddd',
+    boxShadow: '0 2px 8px #f0f1f2',
+    position: 'fixed',
+    top: 0,
+    zIndex: 10,
+    width: '100%',
+    color: 'black',
+    background: 'white',
+    // background: '#f8f8f8',
+    // borderBottom: '1px solid #ddd',
   },
   headIcon: {
     width: 40,
@@ -67,7 +73,7 @@ class MainHeader extends Component {
       </div>
     );
     return (
-      <div style={styles.container} className="header">
+      <div style={styles.container}>
         <div
           role="none"
           className="header_btn"
