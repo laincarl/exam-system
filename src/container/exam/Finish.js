@@ -73,7 +73,7 @@ class Finish extends Component {
               borderRadius: '50%',
             }}
           />
-          <div style={{ fontSize: 20, marginTop: 5 }}>{AppState.userInfo.name}</div>
+          <div style={{ fontSize: 20, marginTop: 5 }}>{AppState.userInfo.real_name}</div>
           <div style={{ marginTop: 20 }}>
             <span style={{ fontWeight: 'bold', fontSize: 28 }}>{score}分</span>
             <span style={{ fontSize: 18, color: '#aaa', marginLeft: 3 }}>({fullScore}分)</span>

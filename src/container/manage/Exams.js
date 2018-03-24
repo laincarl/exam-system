@@ -111,9 +111,16 @@ class Exams extends Component {
     visible: false,
   }
   componentDidMount() {
+    this.getExams();
+  }
+  getExams = () => {
+    this.setState({
+      loading: true,
+    })
     axios.get('/api/exams').then((exams) => {
       exams && this.setState({
         exams,
+        loading: false
       });
     });
   }
@@ -155,9 +162,14 @@ class Exams extends Component {
       <div>
         <Header
           title="试卷管理"
-          prefix={<Icon type="file-add" />}
-          text="新建试卷"
-          onClick={this.createExam}
+          buttons={[
+            {
+              prefix: <Icon type="file-add" />,
+              text: '新建试卷',
+              onClick: this.createExam,
+            },
+          ]}
+          refresh={this.getExams}
         />
 
         <Modal
@@ -220,6 +232,7 @@ class Exams extends Component {
         </Modal>
         <div style={{ padding: '20px' }}>
           <Table
+            rowKey="id"
             columns={columns}
             dataSource={exams.map(one => ({ ...one, ...{ key: one.id } }))}
             loading={loading}

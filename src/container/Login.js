@@ -76,9 +76,9 @@ class Login extends Component {
           <Spin spinning={this.state.spinning}>
             <div style={{ fontSize: '20px', marginBottom: '20px' }}>帐号登录</div>
             <Form onSubmit={this.handleSubmit}>
-              <FormItem label="学号">
+              <FormItem label="学工号">
                 {getFieldDecorator('name', {
-                rules: [{ required: true, message: '请输入学号!' }],
+                rules: [{ required: true, message: '请输入学工号!' }],
               })(<Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} />)}
               </FormItem>
               <FormItem label="密码">
@@ -99,7 +99,7 @@ class Login extends Component {
               marginTop: '20px',
             }}
               >
-              首次使用学号登录，初始密码为学号的后六位
+              首次使用学工号登录，初始密码为学工号的后六位
               </div>            
             </Form>
           </Spin>

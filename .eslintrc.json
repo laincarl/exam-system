@@ -52,6 +52,8 @@
         "no-debugger": "off",
         "no-cond-assign": "off",
         "no-param-reassign": "off",
+        "react/jsx-closing-tag-location": "off",
+        "camelcase": "off",
         "jsx-a11y/anchor-is-valid": [
             "warn",
             {
@@ -61,7 +63,5 @@
             }
         ]
     },
-    "globals": {
-        "HAP": true
-    }
+    "globals": {}
 }

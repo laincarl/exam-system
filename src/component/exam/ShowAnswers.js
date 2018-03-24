@@ -21,7 +21,7 @@ class ShowAnswers extends Component {
     this.setTime();
     this.start();
   }
-  componentWillUnmount() {
+  componentWillUnmount() { 
     clearInterval(this.timer);
   }
   setTime = () => {

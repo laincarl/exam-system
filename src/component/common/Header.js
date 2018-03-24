@@ -12,7 +12,7 @@ import { withRouter } from 'react-router';
 class Header extends Component {
   render() {
     const {
-      hasBack, title, text, prefix, onClick, disabled, history, 
+      hasBack, buttons, refresh, title, disabled, history,
     } = this.props;
     return (
       <div
@@ -23,26 +23,50 @@ class Header extends Component {
         {hasBack && <Icon type="arrow-left" style={{ fontSize: 18, marginLeft: 10, cursor: 'pointer' }} onClick={() => { history.goBack(); }} />}
         <div style={{ fontSize: 18, marginLeft: 10 }}>{title}</div>
         <div style={{ marginLeft: 100 }} />
-        <Button
-          className="header-btn" 
+        {buttons.map(button => (<Button
+          className="header-btn"
           style={{
+            marginLeft: 15,
             alignItems: 'center',
-            color: disabled ? 'rgba(0, 0, 0, 0.26)' : '#3F51B5',
-            pointerEvents: disabled ? 'none' : 'auto',
-            display: 'flex',            
+            color: disabled || button.disabled ? 'rgba(0, 0, 0, 0.26)' : '#3F51B5',
+            pointerEvents: disabled || button.disabled ? 'none' : 'auto',
+            display: 'flex',
             height: '28px',
             fontSize: '14px',
             lineHeight: '24px',
           }}
-          onClick={onClick}
+          onClick={button.onClick}
         >
           <div>
-            {prefix}
+            {button.prefix}
             {' '}
-            {text}
+            {button.text}
+
           </div>
-       
-        </Button>
+        </Button>))}
+        {
+          refresh &&
+          <Button
+            className="header-btn"
+            style={{
+              marginLeft: 15,
+              alignItems: 'center',
+              color: disabled ? 'rgba(0, 0, 0, 0.26)' : '#3F51B5',
+              pointerEvents: disabled ? 'none' : 'auto',
+              display: 'flex',
+              height: '28px',
+              fontSize: '14px',
+              lineHeight: '24px',
+            }}
+            onClick={refresh}
+          >
+            <div>
+              <Icon type="reload" />
+              {' '}
+              刷新
+            </div>
+          </Button>
+        }
       </div>
     );
   }

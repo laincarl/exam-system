@@ -10,7 +10,7 @@ import { withRouter } from 'react-router';
 import { observer } from 'mobx-react';
 import AppState from 'AppState';
 
-const CheckPermission = (WrappedComponent, role = []) => {
+const CheckPermission = (WrappedComponent, role = ['student']) => {
   @observer
   class WrapComponent extends Component {
     componentDidMount() {
@@ -19,14 +19,14 @@ const CheckPermission = (WrappedComponent, role = []) => {
     componentWillReact() {
       this.checkAuth();
     }
-    checkAuth=() => {
+    checkAuth = () => {
       const { userAuth } = AppState;
       if (!userAuth) {
         this.props.history.push('/login');
       }
     }
     render() {
-      const { userAuth, userInfo } = AppState;      
+      const { userAuth, userInfo } = AppState;
       return userAuth && role.includes(userInfo.role) ? <WrappedComponent {...this.props} /> : null;
     }
   }

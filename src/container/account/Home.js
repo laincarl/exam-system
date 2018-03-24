@@ -41,12 +41,6 @@ class Home extends Component {
       formData.append('file', e.target.files[0]);
       axios.post('/api/user/head', formData).then((data) => {
         AppState.setUserInfo({ url: data.url });
-      }).catch((error) => {
-        if (error.response) {
-          message.error(error.response.data.message);
-        } else {
-          console.log(error);
-        }
       });
     }
   }

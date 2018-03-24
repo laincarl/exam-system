@@ -9,6 +9,7 @@ import React, { Component } from 'react';
 import { Icon, Modal, Button, Form, Input, message } from 'antd';
 import Header from 'Header';
 import axios from 'Axios';
+import Spin from 'Spin';
 import Bank from '../../component/manage/Bank';
 
 const FormItem = Form.Item;
@@ -21,12 +22,19 @@ class QuestionBank extends Component {
     visible: false,
   }
   componentDidMount() {
+    this.getBanks();
+  }
+  getBanks = () => {
+    this.setState({
+      loading: true,
+    });
     axios.get('/api/banks').then((banks) => {
       this.setState({
         banks,
+        loading: false,
       });
     });
-  }  
+  }
   showModal = () => {
     this.setState({
       visible: true,
@@ -69,18 +77,25 @@ class QuestionBank extends Component {
       <div>
         <Header
           title="题库管理"
-          prefix={<Icon type="file-add" />}
-          text="新建题库"
-          onClick={this.showModal}
+          buttons={[
+            {
+              prefix: <Icon type="file-add" />,
+              text: '新建题库',
+              onClick: this.showModal,
+            },
+          ]}
+          refresh={this.getBanks}
         />
-        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-          {
-            banks.map(one => <Bank data={one} />)
-          }
-        </div>
+        <Spin spinning={loading}>
+          <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+            {
+              banks.map(one => <Bank data={one} />)
+            }
+          </div>
+        </Spin>
         <Modal
           visible={visible}
-          title="新建题库"     
+          title="新建题库"
           onCancel={this.handleCancel}
           footer={null}
         >

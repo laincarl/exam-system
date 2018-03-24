@@ -39,6 +39,11 @@ const styles = {
     borderRadius: '50%',
   },
 };
+const roles = {
+  student: '学生',
+  teacher: '教师',
+  admin: '管理员',
+};
 @inject('AppState')
 @observer
 class MainHeader extends Component {
@@ -53,8 +58,8 @@ class MainHeader extends Component {
   }
   render() {
     const { AppState } = this.props;
-    const { name, url } = AppState.userInfo;
-    console.log('get', name, url);
+    const { real_name, url, role } = AppState.userInfo;
+    // console.log('get', real_name, url);
     const account = (
       <div style={{ width: 190 }}>
         <div style={{ textAlign: 'center' }}>
@@ -63,7 +68,8 @@ class MainHeader extends Component {
             src={url}
             alt=""
           />
-          <div style={{ marginTop: 10 }}>{name}</div>
+          <div style={{ marginTop: 10 }}>{real_name}</div>
+          <div style={{ fontSize: 10, marginTop: 3 }}>{roles[role]}</div>
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: 20 }}>

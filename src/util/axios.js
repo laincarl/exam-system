@@ -35,6 +35,10 @@ axios.interceptors.response.use(
     if (response) {
       const { status } = response;
       switch (status) {
+        case 403: {
+          message.error('权限不足');
+          break;
+        }
         case 500: {
           message.error('服务器内部错误');
           break;
