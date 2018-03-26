@@ -23,7 +23,7 @@ class Header extends Component {
         {hasBack && <Icon type="arrow-left" style={{ fontSize: 18, marginLeft: 10, cursor: 'pointer' }} onClick={() => { history.goBack(); }} />}
         <div style={{ fontSize: 18, marginLeft: 10 }}>{title}</div>
         <div style={{ marginLeft: 100 }} />
-        {buttons.map(button => (<Button
+        {buttons && buttons.map(button => (<Button
           className="header-btn"
           style={{
             marginLeft: 15,

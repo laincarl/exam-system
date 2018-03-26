@@ -109,12 +109,7 @@ class BankDetail extends Component {
       <div>
         <Header
           hasBack
-          title="题库详情"
-          prefix={<Icon type="reload" />}
-          text="刷新"
-          onClick={() => {
-            console.log('headerclick');
-          }}
+          title="题库详情"          
         />
         <div style={{ width: 500 }}>
           <Form onSubmit={this.handleSubmit}>

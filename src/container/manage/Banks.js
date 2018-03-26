@@ -2,20 +2,20 @@
  * @Author: LainCarl 
  * @Date: 2018-03-11 15:34:18 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-11 16:47:40
+ * @Last Modified time: 2018-03-26 17:11:43
  */
 
 import React, { Component } from 'react';
-import { Icon, Modal, Button, Form, Input, message } from 'antd';
+import { Icon, Modal, Button, Select, Form, Input, message } from 'antd';
 import Header from 'Header';
 import axios from 'Axios';
 import Spin from 'Spin';
 import Bank from '../../component/manage/Bank';
 
 const FormItem = Form.Item;
+const { Option } = Select;
 
-
-class QuestionBank extends Component {
+class Banks extends Component {
   state = {
     banks: [],
     loading: false,
@@ -55,7 +55,7 @@ class QuestionBank extends Component {
       if (!err) {
         this.setState({ loading: true });
         console.log('Received values of form: ', values);
-        axios.post('/api/banks/new', { title: values.title }).then((data) => {
+        axios.post('/api/banks/new', values).then((data) => {
           console.log(data);
           message.success('创建成功');
           this.setState({ visible: false, loading: false });
@@ -111,7 +111,19 @@ class QuestionBank extends Component {
                 }],
               })(<Input />)}
             </FormItem>
-
+            <FormItem
+              label="题型"
+            >
+              {getFieldDecorator('type', {
+            rules: [{
+              required: true, message: '请选择题型',
+            }],
+          })(<Select>
+            <Option value="single_select">单选题</Option>
+            <Option value="multi_select">多选题</Option>
+            <Option value="blank">填空题</Option>
+          </Select>)}
+            </FormItem>
             <FormItem>
               <div style={{ textAlign: 'right' }}>
                 <Button key="back" onClick={this.handleCancel} style={{ marginRight: 10 }}>取消</Button>
@@ -128,4 +140,4 @@ class QuestionBank extends Component {
 }
 
 
-export default Form.create()(QuestionBank);
+export default Form.create()(Banks);

@@ -17,7 +17,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     height: 50,
-    boxShadow: '0 2px 8px #f0f1f2',
+    // boxShadow: '0 2px 8px #f0f1f2',
     position: 'fixed',
     top: 0,
     zIndex: 10,
@@ -25,7 +25,7 @@ const styles = {
     color: 'black',
     background: 'white',
     // background: '#f8f8f8',
-    // borderBottom: '1px solid #ddd',
+    borderBottom: '1px solid #ddd',
   },
   headIcon: {
     width: 40,

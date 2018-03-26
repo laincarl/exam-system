@@ -2,7 +2,7 @@
  * @Author: LainCarl 
  * @Date: 2018-03-05 20:33:52 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-11 16:49:01
+ * @Last Modified time: 2018-03-26 16:43:06
  */
 
 import React, { Component } from 'react';
@@ -12,7 +12,9 @@ import ManageMenu from '../../component/manage/ManageMenu';
 import Main from './Main';
 import Test from './Test';
 import Exams from './Exams';
-import QuestionBank from './QuestionBank';
+import Papers from './Papers';
+import CreatePaper from './CreatePaper';
+import Banks from './Banks';
 import BankDetail from './BankDetail';
 import UserManage from './UserManage';
 
@@ -27,9 +29,10 @@ class Manage extends Component {
           <Switch>
             <Route exact path={`${match.url}/main`} component={Main} />
             <Route path={`${match.url}/examlist`} component={Exams} />
-            <Route path={`${match.url}/paperlist`} component={Test} />
+            <Route path={`${match.url}/paperlist`} component={Papers} />
+            <Route path={`${match.url}/createpaper`} component={CreatePaper} />
             <Route path={`${match.url}/analyze`} component={Test} />
-            <Route path={`${match.url}/questionbank`} component={QuestionBank} />
+            <Route path={`${match.url}/questionbank`} component={Banks} />
             <Route path={`${match.url}/user`} component={UserManage} />
             <Route path={`${match.url}/bankdetail/:id?`} component={BankDetail} />
             <Redirect from={`${match.url}`} to={`${match.url}/main`} />
@@ -40,8 +43,5 @@ class Manage extends Component {
   }
 }
 
-Manage.propTypes = {
-
-};
 
 export default CheckPermission(Manage, 'admin');

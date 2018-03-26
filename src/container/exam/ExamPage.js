@@ -38,7 +38,7 @@ class ExamPage extends Component {
     }).catch((error) => {
       if (error.response) {
         message.error(error.response.data.message);
-        AppState.history.push('/404');
+        AppState.history.goBack();
       } else {
         console.log(error);
       }
