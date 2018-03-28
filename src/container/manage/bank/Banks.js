@@ -2,7 +2,7 @@
  * @Author: LainCarl 
  * @Date: 2018-03-11 15:34:18 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-26 17:11:43
+ * @Last Modified time: 2018-03-28 12:30:38
  */
 
 import React, { Component } from 'react';
@@ -10,7 +10,7 @@ import { Icon, Modal, Button, Select, Form, Input, message } from 'antd';
 import Header from 'Header';
 import axios from 'Axios';
 import Spin from 'Spin';
-import Bank from '../../component/manage/Bank';
+import Bank from '../../../component/manage/Bank';
 
 const FormItem = Form.Item;
 const { Option } = Select;

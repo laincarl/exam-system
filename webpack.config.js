@@ -36,6 +36,7 @@ module.exports = {
       Spin: path.resolve(__dirname, './src/component/common/Spin.js'),
       AppState: path.resolve(__dirname, './src/store/AppState.js'),
       CheckPermission: path.resolve(__dirname, './src/component/common/CheckPermission.js'),
+      Constants: path.resolve(__dirname, './src/util/Constants.js'),
     },
   },
   module: {

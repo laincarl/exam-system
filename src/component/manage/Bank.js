@@ -2,7 +2,7 @@
  * @Author: LainCarl 
  * @Date: 2018-03-11 15:34:09 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-11 16:40:04
+ * @Last Modified time: 2018-03-28 12:56:51
  */
 
 import React, { Component } from 'react';
@@ -17,7 +17,7 @@ class Bank extends Component {
   }
   openDetail = () => {
     const { history } = this.props;
-    history.push(`/manage/bankdetail/${this.props.data.id}`);
+    history.push(`/manage/bank/detail/${this.props.data.id}`);
   }
   render() {
     const { data } = this.props;

@@ -14,11 +14,14 @@ class AddPaperItem extends Component {
     this.getBanks();
   }
   
-  getBanks=() => {
+  getBanks=(type) => {
+    const { resetFields } = this.props.form;
+    resetFields('bank');
+    console.log(type);
     this.setState({
       loading: true,
     });
-    axios.get('/api/banks').then((banks) => {
+    axios.get(type ? `/api/banks?type=${type}` : '/api/banks').then((banks) => {
       this.setState({
         banks,
         loading: false,
@@ -55,9 +58,9 @@ class AddPaperItem extends Component {
             rules: [{
               required: true, message: '请选择题型',
             }],
-          })(<Select>
-            <Option value="single_select">单选题</Option>
-            <Option value="multi_select">多选题</Option>
+          })(<Select onChange={this.getBanks}>
+            <Option value="select_single">单选题</Option>
+            <Option value="select_multi">多选题</Option>
             <Option value="blank">填空题</Option>
           </Select>)}
           </FormItem>

@@ -2,7 +2,7 @@
  * @Author: LainCarl 
  * @Date: 2018-03-05 20:33:52 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-26 16:43:06
+ * @Last Modified time: 2018-03-28 12:28:52
  */
 
 import React, { Component } from 'react';
@@ -14,9 +14,8 @@ import Test from './Test';
 import Exams from './Exams';
 import Papers from './Papers';
 import CreatePaper from './CreatePaper';
-import Banks from './Banks';
-import BankDetail from './BankDetail';
 import UserManage from './UserManage';
+import BankRoute from './bank/BankRoute';
 
 class Manage extends Component {
   render() {
@@ -32,9 +31,8 @@ class Manage extends Component {
             <Route path={`${match.url}/paperlist`} component={Papers} />
             <Route path={`${match.url}/createpaper`} component={CreatePaper} />
             <Route path={`${match.url}/analyze`} component={Test} />
-            <Route path={`${match.url}/questionbank`} component={Banks} />
+            <Route path={`${match.url}/bank`} component={BankRoute} />
             <Route path={`${match.url}/user`} component={UserManage} />
-            <Route path={`${match.url}/bankdetail/:id?`} component={BankDetail} />
             <Redirect from={`${match.url}`} to={`${match.url}/main`} />
           </Switch>
         </div>
