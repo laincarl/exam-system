@@ -12,8 +12,7 @@ import ManageMenu from '../../component/manage/ManageMenu';
 import Main from './Main';
 import Test from './Test';
 import Exams from './Exams';
-import Papers from './Papers';
-import CreatePaper from './CreatePaper';
+import PaperRoute from './paper/PaperRoute';
 import UserManage from './UserManage';
 import BankRoute from './bank/BankRoute';
 
@@ -28,8 +27,7 @@ class Manage extends Component {
           <Switch>
             <Route exact path={`${match.url}/main`} component={Main} />
             <Route path={`${match.url}/examlist`} component={Exams} />
-            <Route path={`${match.url}/paperlist`} component={Papers} />
-            <Route path={`${match.url}/createpaper`} component={CreatePaper} />
+            <Route path={`${match.url}/paper`} component={PaperRoute} />           
             <Route path={`${match.url}/analyze`} component={Test} />
             <Route path={`${match.url}/bank`} component={BankRoute} />
             <Route path={`${match.url}/user`} component={UserManage} />

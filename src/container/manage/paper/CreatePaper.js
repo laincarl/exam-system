@@ -10,8 +10,8 @@ import React, { Component } from 'react';
 import { Form, Input, message, InputNumber, Button, Icon } from 'antd';
 import axios from 'Axios';
 import Header from 'Header';
-import PaperItem from '../../component/manage/PaperItem';
-import AddPaperItem from '../../component/manage/AddPaperItem';
+import PaperItem from '../../../component/manage/PaperItem';
+import AddPaperItem from '../../../component/manage/AddPaperItem';
 
 const FormItem = Form.Item;
 class CreatePaper extends Component {
@@ -24,7 +24,7 @@ class CreatePaper extends Component {
       title: '多选题',
     }],
   }
-  addItem=(values) => {
+  addItem = (values) => {
     console.log(values);
   }
   handleSubmit = (e) => {
@@ -32,7 +32,16 @@ class CreatePaper extends Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         this.setState({ loading: true });
-        axios.post('/api/exams/new', { title: values.title }).then((data) => {
+        const parts = [
+          {
+            type: 'select_single',
+            bank_id: 4,
+            num: 10,
+            score: 1,
+            // questions: ['5abc923a40db290bc009d42a'],
+          },
+        ];
+        axios.post('/api/papers/new', { title: values.title, parts }).then((data) => {
           console.log(data);
           message.success('创建成功');
           this.setState({ loading: false });
@@ -63,10 +72,10 @@ class CreatePaper extends Component {
           ]}
         />
         {visible &&
-        <AddPaperItem 
-          handleSubmit={this.addItem} 
-          handleCancel={() => { this.setState({ visible: false }); }}
-        />}
+          <AddPaperItem
+            handleSubmit={this.addItem}
+            handleCancel={() => { this.setState({ visible: false }); }}
+          />}
         <div style={{ margin: '0 20px' }}>
           <Form onSubmit={this.handleSubmit}>
             <FormItem
@@ -85,11 +94,12 @@ class CreatePaper extends Component {
               label="考试时间"
             >
               {getFieldDecorator('limit_time', {
+                initialValue: 50,
                 rules: [{
                   required: true, message: '请填写考试时间',
                 }],
               })(<div>
-                <InputNumber min={1} max={500} defaultValue={50} />{' '}分钟
+                <InputNumber min={1} max={500} />{' '}分钟
               </div>)}
             </FormItem>
             <FormItem>

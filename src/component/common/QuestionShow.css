@@ -1,0 +1,7 @@
+.input_question_edit {
+    border-color: transparent;
+}
+
+.input_question_edit:hover {
+    border: 1px dashed gray;
+}

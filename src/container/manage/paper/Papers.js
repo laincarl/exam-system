@@ -8,30 +8,30 @@ import AppState from 'AppState';
 
 class Papers extends Component {
   state = {
-    exams: [],
+    papers: [],
     loading: false,
   }
   componentDidMount() {
-    this.getExams();
+    this.getPapers();
   }
-  getExams = () => {
+  getPapers = () => {
     this.setState({
       loading: true,
     });
-    axios.get('/api/exams').then((exams) => {
-      if (exams) {
+    axios.get('/api/papers').then((papers) => {
+      if (papers) {
         this.setState({
-          exams,
+          papers,
           loading: false,
         });
       }
     });
   }
   toCreate = () => {
-    AppState.history.push('/manage/createpaper');
+    AppState.history.push('/manage/paper/create');
   }
   render() {
-    const { exams, loading } = this.state;
+    const { papers, loading } = this.state;
     const columns = [{
       title: '名称',
       dataIndex: 'title',
@@ -71,14 +71,14 @@ class Papers extends Component {
               onClick: this.toCreate,
             },
           ]}
-          refresh={this.getExams}
+          refresh={this.getPapers}
         />
 
         <div style={{ padding: '20px' }}>
           <Table
             rowKey="id"
             columns={columns}
-            dataSource={exams.map(one => ({ ...one, ...{ key: one.id } }))}
+            dataSource={papers.map(one => ({ ...one, ...{ key: one.id } }))}
             loading={loading}
           />
         </div>

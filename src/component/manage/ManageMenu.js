@@ -41,7 +41,7 @@ class ManageMenu extends Component {
           <Menu.Item key={`${match.url}/user`}><Icon type="home" />用户管理</Menu.Item>
           <Menu.Item key={`${match.url}/examlist`}><Icon type="switcher" />考试管理</Menu.Item>
           <Menu.Item key={`${match.url}/bank`}><Icon type="switcher" />题库管理</Menu.Item>
-          <Menu.Item key={`${match.url}/paperlist`}><Icon type="copy" />试卷管理</Menu.Item>
+          <Menu.Item key={`${match.url}/paper`}><Icon type="copy" />试卷管理</Menu.Item>
           <Menu.Item key={`${match.url}/analyze`}><Icon type="calculator" />统计信息</Menu.Item>
         </Menu>
       </div>

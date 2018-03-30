@@ -6,19 +6,17 @@
  */
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import Banks from './Banks';
-import BankDetail from './BankDetail';
-import ImportQuestion from './ImportQuestion';
+import Papers from './Papers';
+import CreatePaper from './CreatePaper';
 
-class BankRoute extends Component {
+class PaperRoute extends Component {
   render() {
     const { match } = this.props;
     // console.log(this.props);
     return (
       <Switch>
-        <Route exact path={`${match.url}/list`} component={Banks} /> 
-        <Route path={`${match.url}/import/:id?`} component={ImportQuestion} />
-        <Route path={`${match.url}/detail/:id?`} component={BankDetail} />
+        <Route exact path={`${match.url}/list`} component={Papers} /> 
+        <Route path={`${match.url}/create`} component={CreatePaper} />        
         <Redirect from={`${match.url}`} to={`${match.url}/list`} />
       </Switch>
     );
@@ -26,4 +24,4 @@ class BankRoute extends Component {
 }
 
 
-export default BankRoute;
+export default PaperRoute;

@@ -1,28 +1,35 @@
 import React, { Component } from 'react';
 import { Icon } from 'antd';
-
+import { observer } from 'mobx-react';
+import QuestionStore from '../../store/manage/bank/QuestionStore';
+import './QuestionShow.css';
 
 const radioStyle = {
   height: '30px',
   lineHeight: '30px',
 };
-
+@observer
 class QuestionShow extends Component {
   state = {
     hover: false,
   }
+  handleChange=(e) => {
+    QuestionStore.setQuestion(e.target.value, 0);
+  }
   render() {
+    console.log('render');
     // <Icon type="check-circle" />
     const { hover } = this.state;
-    const { num, data } = this.props;
+    const { num, index } = this.props;
+    const question = QuestionStore.questions[index];
     const {
       title, selects, answers,
-    } = data;
+    } = question;
     return (
       <div
         style={{ margin: '18px 0', position: 'relative', paddingRight: 50 }}
-        onMouseEnter={() => { this.setState({ hover: true }); }}
-        onMouseLeave={() => { this.setState({ hover: false }); }}
+        // onMouseEnter={() => { this.setState({ hover: true }); }}
+        // onMouseLeave={() => { this.setState({ hover: false }); }}
       >
         {
           hover && <Icon
@@ -34,11 +41,13 @@ class QuestionShow extends Component {
         }
         <div><span style={{ fontWeight: 'bold' }}>{num}.</span> {title}</div>
         <div style={{ marginTop: '8px' }}>
-          {Object.keys(selects).map((key, i) => (
+          {Object.keys(selects).map(key => (
             <div style={{ display: 'flex', alignItems: 'center', color: answers.includes(key) && '#52c41a' }}>
-              <div style={{ width: '30px', overflow: 'hidden', fontWeight: 'bold' }}>{String.fromCharCode(65 + i)} . </div>
+              {/* 选项key */}
+              <div style={{ width: '30px', overflow: 'hidden', fontWeight: 'bold' }}>{key} . </div>
               {/* {answers.includes(key) && <Icon type="check-circle" />} */}
-              <div style={radioStyle} >{selects[key]}</div>
+              {/* 选项内容 */}
+              <input className="input_question_edit" style={radioStyle} value={selects[key]} onChange={this.handleChange} />
             </div>))
           }
         </div>
