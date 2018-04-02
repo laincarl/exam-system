@@ -44,10 +44,14 @@ class CreatePaper extends Component {
   }
   remove = (index) => {
     const { items } = this.state;
-    items.splice(index, 1);
-    this.setState({
-      items,
-    });
+    if (items.length > 1) {
+      items.splice(index, 1);
+      this.setState({
+        items,
+      });
+    } else {
+      message.info('至少含有一个大题');
+    }
   }
 
   add = () => {
@@ -60,8 +64,8 @@ class CreatePaper extends Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        const { 
-          title, banks, nums, scores, types, 
+        const {
+          title, banks, nums, scores, types,
         } = values;
         const paper = {
           title,
@@ -69,7 +73,7 @@ class CreatePaper extends Component {
             type,
             bank_id: banks[i],
             num: nums[i],
-            score: scores[i], 
+            score: scores[i],
           })),
         };
         axios.post('/api/papers/new', paper).then((data) => {
@@ -86,39 +90,12 @@ class CreatePaper extends Component {
       }
     });
   }
-  // handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   this.props.form.validateFieldsAndScroll((err, values) => {
-  //     if (!err) {
-  //       this.setState({ loading: true });
-  //       const parts = [
-  //         {
-  //           type: 'select_single',
-  //           bank_id: 4,
-  //           num: 10,
-  //           score: 1,    
-  //         },
-  //       ];
-  //       axios.post('/api/papers/new', { title: values.title, parts }).then((data) => {
-  //         console.log(data);
-  //         message.success('创建成功');
-  //         this.setState({ loading: false });
-  //       }).catch((error) => {
-  //         if (error.response) {
-  //           message.error(error.response.data.message);
-  //         } else {
-  //           console.log(error);
-  //         }
-  //       });
-  //     }
-  //   });
-  // }
   render() {
     const { getFieldDecorator, getFieldValue, resetFields } = this.props.form;
     const { items, loading, banks } = this.state;
     const formItemLayout = {
-      labelCol: { span: 4 },
-      wrapperCol: { span: 14 },
+      labelCol: { span: 2 },
+      wrapperCol: { span: 8 },
     };
     const formItems = items.map((item, index) => {
       const type = getFieldValue(`types[${index}]`);
@@ -133,18 +110,26 @@ class CreatePaper extends Component {
               {...formItemLayout}
               label="题型"
             >
-              {getFieldDecorator(`types[${index}]`, {
+              <div style={{ position: 'relative' }}>           
+                {getFieldDecorator(`types[${index}]`, {
                 rules: [{
                   required: true,
                   message: "Please input passenger's name or delete this field.",
                 }],
-              })(<Select
+              })(<Select     
                 onSelect={() => { resetFields(`banks[${index}]`); }}
               >
                 <Option value="select_single">单选题</Option>
                 <Option value="select_multi">多选题</Option>
                 <Option value="blank">填空题</Option>
               </Select>)}
+                <Icon
+                  style={{ position: 'absolute', top: 9, right: -28 }}
+                  className="dynamic-delete-button"
+                  type="minus-circle-o"
+                  onClick={() => this.remove(index)}
+                />
+              </div>
             </FormItem>
             <FormItem
               {...formItemLayout}
@@ -182,14 +167,7 @@ class CreatePaper extends Component {
                 }],
               })(<InputNumber min={1} max={20} />)}
             </FormItem>
-          </div>
-          <div style={{ position: 'absolute', top: 10, right: 10 }}>
-            <Icon
-              className="dynamic-delete-button"
-              type="minus-circle-o"
-              onClick={() => this.remove(index)}
-            />
-          </div>
+          </div>          
         </div>
       );
     });
@@ -222,13 +200,8 @@ class CreatePaper extends Component {
                 })(<Input />)}
               </FormItem>
               {formItems}
-              <FormItem>
-                <Button type="dashed" onClick={this.add} style={{ width: '60%' }}>
-                  <Icon type="plus" /> Add field
-                </Button>
-              </FormItem>
-              <FormItem>
-                <Button type="primary" htmlType="submit">保存</Button>
+              <FormItem>              
+                <Button type="primary" htmlType="submit" style={{ marginLeft: 100, width: 100 }}>保存</Button>         
               </FormItem>
             </Form>
           </Spin>

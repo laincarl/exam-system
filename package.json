@@ -39,6 +39,7 @@
         "babel-plugin-import": "^1.6.3",
         "babel-polyfill": "^6.26.0",
         "echarts": "^4.0.4",
+        "echarts-for-react": "^2.0.8",
         "extract-text-webpack-plugin": "^3.0.2",
         "file-loader": "^1.1.6",
         "history": "^4.7.2",

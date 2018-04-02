@@ -1,9 +1,12 @@
 .dynamic-delete-button {
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    position: relative;
+    top: 4px;
+    font-size: 20px;
+    color: #999;
+    transition: all .3s;
 }
 
-.dynamic-delete-button :hover {
-    cursor: pointer;
-    font-weight: bold;
+.dynamic-delete-button:hover {
+    color: #777;
 }

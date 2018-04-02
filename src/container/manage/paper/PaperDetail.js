@@ -55,7 +55,8 @@ class PaperDetail extends Component {
     return (
       <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <Header
-          title="试卷管理"          
+          hasBack
+          title="试卷详情"          
           refresh={this.getPaper}
         />
         <div style={{ flex: 1, overflow: 'auto' }}>
