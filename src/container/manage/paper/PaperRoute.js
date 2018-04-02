@@ -8,6 +8,8 @@ import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Papers from './Papers';
 import CreatePaper from './CreatePaper';
+import PaperDetail from './PaperDetail';
+import '../../../assets/css/paper.css';
 
 class PaperRoute extends Component {
   render() {
@@ -17,6 +19,7 @@ class PaperRoute extends Component {
       <Switch>
         <Route exact path={`${match.url}/list`} component={Papers} /> 
         <Route path={`${match.url}/create`} component={CreatePaper} />        
+        <Route path={`${match.url}/detail/:id`} component={PaperDetail} />        
         <Redirect from={`${match.url}`} to={`${match.url}/list`} />
       </Switch>
     );

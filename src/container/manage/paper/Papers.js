@@ -30,6 +30,9 @@ class Papers extends Component {
   toCreate = () => {
     AppState.history.push('/manage/paper/create');
   }
+  toDetail=(id) => {
+    AppState.history.push(`/manage/paper/detail/${id}`);
+  }
   render() {
     const { papers, loading } = this.state;
     const columns = [{
@@ -76,6 +79,9 @@ class Papers extends Component {
 
         <div style={{ padding: '20px' }}>
           <Table
+            onRow={record => ({
+              onClick: () => { this.toDetail(record.id); }, // 点击行
+            })}
             rowKey="id"
             columns={columns}
             dataSource={papers.map(one => ({ ...one, ...{ key: one.id } }))}
