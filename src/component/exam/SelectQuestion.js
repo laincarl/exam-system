@@ -14,10 +14,11 @@ class SelectQuestion extends Component {
     value: 0,
   }
   onChange = (e) => {
+    const { part, index } = this.props;
     const { id } = this.props.data;
 
-    console.log(id, e.target.value);
-    ExamStore.setAnswer(id, e.target.value);
+    console.log(id, part, index, e.target.value);
+    ExamStore.setAnswer(id, part, index, e.target.value);
     console.log('radio checked', e.target.value);
     this.setState({
       value: e.target.value,

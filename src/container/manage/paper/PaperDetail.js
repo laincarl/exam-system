@@ -14,7 +14,7 @@ import Spin from 'Spin';
 import Header from 'Header';
 import { message } from 'antd';
 import AppState from 'AppState';
-import OnePart from '../../../component/manage/paper/OnePart';
+import OnePart from '../../../component/common/OnePart';
 
 @observer
 class PaperDetail extends Component {
@@ -74,10 +74,7 @@ class PaperDetail extends Component {
             // boxShadow: '0 1px 6px rgba(0, 0, 0, .2)',
           }}
             >
-              {parts.map((part, i) => <OnePart index={i + 1} part={part} />)
-              // questions.map((one, i) => <SelectQuestion key={one.id} num={i + 1} data={one} />)
-              // questions.map((one, i) => <QuestionShow num={i + 1} data={one} />)
-            }
+              {parts.map((part, i) => <OnePart index={i + 1} part={part} />)}
             </div>
           </Spin>
         </div>

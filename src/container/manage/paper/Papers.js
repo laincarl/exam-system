@@ -70,7 +70,7 @@ class Papers extends Component {
           buttons={[
             {
               prefix: <Icon type="file-add" />,
-              text: '新建考试',
+              text: '新建试卷',
               onClick: this.toCreate,
             },
           ]}

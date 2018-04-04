@@ -10,7 +10,7 @@ import CheckPermission from 'CheckPermission';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import ManageMenu from '../../component/manage/ManageMenu';
 import Main from './Main';
-import Exams from './Exams';
+import ExamRoute from './exam/ExamRoute';
 import PaperRoute from './paper/PaperRoute';
 import UserManage from './UserManage';
 import BankRoute from './bank/BankRoute';
@@ -26,7 +26,7 @@ class Manage extends Component {
         <div style={{ flex: 1 }}>
           <Switch>
             <Route exact path={`${match.url}/main`} component={Main} />
-            <Route path={`${match.url}/examlist`} component={Exams} />
+            <Route path={`${match.url}/exam`} component={ExamRoute} />
             <Route path={`${match.url}/paper`} component={PaperRoute} />           
             <Route path={`${match.url}/analyze`} component={Analyze} />
             <Route path={`${match.url}/bank`} component={BankRoute} />

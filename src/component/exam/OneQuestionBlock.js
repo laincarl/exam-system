@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+import { observer } from 'mobx-react';
+import ExamStore from '../../store/exam/ExamStore';
 
+@observer
 class OneQuestionBlock extends Component {
   render() {
-    const { checked, num } = this.props;
+    console.log('render');
+    const { num, id } = this.props;
+    const checked = ExamStore.answers[id];
     return (
       <div style={{
         width: 40,

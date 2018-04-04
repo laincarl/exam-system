@@ -5,18 +5,17 @@ import AppState from 'AppState';
 
 class Finish extends Component {
   state={
-    score: 0,
-    fullScore: 0,
+    user_score: 0,
+    total_score: 0,
   }
   componentDidMount() {
     const { id } = this.props.match.params;
     axios.get(`/api/exams/result?id=${id}`).then((result) => {
       console.log(result);
-      const { score } = result;
-      const fullScore = 120;
+      const { user_score, total_score } = result;
       this.setState({
-        score,
-        fullScore,
+        user_score,
+        total_score,
       });
     }).catch((error) => {
       if (error.response) {
@@ -33,7 +32,7 @@ class Finish extends Component {
     AppState.history.push(`/exam/result/${id}`);
   }
   render() {
-    const { score, fullScore } = this.state;
+    const { user_score, total_score } = this.state;
     return (
       <div style={{
         width: '50%',
@@ -75,11 +74,11 @@ class Finish extends Component {
           />
           <div style={{ fontSize: 20, marginTop: 5 }}>{AppState.userInfo.real_name}</div>
           <div style={{ marginTop: 20 }}>
-            <span style={{ fontWeight: 'bold', fontSize: 28 }}>{score}分</span>
-            <span style={{ fontSize: 18, color: '#aaa', marginLeft: 3 }}>({fullScore}分)</span>
+            <span style={{ fontWeight: 'bold', fontSize: 28 }}>{user_score}分</span>
+            <span style={{ fontSize: 18, color: '#aaa', marginLeft: 3 }}>({total_score}分)</span>
           </div>
           <div style={{ fontSize: 18, color: '#aaa', margin: '10px 0 50px 0' }}>
-            {score >= fullScore * 0.8 ? '考的不错，再接再厉' : '下次继续努力，加油!'}
+            {user_score >= total_score * 0.8 ? '考的不错，再接再厉' : '下次继续努力，加油!'}
           </div>
           <Button
             onClick={this.toResult}

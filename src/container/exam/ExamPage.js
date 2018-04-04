@@ -2,7 +2,7 @@
  * @Author: LainCarl 
  * @Date: 2018-03-06 16:03:55 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-23 15:42:28
+ * @Last Modified time: 2018-04-03 17:20:58
  */
 
 import React, { Component } from 'react';
@@ -12,8 +12,7 @@ import Spin from 'Spin';
 import { message } from 'antd';
 import AppState from 'AppState';
 import ShowAnswers from '../../component/exam/ShowAnswers';
-import SelectQuestion from '../../component/exam/SelectQuestion';
-// import QuestionShow from '../component/common/QuestionShow';
+import OnePart from '../../component/common/OnePart';
 import ExamStore from '../../store/exam/ExamStore';
 
 @observer
@@ -28,10 +27,7 @@ class ExamPage extends Component {
     const { id } = this.props.match.params;
     axios.get(`/api/exams/exam?id=${id}`).then((exam) => {
       console.log(exam);
-      ExamStore.setCurrentExam({
-        ...exam,
-        ...{ questions: exam.questions.map(one => ({ ...one, ...{ answers: [] } })) },
-      });
+      ExamStore.setCurrentExam(exam);
       this.setState({
         loading: false,
       });
@@ -53,8 +49,8 @@ class ExamPage extends Component {
 
   render() {
     const { loading } = this.state;
-    const { questions } = ExamStore.currentExam;
-    console.log(questions);
+    const { parts } = ExamStore.currentExam;
+    console.log(parts);
     return (
       <div>
         <ShowAnswers />
@@ -68,7 +64,7 @@ class ExamPage extends Component {
           }}
           >
             {
-              questions.map((one, i) => <SelectQuestion key={one.id} num={i + 1} data={one} />)
+             parts.map((part, i) => <OnePart mode="exam" index={i} part={part} />)
               // questions.map((one, i) => <QuestionShow num={i + 1} data={one} />)
             }
           </div>

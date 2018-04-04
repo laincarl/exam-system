@@ -1,16 +1,23 @@
+/*
+ * @Author: LainCarl 
+ * @Date: 2018-04-03 14:49:27 
+ * @Last Modified by: LainCarl
+ * @Last Modified time: 2018-04-03 16:24:50
+ * @Feature: 创建一个考试 
+ */
 
 import React, { Component } from 'react';
+import { Modal, Select, Form, message, Input, Button, DatePicker, InputNumber } from 'antd';
+
+import axios from 'Axios';
+import Spin from 'Spin';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
-import { Table, Modal, Icon, Form, message, Input, Button, DatePicker, InputNumber } from 'antd';
-import Header from 'Header';
-import axios from 'Axios';
-import Action from 'Action';
-import AppState from 'AppState';
 
 moment.locale('zh-cn');
 const { RangePicker } = DatePicker;
 const FormItem = Form.Item;
+const { Option } = Select;
 const Locale = {
   lang: {
     placeholder: 'Select date',
@@ -50,13 +57,13 @@ const Locale = {
   },
 };
 
-function ranges(start, end) {
-  const result = [];
-  for (let i = start; i < end; i += 1) {
-    result.push(i);
-  }
-  return result;
-}
+// function ranges(start, end) {
+//   const result = [];
+//   for (let i = start; i < end; i += 1) {
+//     result.push(i);
+//   }
+//   return result;
+// }
 
 function disabledDate(current) {
   // Can not select days before today and today
@@ -64,53 +71,37 @@ function disabledDate(current) {
 }
 
 
-function disabledRangeTime(_, type) {
-  if (type === 'start') {
-    return {
-      disabledHours: () => ranges(0, 60).splice(4, 20),
-      disabledMinutes: () => ranges(30, 60),
-      disabledSeconds: () => [55, 56],
-    };
-  }
-  return {
-    disabledHours: () => ranges(0, 60).splice(20, 4),
-    disabledMinutes: () => ranges(0, 31),
-    disabledSeconds: () => [55, 56],
-  };
-}
-class Exams extends Component {
+// function disabledRangeTime(_, type) {
+//   if (type === 'start') {
+//     return {
+//       disabledHours: () => ranges(0, 60).splice(4, 20),
+//       disabledMinutes: () => ranges(30, 60),
+//       disabledSeconds: () => [55, 56],
+//     };
+//   }
+//   return {
+//     disabledHours: () => ranges(0, 60).splice(20, 4),
+//     disabledMinutes: () => ranges(0, 31),
+//     disabledSeconds: () => [55, 56],
+//   };
+// }
+class CreateExam extends Component {
   state = {
-    exams: [],
-    loading: false,
-    visible: false,
+    loading: true,
+    papers: [],
   }
   componentDidMount() {
-    this.getExams();
+    this.getPapers();
   }
-  getExams = () => {
+  getPapers = () => {
     this.setState({
       loading: true,
     });
-    axios.get('/api/exams').then((exams) => {
-      if (exams) {
-        this.setState({
-          exams,
-          loading: false,
-        });
-      }
-    });
-  }
-  createExam = () => {
-    this.setState({
-      visible: true,
-    });
-  }
-  editExam = (id) => {
-    AppState.history.push(`/manage/exam/${id}`);
-  }
-  handleCancel = () => {
-    this.setState({
-      visible: false,
+    axios.get('/api/papers').then((papers) => {
+      this.setState({
+        papers,
+        loading: false,
+      });
     });
   }
   handleSubmit = (e) => {
@@ -118,12 +109,14 @@ class Exams extends Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         this.setState({ loading: true });
-        const { title, range } = values;
-        console.log({ title, start: moment(range[0]).format('YYYY-MM-DD HH:mm:ss'), end: moment(range[1]).format('YYYY-MM-DD HH:mm:ss') });
-        axios.post('/api/exams/new', { title: values.title }).then((data) => {
+        // moment(range[0]).format('YYYY-MM-DD HH:mm:ss')
+        console.log(values);
+        const { range } = values;
+        axios.post('/api/exams/new', { ...values, ...{ range: { start_time: range[0], end_time: range[1] } } }).then((data) => {
           console.log(data);
           message.success('创建成功');
-          this.setState({ visible: false, loading: false });
+          this.setState({ loading: false });
+          this.props.handleCancel();
         }).catch((error) => {
           if (error.response) {
             message.error(error.response.data.message);
@@ -135,54 +128,15 @@ class Exams extends Component {
     });
   }
   render() {
-    const { exams, visible, loading } = this.state;
     const { getFieldDecorator } = this.props.form;
-    const columns = [{
-      title: '名称',
-      dataIndex: 'title',
-      key: 'title',
-    }, {
-      title: '状态',
-      dataIndex: 'status',
-      key: 'status',
-    }, {
-      title: '创建时间',
-      dataIndex: 'create_time',
-      key: 'create_time',
-    }, {
-      title: '操作',
-      key: 'action',
-      render: (text, record) => (
-        <div
-          role="none"
-          onClick={(e) => { e.stopPropagation(); }}
-        >
-          <Action data={[{
-            action: () => { this.editExam(record.id); },
-            text: '编辑',
-          }]}
-          />
-        </div>
-      ),
-    }];
+    const { loading, papers } = this.state;
+    const options = papers.map(paper => <Option value={paper.id}> {paper.title}</Option>);
     return (
-      <div>
-        <Header
-          title="考试管理"
-          buttons={[
-            {
-              prefix: <Icon type="file-add" />,
-              text: '新建考试',
-              onClick: this.createExam,
-            },
-          ]}
-          refresh={this.getExams}
-        />
-
+      <Spin spinning={loading}>
         <Modal
-          visible={visible}
+          visible
           title="新建考试"
-          onCancel={this.handleCancel}
+          onCancel={this.props.handleCancel}
           footer={null}
         >
           <Form onSubmit={this.handleSubmit}>
@@ -198,6 +152,17 @@ class Exams extends Component {
               })(<Input />)}
             </FormItem>
             <FormItem
+              label="试卷"
+            >
+              {getFieldDecorator('paper_id', {
+                rules: [{
+                  required: true, message: '请选择试卷',
+                }],
+              })(<Select>
+                {options}
+              </Select>)}
+            </FormItem>
+            <FormItem
               label="开始和结束时间"
             >
               {getFieldDecorator('range', {
@@ -208,24 +173,23 @@ class Exams extends Component {
                 style={{ width: '100%' }}
                 locale={Locale}
                 disabledDate={disabledDate}
-                disabledTime={disabledRangeTime}
+                // disabledTime={disabledRangeTime}
                 showTime={{
                   hideDisabledOptions: true,
-                  defaultValue: [moment('00:00:00', 'HH:mm:ss'), moment('11:59:59', 'HH:mm:ss')],
+                  defaultValue: [moment('00:00:00', 'HH:mm:ss'), moment('23:59:59', 'HH:mm:ss')],
                 }}
                 format="YYYY-MM-DD HH:mm:ss"
               />)}
             </FormItem>
             <FormItem
-              label="考试时间"
+              label="考试时间（分钟）"
             >
               {getFieldDecorator('limit_time', {
+                initialValue: 10,
                 rules: [{
                   required: true, message: '请填写考试时间',
                 }],
-              })(<div>
-                <InputNumber min={1} max={500} defaultValue={50} />{' '}分钟
-              </div>)}
+              })(<InputNumber min={1} max={500} />)}
             </FormItem>
             <FormItem>
               <div style={{ textAlign: 'right' }}>
@@ -237,17 +201,9 @@ class Exams extends Component {
             </FormItem>
           </Form>
         </Modal>
-        <div style={{ padding: '20px' }}>
-          <Table
-            rowKey="id"
-            columns={columns}
-            dataSource={exams.map(one => ({ ...one, ...{ key: one.id } }))}
-            loading={loading}
-          />
-        </div>
-      </div>
-    );
+      </Spin>);
   }
 }
 
-export default Form.create()(Exams);
+
+export default Form.create()(CreateExam);

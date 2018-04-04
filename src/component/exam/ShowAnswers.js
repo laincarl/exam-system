@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import { Button, Modal } from 'antd';
 import axios from 'Axios';
 import AppState from 'AppState';
-import OneQuestionBlock from './OneQuestionBlock';
+import OnePart from '../common/OnePart';
 import ExamStore from '../../store/exam/ExamStore';
 
 const { confirm } = Modal;
@@ -44,12 +44,15 @@ class ShowAnswers extends Component {
     }, 1000);
   }
   handleSubmit = () => {
-    const { currentExam } = ExamStore;
-    console.log(currentExam);
+    const { answers, currentExam } = ExamStore;
+    const { id, paper_id, title } = currentExam;
+    console.log(id, paper_id, answers);
     this.setState({
       loading: true,
     });
-    axios.post('/api/exams/submit', currentExam).then((result) => {
+    axios.post('/api/exams/submit', {
+      id, title, paper_id, answers, 
+    }).then((result) => {
       console.log(result);
       // const { score, results } = result;
       this.setState({
@@ -73,7 +76,7 @@ class ShowAnswers extends Component {
   }
 
   render() {
-    const { questions } = ExamStore.currentExam;
+    const { parts } = ExamStore.currentExam;
     const { time, loading } = this.state;
     const { sec, min, hour } = time;
     // console.log(questions);
@@ -95,15 +98,9 @@ class ShowAnswers extends Component {
       >
 
         <div style={{ fontSize: 18, fontWeight: 'bold', margin: '10px 0' }}>正在考试中</div>
-        <div style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignContent: 'flex-start',
-        }}
-        >
+        <div>
           {
-            questions.map((one, i) =>
-              <OneQuestionBlock key={one.id} checked={one.answers.length > 0} num={i + 1} />)
+           parts.map((part, i) => <OnePart mode="side" index={i + 1} part={part} />)
           }
         </div>
         <div style={{ margin: '15px 0 5px 0' }}>考试倒计时</div>

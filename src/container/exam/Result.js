@@ -7,16 +7,13 @@
  */
 
 import React, { Component } from 'react';
-// import { observer } from 'mobx-react';
+
 import { message } from 'antd';
 import Spin from 'Spin';
 import axios from 'Axios';
 import AppState from 'AppState';
-// import { withRouter } from 'react-router';
-import ResultShow from '../../component/exam/ResultShow';
-// import ExamStore from '../../store/exam/ExamStore';
+import OnePart from '../../component/common/OnePart';
 
-// @observer
 class Result extends Component {
   constructor() {
     super();
@@ -25,8 +22,8 @@ class Result extends Component {
       result: {
         exam_id: 0,
         exam_title: '',
-        score: 0,
-        results: [],
+        user_score: 0,
+        parts: [],
       },
     };
   }
@@ -51,8 +48,8 @@ class Result extends Component {
   }
   render() {
     const { result, loading } = this.state;
-    const { score, results } = result;
-    console.log(results);
+    const { user_score, parts } = result;
+    console.log(parts);
     return (
       <div>
         <Spin spinning={loading}>
@@ -64,10 +61,8 @@ class Result extends Component {
             boxShadow: '0 1px 6px rgba(0, 0, 0, .2)',
           }}
           >
-            <div>{score}</div>
-            {
-              results.map((one, i) => <ResultShow num={i + 1} data={one} />)
-            }
+            <div>{user_score}</div>
+            {parts.map((part, i) => <OnePart mode="result" index={i + 1} part={part} />)}
           </div>
         </Spin>
       </div>

@@ -14,9 +14,9 @@ const radioStyle = {
 };
 
 class ResultShow extends Component {
-  returnRightColor = (key, choices, answers) => {
+  returnRightColor = (key, user_answer, answers) => {
     let color = '';
-    if (choices.includes(key)) {
+    if (user_answer === key) {
       color = 'red';
     }
     if (answers.includes(key)) {
@@ -27,20 +27,20 @@ class ResultShow extends Component {
   render() {
     const { num, data } = this.props;
     const {
-      title, selects, answers, choices,
+      title, selects, answers, user_answer,
     } = data;
     return (
       <div
         style={{ margin: '18px 0', position: 'relative', paddingRight: 50 }}       
       >
         <div><span style={{ fontWeight: 'bold' }}>{num}.</span> {title}</div>
-        {choices.length === 0 || !choices[0] ? <div style={{ color: 'red', marginTop: 5 }}>未作答</div> : null}
+        {!user_answer ? <div style={{ color: 'red', marginTop: 5 }}>未作答</div> : null}
         <div style={{ marginTop: '8px' }}>
           {Object.keys(selects).map(key => (
             <div style={{
               display: 'flex',
               alignItems: 'center',
-              color: this.returnRightColor(key, choices, answers),
+              color: this.returnRightColor(key, user_answer, answers),
             }
             }
             >
