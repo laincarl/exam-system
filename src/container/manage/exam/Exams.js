@@ -2,7 +2,7 @@
  * @Author: LainCarl 
  * @Date: 2018-04-03 14:40:15 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-04-03 16:08:09
+ * @Last Modified time: 2018-04-05 17:26:35
  * @Feature: 展示考试列表 
  */
 
@@ -14,27 +14,9 @@ import axios from 'Axios';
 import Action from 'Action';
 import AppState from 'AppState';
 import moment from 'moment';
-import 'moment/locale/zh-cn';
+
 import CreateExam from 'component/manage/exam/CreateExam';
 
-
-moment.locale('zh-cn', {
-  relativeTime: {
-    future: '%s后',
-    past: '%s前',
-    s: '秒',
-    m: '一分钟',
-    mm: '%d分钟',
-    h: '一小时',
-    hh: '%d小时',
-    d: '一天',
-    dd: '%d天',
-    M: '一月',
-    MM: '%d月',
-    y: '一年',
-    yy: '%d年',
-  },
-});
 class Exams extends Component {
   state = {
     exams: [],
@@ -57,6 +39,30 @@ class Exams extends Component {
       }
     });
   }
+  dataTransForm = exams => exams.map((exam) => {
+    const { range, id } = exam;
+    let status = '未开启';
+    let color = '#52c41a';
+    let during = '';
+    if (moment(range.start_time).isBefore(new Date())
+        && moment(range.end_time).isAfter(new Date())) {
+      status = '进行中';
+      during = `${moment().to(range.end_time)}关闭`;
+    } else if (moment(range.start_time).isAfter(new Date())) {
+      color = '#1890ff';
+      status = '未开启';
+      during = `${moment().to(range.start_time)}开启`;
+    } if (moment(range.end_time).isBefore(new Date())) {
+      color = '#FF9915';
+      status = '已结束';
+    }
+    return {
+      ...exam,
+      ...{
+        key: id, status, color, during,
+      },
+    };
+  })
   createExam = () => {
     this.setState({
       visible: true,
@@ -81,21 +87,9 @@ class Exams extends Component {
       title: '状态',
       dataIndex: 'status',
       key: 'status',
-      render: (text, record) => {
-        const { range } = record;
-        let status = '未开启'; 
-        let during = '';      
-        if (moment(range.start_time).isBefore(new Date())
-          && moment(range.end_time).isAfter(new Date())) {
-          status = '进行中';
-          during = `${moment().to(range.end_time)}关闭`;
-        } else if (moment(range.start_time).isAfter(new Date())) {          
-          status = '未开启';
-          during = `${moment().to(range.start_time)}开启`;
-        } if (moment(range.end_time).isBefore(new Date())) {
-          status = '已结束';
-        }        
-        return (<div>{status}{during}</div>);
+      render: (text, record) => {  
+        const { status, color, during } = record;      
+        return (<div style={{ color }} title={during}>{status}</div>);
       },
     }, {
       title: '创建时间',
@@ -125,7 +119,7 @@ class Exams extends Component {
       title: '操作',
       key: 'action',
       render: (text, record) => (
-        <div
+        <div          
           role="none"
           onClick={(e) => { e.stopPropagation(); }}
         >
@@ -155,7 +149,7 @@ class Exams extends Component {
           <Table
             rowKey="id"
             columns={columns}
-            dataSource={exams.map(one => ({ ...one, ...{ key: one.id } }))}
+            dataSource={this.dataTransForm(exams)}
             loading={loading}
           />
         </div>

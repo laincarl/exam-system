@@ -2,7 +2,7 @@
  * @Author: LainCarl 
  * @Date: 2018-04-03 14:49:27 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-04-03 16:24:50
+ * @Last Modified time: 2018-04-05 17:25:39
  * @Feature: 创建一个考试 
  */
 
@@ -12,50 +12,10 @@ import { Modal, Select, Form, message, Input, Button, DatePicker, InputNumber } 
 import axios from 'Axios';
 import Spin from 'Spin';
 import moment from 'moment';
-import 'moment/locale/zh-cn';
 
-moment.locale('zh-cn');
 const { RangePicker } = DatePicker;
 const FormItem = Form.Item;
 const { Option } = Select;
-const Locale = {
-  lang: {
-    placeholder: 'Select date',
-    rangePlaceholder: [
-      '开始日期',
-      '结束日期',
-    ],
-    today: 'Today',
-    now: 'Now',
-    backToToday: 'Back to today',
-    ok: '确定',
-    clear: 'Clear',
-    month: 'Month',
-    year: 'Year',
-    timeSelect: '选择时间',
-    dateSelect: '选择日期',
-    monthSelect: 'Choose a month',
-    yearSelect: 'Choose a year',
-    decadeSelect: 'Choose a decade',
-    yearFormat: 'YYYY',
-    dateFormat: 'M/D/YYYY',
-    dayFormat: 'D',
-    dateTimeFormat: 'M/D/YYYY HH:mm:ss',
-    monthFormat: 'MMMM',
-    monthBeforeYear: true,
-    previousMonth: 'Previous month (PageUp)',
-    nextMonth: 'Next month (PageDown)',
-    previousYear: 'Last year (Control + left)',
-    nextYear: 'Next year (Control + right)',
-    previousDecade: 'Last decade',
-    nextDecade: 'Next decade',
-    previousCentury: 'Last century',
-    nextCentury: 'Next century',
-  },
-  timePickerLocale: {
-    placeholder: 'Select time',
-  },
-};
 
 // function ranges(start, end) {
 //   const result = [];
@@ -170,8 +130,7 @@ class CreateExam extends Component {
                   required: true, message: '请选择开始和结束日期',
                 }],
               })(<RangePicker
-                style={{ width: '100%' }}
-                locale={Locale}
+                style={{ width: '100%' }} 
                 disabledDate={disabledDate}
                 // disabledTime={disabledRangeTime}
                 showTime={{
