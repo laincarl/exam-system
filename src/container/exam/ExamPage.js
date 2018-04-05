@@ -2,14 +2,14 @@
  * @Author: LainCarl 
  * @Date: 2018-03-06 16:03:55 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-04-03 17:20:58
+ * @Last Modified time: 2018-04-05 15:52:51
  */
 
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import axios from 'Axios';
 import Spin from 'Spin';
-import { message } from 'antd';
+// import { message } from 'antd';
 import AppState from 'AppState';
 import ShowAnswers from 'component/exam/ShowAnswers';
 import OnePart from 'component/common/OnePart';
@@ -33,8 +33,8 @@ class ExamPage extends Component {
       });
     }).catch((error) => {
       if (error.response) {
-        message.error(error.response.data.message);
-        AppState.history.goBack();
+        // message.error(error.response.data.message);
+        AppState.history.replace('/exam/end');
       } else {
         console.log(error);
       }

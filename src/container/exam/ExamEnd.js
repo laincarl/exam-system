@@ -1,15 +1,16 @@
 /*
  * @Author: LainCarl 
- * @Date: 2018-03-05 20:35:08 
+ * @Date: 2018-04-05 15:39:13 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-04-05 16:07:01
+ * @Last Modified time: 2018-04-05 16:05:37
+ * @Feature: 错误提示页面  
  */
 
 import React, { Component } from 'react';
 import AppState from 'AppState';
 import { Button } from 'antd';
 
-class NotFoundPage extends Component {
+class ExamEnd extends Component {
   render() {
     return (
       <div
@@ -30,13 +31,12 @@ class NotFoundPage extends Component {
             fontSize: 30,
           }}
         >
-          404<br />
-          页面不翼而飞了
+          当前考试不在开启范围
         </div>
         <Button
           onClick={() => { AppState.history.goBack(); }}
           style={{
-            marginTop: 60,
+            marginTop: 90,
             background: '#bb8c3e',
             height: 50,
             width: 150,
@@ -46,10 +46,12 @@ class NotFoundPage extends Component {
           }}
         >返回
         </Button>
-      </div>
-    );
+      </div>);
   }
 }
 
+ExamEnd.propTypes = {
 
-export default NotFoundPage;
+};
+
+export default ExamEnd;

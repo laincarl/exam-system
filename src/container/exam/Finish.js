@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon, Button, message } from 'antd';
+import { Icon, Button } from 'antd';
 import axios from 'Axios';
 import AppState from 'AppState';
 
@@ -18,9 +18,8 @@ class Finish extends Component {
         total_score,
       });
     }).catch((error) => {
-      if (error.response) {
-        message.error(error.response.data.message);
-        AppState.history.push('/404');
+      if (error.response) { 
+        AppState.history.replace('/404');
       } else {
         console.log(error);
       }
