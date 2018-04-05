@@ -15,7 +15,7 @@ import Action from 'Action';
 import AppState from 'AppState';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
-import CreateExam from '../../../component/manage/exam/CreateExam';
+import CreateExam from 'component/manage/exam/CreateExam';
 
 
 moment.locale('zh-cn', {

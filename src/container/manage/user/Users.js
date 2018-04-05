@@ -3,8 +3,8 @@ import { Table, Icon, Modal, message } from 'antd';
 import Header from 'Header';
 import Action from 'Action';
 import axios from 'Axios';
-import EditUser from '../../component/manage/EditUser';
-import AddUser from '../../component/manage/AddUser';
+import EditUser from 'component/manage/EditUser';
+import AddUser from 'component/manage/AddUser';
 
 const { confirm } = Modal;
 const roles = {
@@ -20,7 +20,6 @@ class UserManage extends Component {
     editVisible: false,
     currentEditId: 0,
   }
-
   componentDidMount() {
     this.getAllUser();
   }

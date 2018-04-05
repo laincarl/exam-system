@@ -11,9 +11,9 @@ import axios from 'Axios';
 import Spin from 'Spin';
 import { message } from 'antd';
 import AppState from 'AppState';
-import ShowAnswers from '../../component/exam/ShowAnswers';
-import OnePart from '../../component/common/OnePart';
-import ExamStore from '../../store/exam/ExamStore';
+import ShowAnswers from 'component/exam/ShowAnswers';
+import OnePart from 'component/common/OnePart';
+import ExamStore from 'store/exam/ExamStore';
 
 @observer
 class ExamPage extends Component {

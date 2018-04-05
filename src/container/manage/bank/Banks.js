@@ -10,7 +10,7 @@ import { Icon, Modal, Button, Select, Form, Input, message } from 'antd';
 import Header from 'Header';
 import axios from 'Axios';
 import Spin from 'Spin';
-import Bank from '../../../component/manage/Bank';
+import Bank from 'component/manage/Bank';
 
 const FormItem = Form.Item;
 const { Option } = Select;

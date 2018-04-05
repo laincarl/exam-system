@@ -14,7 +14,7 @@ import Spin from 'Spin';
 import Header from 'Header';
 import { message } from 'antd';
 import AppState from 'AppState';
-import OnePart from '../../../component/common/OnePart';
+import OnePart from 'component/common/OnePart';
 
 @observer
 class PaperDetail extends Component {

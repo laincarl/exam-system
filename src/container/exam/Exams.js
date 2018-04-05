@@ -10,6 +10,8 @@ import React, { Component } from 'react';
 import axios from 'Axios';
 import { Table, Button } from 'antd';
 import AppState from 'AppState';
+import moment from 'moment';
+import 'moment/locale/zh-cn';
 
 function toExam(id) {
   AppState.history.push(`/exam/main/${id}`);
@@ -22,14 +24,46 @@ const columns = [{
   title: '状态',
   dataIndex: 'status',
   key: 'status',
+  render: (text, record) => {
+    const { range } = record;
+    let status = '未开启'; 
+    let during = '';      
+    if (moment(range.start_time).isBefore(new Date())
+      && moment(range.end_time).isAfter(new Date())) {
+      status = '进行中';
+      during = `${moment().to(range.end_time)}关闭`;
+    } else if (moment(range.start_time).isAfter(new Date())) {          
+      status = '未开启';
+      during = `${moment().to(range.start_time)}开启`;
+    } if (moment(range.end_time).isBefore(new Date())) {
+      status = '已结束';
+    }        
+    return (<div>{status}{during}</div>);
+  },
+}, {
+  title: '创建时间',
+  dataIndex: 'create_time',
+  key: 'create_time',
 }, {
   title: '开始时间',
   dataIndex: 'start_time',
   key: 'start_time',
+  render: (text, record) => {
+    const { range } = record;
+    return (<div>
+      {moment(range.start_time).format('YYYY-MM-DD HH:mm:ss')}
+    </div>);
+  },
 }, {
   title: '结束时间',
   dataIndex: 'end_time',
   key: 'end_time',
+  render: (text, record) => {
+    const { range } = record;
+    return (<div>
+      {moment(range.end_time).format('YYYY-MM-DD HH:mm:ss')}
+    </div>);
+  },
 }, {
   title: '时间限制',
   dataIndex: 'limit_time',

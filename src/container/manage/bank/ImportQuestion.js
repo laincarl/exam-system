@@ -10,8 +10,8 @@ import { Input, Button, message, Modal, Icon } from 'antd';
 import Header from 'Header';
 import { observer } from 'mobx-react';
 import axios from 'Axios';
-import QuestionShow from '../../../component/common/QuestionShow';
-import QuestionStore from '../../../store/manage/bank/QuestionStore';
+import QuestionShow from 'component/common/QuestionShow';
+import QuestionStore from 'store/manage/bank/QuestionStore';
 
 const { TextArea } = Input;
 

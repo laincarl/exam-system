@@ -12,7 +12,7 @@ import { message } from 'antd';
 import Spin from 'Spin';
 import axios from 'Axios';
 import AppState from 'AppState';
-import OnePart from '../../component/common/OnePart';
+import OnePart from 'component/common/OnePart';
 
 class Result extends Component {
   constructor() {

@@ -28,6 +28,8 @@ module.exports = {
     modules: [path.resolve(__dirname, 'node_modules')], // 优化webpack文件搜索范围
     extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.less'],
     alias: {
+      component: path.resolve(__dirname, './src/component'),
+      store: path.resolve(__dirname, './src/store'),
       Loading: path.resolve(__dirname, './src/component/common/Loading.js'),
       Action: path.resolve(__dirname, './src/component/common/Action.js'),
       Axios: path.resolve(__dirname, './src/util/axios.js'),      
