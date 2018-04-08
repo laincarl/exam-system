@@ -2,7 +2,7 @@
  * @Author: LainCarl 
  * @Date: 2018-04-03 14:40:15 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-04-05 17:26:35
+ * @Last Modified time: 2018-04-05 17:30:55
  * @Feature: 展示考试列表 
  */
 
@@ -14,9 +14,29 @@ import axios from 'Axios';
 import Action from 'Action';
 import AppState from 'AppState';
 import moment from 'moment';
-
 import CreateExam from 'component/manage/exam/CreateExam';
 
+function compare(param1, param2) {
+  // 如果两个参数均为字符串类型
+  if (typeof param1 === 'string' && typeof param2 === 'string') {
+    return param1.localeCompare(param2);
+  }
+  // 如果参数1为数字，参数2为字符串
+  if (typeof param1 === 'number' && typeof param2 === 'string') {
+    return -1;
+  }
+  // 如果参数1为字符串，参数2为数字
+  if (typeof param1 === 'string' && typeof param2 === 'number') {
+    return 1;
+  }
+  // 如果两个参数均为数字
+  if (typeof param1 === 'number' && typeof param2 === 'number') {
+    if (param1 > param2) return 1;
+    if (param1 === param2) return 0;
+    if (param1 < param2) return -1;
+  }
+  return 0;
+}
 class Exams extends Component {
   state = {
     exams: [],
@@ -83,10 +103,23 @@ class Exams extends Component {
       title: '名称',
       dataIndex: 'title',
       key: 'title',
+      sorter: (a, b) => compare(a.title, b.title),
     }, {
       title: '状态',
       dataIndex: 'status',
       key: 'status',
+      filters: [{
+        text: '未开始',
+        value: '未开始',
+      }, {
+        text: '进行中',
+        value: '进行中',
+      }, {
+        text: '已结束',
+        value: '已结束',
+      }],
+      filterMultiple: true,
+      onFilter: (value, record) => record.status === value,
       render: (text, record) => {  
         const { status, color, during } = record;      
         return (<div style={{ color }} title={during}>{status}</div>);

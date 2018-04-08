@@ -30,6 +30,7 @@ module.exports = {
     alias: {
       component: path.resolve(__dirname, './src/component'),
       store: path.resolve(__dirname, './src/store'),
+      css: path.resolve(__dirname, './src/assets/css'),
       Loading: path.resolve(__dirname, './src/component/common/Loading.js'),
       Action: path.resolve(__dirname, './src/component/common/Action.js'),
       Axios: path.resolve(__dirname, './src/util/axios.js'),      
@@ -68,7 +69,7 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: [{
-          loader: 'react-hot-loader/webpack',
+          loader: 'css-literal-loader',
         }, {
           loader: 'babel-loader',
           query: {
@@ -76,7 +77,7 @@ module.exports = {
           },
         }, {
           loader: 'eslint-loader',
-        },
+        }, 
         ],
       },
       {
@@ -128,6 +129,7 @@ module.exports = {
       names: ['vendor', 'manifest'], // name是提取公共代码块后js文件的名字。
       // chunks: ['vendor'] //只有在vendor中配置的文件才会提取公共代码块至manifest的js文件中
     }),
+    
     new HtmlWebpackPlugin({
       title: '首页',
       inject: true,
