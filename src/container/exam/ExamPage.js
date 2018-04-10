@@ -70,7 +70,6 @@ class ExamPage extends Component {
           </div>
         </Spin>
       </div>
-
     );
   }
 }

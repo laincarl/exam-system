@@ -62,9 +62,19 @@ const columns = [{
     return (<div style={{ color }} title={during}>{status}</div>);
   },
 }, {
-  title: '创建时间',
-  dataIndex: 'create_time',
-  key: 'create_time',
+  title: '是否参加',
+  dataIndex: 'join',
+  key: 'join',
+  filters: [{
+    text: '已参加',
+    value: 'join',
+  }, {
+    text: '未参加',
+    value: false,
+  }],
+  filterMultiple: false,
+  onFilter: (value, record) => (value === 'join' ? record.join : !record.join),
+  render: join => <div>{join ? '已参加' : '未参加'}</div>,
 }, {
   title: '开始时间',
   dataIndex: 'start_time',
