@@ -12,6 +12,7 @@ import { observer } from 'mobx-react';
 import axios from 'Axios';
 import QuestionShow from 'component/common/QuestionShow';
 import QuestionStore from 'store/manage/bank/QuestionStore';
+import AnalyQuestion from 'util/AnalyQuestion';
 
 const { TextArea } = Input;
 
@@ -33,64 +34,17 @@ class ImportQuestion extends Component {
   }
   analyQuestion = () => {
     const data = this.state.question;
-    // 以下开始匹配问题以及答案
-    // 试题格式示例 数字加顿号开头，选项大写，正确答案前面星号
-    // 1、下面哪个是属性而不是标记（  ）。
-    // A、IMG    B、FORM     *C、 HREF   D、TD
-    // 将问题分割成单个问题
-    const questionReg = /[0-9]+、([^]*?)(?=[0-9]+、|$)/g;
-    // 从单个问题找题目
-    const titleReg = /[0-9]+、([^]*?)\*?[A-Z]+、/g;
-    // 找到选项
-    const selectsReg = /([A-Z])+、([^]*?)(?=\*?[A-Z]+、|$)/g;
-    // 找到答案
-    const answersReg = /\*([A-Z])+、/g;
-    let result;
-    const questions = [];
     const { match } = this.props;
     const bankId = match.params.id;
-    while (result = questionReg.exec(data)) {
-      // console.log(result[1], regex2.lastIndex);
-      // console.log(result);
-      const question = {
-        bankId,
-        title: null,
-        answers: [],
-        selects: {},
-      };
-      let answer;
-      while (answer = answersReg.exec(result[0])) {
-        // console.log(answer, regex2.lastIndex);
-        // console.log(answer[1].trim());
-        question.answers.push(answer[1].trim());
-      }
-      let select;
-      while (select = selectsReg.exec(result[0])) {
-        // console.log(answer, regex2.lastIndex);
-        // console.log(select[1].trim());
-        question.selects[select[1].trim()] = (select[2].trim());
-      }
-      let title;
-      while (title = titleReg.exec(result[0])) {
-        // console.log(answer, regex2.lastIndex);
-        // console.log('title', title);
-        question.title = title[1].trim();
-      }
-      // 单个试题解析完成后开始判断
-      if (!question.title || !question.selects.length === 0 || question.answers.length === 0) {
-        console.log(question);
-        message.error('部分试题解析错误，请检查格式');
-      } else {
-        questions.push(question);
-      }
-    }
-    // 解析完成后开始判断
-
-    console.log(questions);
-    this.setState({
-      visible: false,     
+    AnalyQuestion(data, bankId, 'select_single').then((questions) => {
+      console.log(questions);
+      this.setState({
+        visible: false,     
+      });
+      QuestionStore.setQuestions(questions);
+    }).catch((error) => {
+      console.log(error);
     });
-    QuestionStore.setQuestions(questions);
   }
   handleSubmit=() => {
     const { questions } = QuestionStore;

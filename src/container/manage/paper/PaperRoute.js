@@ -14,6 +14,7 @@ import '../../../assets/css/paper.css';
 class PaperRoute extends Component {
   render() {
     const { match } = this.props;
+    // console.log(match)
     // console.log(this.props);
     return (
       <Switch>

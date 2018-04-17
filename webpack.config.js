@@ -31,6 +31,7 @@ module.exports = {
       component: path.resolve(__dirname, './src/component'),
       store: path.resolve(__dirname, './src/store'),
       css: path.resolve(__dirname, './src/assets/css'),
+      util: path.resolve(__dirname, './src/util'),
       Loading: path.resolve(__dirname, './src/component/common/Loading.js'),
       Action: path.resolve(__dirname, './src/component/common/Action.js'),
       Axios: path.resolve(__dirname, './src/util/axios.js'),      

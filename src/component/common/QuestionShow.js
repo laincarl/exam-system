@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { observer } from 'mobx-react';
+import QuestionStore from 'store/manage/bank/QuestionStore';
 
 const radioStyle = {
   height: '30px',
@@ -11,7 +12,8 @@ class QuestionShow extends Component {
   render() {
     console.log('render');
 
-    const { num, data } = this.props;    
+    const { num, index } = this.props;    
+    const data = QuestionStore.questions[index];
     const {
       title, selects, answers,
     } = data;
