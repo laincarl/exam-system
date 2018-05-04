@@ -32,7 +32,7 @@ class ImportQuestion extends Component {
   getBank = () => {
     this.setState({ loading: true });
     const { id } = this.props.match.params;
-    axios.get(`/api/banks/bank?id=${id}`).then((bank) => {
+    axios.get(`/banks/bank?id=${id}`).then((bank) => {
       console.log(bank);
       const { type } = bank;
       this.setState({
@@ -68,7 +68,7 @@ class ImportQuestion extends Component {
   }
   handleSubmit = () => {
     const { questions } = QuestionStore;
-    axios.post('/api/questions/new', questions).then((data) => {
+    axios.post('/questions/new', questions).then((data) => {
       console.log(data);
       message.success('导入成功');
     }).catch((error) => {

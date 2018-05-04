@@ -18,7 +18,7 @@ class Papers extends Component {
     this.setState({
       loading: true,
     });
-    axios.get('/api/papers').then((papers) => {
+    axios.get('/papers').then((papers) => {
       if (papers) {
         this.setState({
           papers,

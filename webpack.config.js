@@ -123,14 +123,15 @@ module.exports = {
     public: 'localhost:3000', // 加了host之后，open会打开0.0.0.0，所以需要定义public
     stats: 'errors-only',
     open: true,
-    proxy: {
-      // /api/test => http://localhost:8000/test
-      '/**': {
-        target: 'http://localhost:8000',
-        changeOrigin: true,
-        pathRewrite: { '^/api': '' },
-      },
-    },
+    //不需要设置跨域，直接后台设置允许跨域
+    // proxy: {
+    //   // /test => http://localhost:8000/test
+    //   '/api/**': {
+    //     target: 'http://localhost:8000',
+    //     changeOrigin: true,
+    //     // pathRewrite: { '^/api': '' },
+    //   },
+    // },
   },
   plugins: [
     new LessThemePlugin({ theme: './theme.less' }), // 使antd主题可以热加载

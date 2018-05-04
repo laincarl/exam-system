@@ -26,7 +26,7 @@ class BankDetail extends Component {
   getBank = () => {
     this.setState({ loading: true });
     const { id } = this.props.match.params;
-    axios.get(`/api/banks/bank?id=${id}`).then((bank) => {
+    axios.get(`/banks/bank?id=${id}`).then((bank) => {
       console.log(bank);
       this.setState({
         bank,

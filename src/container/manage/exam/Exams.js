@@ -50,7 +50,7 @@ class Exams extends Component {
     this.setState({
       loading: true,
     });
-    axios.get('/api/exams').then((exams) => {
+    axios.get('/exams').then((exams) => {
       if (exams) {
         this.setState({
           exams,
@@ -92,7 +92,7 @@ class Exams extends Component {
     AppState.history.push(`/manage/exam/${id}`);
   }
   closeExam=(id) => {
-    axios.delete(`/api/exams/exam?id=${id}`).then((data) => {
+    axios.delete(`/exams/exam?id=${id}`).then((data) => {
       console.log(data);
     });
   }

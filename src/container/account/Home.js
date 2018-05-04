@@ -90,7 +90,7 @@ class Home extends Component {
   }
 
   getResults = () => {
-    axios.get('/api/exams/results').then((results) => {
+    axios.get('/exams/results').then((results) => {
       this.setState({
         loading: false,
         results,
@@ -102,7 +102,7 @@ class Home extends Component {
       console.log(e.target.files[0]);
       const formData = new FormData();
       formData.append('file', e.target.files[0]);
-      axios.post('/api/user/head', formData).then((data) => {
+      axios.post('/user/head', formData).then((data) => {
         AppState.setUserInfo({ url: data.url });
       });
     }

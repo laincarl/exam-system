@@ -18,7 +18,7 @@ class EditUser extends Component {
   }
 
   getUser = (id) => {
-    axios.get(`/api/user?id=${id}`).then((data) => {
+    axios.get(`/user?id=${id}`).then((data) => {
       console.log(data);
       this.setState({
         data,
@@ -35,7 +35,7 @@ class EditUser extends Component {
         this.setState({          
           loading: true,
         });
-        axios.put('/api/user/edituser', { ...values, ...{ id: this.props.currentEditId } }).then((data) => {
+        axios.put('/user/edituser', { ...values, ...{ id: this.props.currentEditId } }).then((data) => {
           if (data.success) {
             hideModal();
             message.success('修改成功');

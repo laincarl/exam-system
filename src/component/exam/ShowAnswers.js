@@ -50,7 +50,7 @@ class ShowAnswers extends Component {
     this.setState({
       loading: true,
     });
-    axios.post('/api/exams/submit', {
+    axios.post('/exams/submit', {
       id, title, paper_id, answers, 
     }).then((result) => {
       console.log(result);

@@ -31,7 +31,7 @@ class PaperDetail extends Component {
   getPaper=() => {
     const { id } = this.props.match.params;
     this.setState({ loading: true });
-    axios.get(`/api/papers/paper?id=${id}`).then((paper) => {
+    axios.get(`/papers/paper?id=${id}`).then((paper) => {
       console.log(paper);
       const { title, parts } = paper;
       this.setState({

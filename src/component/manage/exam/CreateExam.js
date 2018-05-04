@@ -57,7 +57,7 @@ class CreateExam extends Component {
     this.setState({
       loading: true,
     });
-    axios.get('/api/papers').then((papers) => {
+    axios.get('/papers').then((papers) => {
       this.setState({
         papers,
         loading: false,
@@ -72,7 +72,7 @@ class CreateExam extends Component {
         // moment(range[0]).format('YYYY-MM-DD HH:mm:ss')
         console.log(values);
         const { range } = values;
-        axios.post('/api/exams/new', { ...values, ...{ range: { start_time: range[0], end_time: range[1] } } }).then((data) => {
+        axios.post('/exams/new', { ...values, ...{ range: { start_time: range[0], end_time: range[1] } } }).then((data) => {
           console.log(data);
           message.success('创建成功');
           this.setState({ loading: false });

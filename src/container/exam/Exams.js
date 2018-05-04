@@ -132,7 +132,7 @@ class Exams extends Component {
   }
 
   getExams = () => {
-    axios.get('/api/exams').then((exams) => {
+    axios.get('/exams').then((exams) => {
       this.setState({
         exams,
         loading: false,

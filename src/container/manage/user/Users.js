@@ -27,7 +27,7 @@ class UserManage extends Component {
     this.setState({
       loading: true,
     });
-    axios.get('/api/user/alluser').then((users) => {
+    axios.get('/user/alluser').then((users) => {
       this.setState({
         users,
         loading: false,
@@ -66,7 +66,7 @@ class UserManage extends Component {
   }
   deleteUser = (id) => {
     console.log(id);
-    axios.delete(`/api/user/deluser?id=${id}`).then((data) => {
+    axios.delete(`/user/deluser?id=${id}`).then((data) => {
       // console.log(data);
       if (data.success) {
         message.success(data.message);

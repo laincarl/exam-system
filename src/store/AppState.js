@@ -14,7 +14,7 @@ class AppState {
   @observable userInfo = {};
   @observable currentLocation = null;
   constructor() {
-    axios.get('/api/user/info').then((userInfo) => {
+    axios.get('/user/info').then((userInfo) => {
       if (userInfo) {
         // console.log('origin', userInfo);
         this.setUserInfo(userInfo);

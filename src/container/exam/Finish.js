@@ -10,7 +10,7 @@ class Finish extends Component {
   }
   componentDidMount() {
     const { id } = this.props.match.params;
-    axios.get(`/api/exams/result?id=${id}`).then((result) => {
+    axios.get(`/exams/result?id=${id}`).then((result) => {
       console.log(result);
       const { user_score, total_score } = result;
       this.setState({

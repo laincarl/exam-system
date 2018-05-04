@@ -30,7 +30,7 @@ class Result extends Component {
   componentDidMount() {
     console.log(this.props.match.params);
     const { id } = this.props.match.params;
-    axios.get(`/api/exams/result?id=${id}`).then((result) => {
+    axios.get(`/exams/result?id=${id}`).then((result) => {
       console.log(result);
       // ExamStore.setResult(result);
       this.setState({

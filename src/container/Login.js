@@ -37,7 +37,7 @@ class Login extends Component {
         this.setState({
           spinning: true,
         });
-        axios.post('/api/user/accesstoken', values).then((data) => {
+        axios.post('/user/accesstoken', values).then((data) => {
           console.log(data);
           this.setState({
             spinning: false,

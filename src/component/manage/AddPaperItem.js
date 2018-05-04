@@ -21,7 +21,7 @@ class AddPaperItem extends Component {
     this.setState({
       loading: true,
     });
-    axios.get(type ? `/api/banks?type=${type}` : '/api/banks').then((banks) => {
+    axios.get(type ? `/banks?type=${type}` : '/banks').then((banks) => {
       this.setState({
         banks,
         loading: false,

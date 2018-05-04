@@ -32,7 +32,7 @@ class CreatePaper extends Component {
     this.setState({
       loading: true,
     });
-    axios.get('/api/banks').then((banks) => {
+    axios.get('/banks').then((banks) => {
       this.setState({
         banks,
         loading: false,
@@ -76,7 +76,7 @@ class CreatePaper extends Component {
             score: scores[i],
           })),
         };
-        axios.post('/api/papers/new', paper).then((data) => {
+        axios.post('/papers/new', paper).then((data) => {
           console.log(data);
           message.success('创建成功');
           this.setState({ loading: false });

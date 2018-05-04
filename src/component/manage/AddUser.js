@@ -10,7 +10,7 @@ class AddUser extends Component {
     const { hideModal, reload } = this.props;
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        axios.post('/api/user/adduser', values).then((data) => {
+        axios.post('/user/adduser', values).then((data) => {
           if (data.success) {
             hideModal();
             message.success('添加成功');

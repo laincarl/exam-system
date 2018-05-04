@@ -29,7 +29,7 @@ class Banks extends Component {
     this.setState({
       loading: true,
     });
-    axios.get('/api/banks').then((banks) => {
+    axios.get('/banks').then((banks) => {
       this.setState({
         banks,
         loading: false,
@@ -56,7 +56,7 @@ class Banks extends Component {
       if (!err) {
         this.setState({ loading: true });
         console.log('Received values of form: ', values);
-        axios.post('/api/banks/new', values).then((data) => {
+        axios.post('/banks/new', values).then((data) => {
           console.log(data);
           message.success('创建成功');
           this.setState({ visible: false, loading: false });

@@ -25,7 +25,7 @@ class ExamPage extends Component {
   }
   componentDidMount() {
     const { id } = this.props.match.params;
-    axios.get(`/api/exams/exam?id=${id}`).then((exam) => {
+    axios.get(`/exams/exam?id=${id}`).then((exam) => {
       console.log(exam);
       ExamStore.setCurrentExam(exam);
       this.setState({
@@ -39,7 +39,7 @@ class ExamPage extends Component {
         console.log(error);
       }
     });
-    // axios.get('/api/questions').then(questions => {
+    // axios.get('/questions').then(questions => {
     //   console.log(questions);
     //   this.setState({
     //     questions
