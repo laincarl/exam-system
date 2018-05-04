@@ -32,9 +32,10 @@ module.exports = {
       store: path.resolve(__dirname, './src/store'),
       css: path.resolve(__dirname, './src/assets/css'),
       util: path.resolve(__dirname, './src/util'),
+      config: path.resolve(__dirname, './config.js'),
       Loading: path.resolve(__dirname, './src/component/common/Loading.js'),
       Action: path.resolve(__dirname, './src/component/common/Action.js'),
-      Axios: path.resolve(__dirname, './src/util/axios.js'),      
+      Axios: path.resolve(__dirname, './src/util/axios.js'),
       MainHeader: path.resolve(__dirname, './src/component/common/MainHeader.js'),
       Header: path.resolve(__dirname, './src/component/common/Header.js'),
       Spin: path.resolve(__dirname, './src/component/common/Spin.js'),
@@ -47,7 +48,17 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          }, 
+          {
+            loader: 'postcss-loader',
+          },
+        ],
       },
       {
         test: /\.less$/,
@@ -70,15 +81,13 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: [{
-          loader: 'css-literal-loader',
-        }, {
           loader: 'babel-loader',
           query: {
             plugins: [['import', { libraryName: 'antd', style: true }]], // style: true 会加载 less 文件 style: 'css' 会加载 css 文件
           },
         }, {
           loader: 'eslint-loader',
-        }, 
+        },
         ],
       },
       {
@@ -116,7 +125,7 @@ module.exports = {
     open: true,
     proxy: {
       // /api/test => http://localhost:8000/test
-      '/api': {
+      '/**': {
         target: 'http://localhost:8000',
         changeOrigin: true,
         pathRewrite: { '^/api': '' },
@@ -130,7 +139,7 @@ module.exports = {
       names: ['vendor', 'manifest'], // name是提取公共代码块后js文件的名字。
       // chunks: ['vendor'] //只有在vendor中配置的文件才会提取公共代码块至manifest的js文件中
     }),
-    
+
     new HtmlWebpackPlugin({
       title: '首页',
       inject: true,

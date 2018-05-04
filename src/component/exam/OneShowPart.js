@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from 'react';
-import Constants from 'Constants';
+import { questionType } from 'Constants';
 import NumberToChinese from '../../util/NumberToChinese';
 import OneQuestionBlock from './OneQuestionBlock';
 
@@ -19,7 +19,7 @@ class OneShowPart extends Component {
     } = part;
     return (
       <div>
-        {`${NumberToChinese(index + 1)}、${Constants[type]}`}
+        {`${NumberToChinese(index + 1)}、${questionType[type]}`}
         <div style={{
           display: 'flex',
           flexWrap: 'wrap',

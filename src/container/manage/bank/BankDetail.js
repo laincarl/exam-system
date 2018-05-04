@@ -11,7 +11,7 @@ import { Button } from 'antd';
 import Header from 'Header';
 import axios from 'Axios';
 import Spin from 'Spin';
-import Constants from 'Constants';
+import { questionType } from 'Constants';
 
 
 class BankDetail extends Component {
@@ -42,7 +42,7 @@ class BankDetail extends Component {
   }
   render() {
     const { loading, bank } = this.state;
-    const { title, type } = bank;
+    const { title, type, count } = bank;
     return (
       <div>
         <Header
@@ -55,7 +55,10 @@ class BankDetail extends Component {
               名称：{title}
             </div>
             <div>
-              类型：{Constants[type]}
+              类型：{questionType[type]}
+            </div>
+            <div>
+              题数:{count}
             </div>
             <Button onClick={this.toImport}>导入试题</Button>
           </div>

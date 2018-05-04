@@ -7,6 +7,7 @@
 
 import React, { Component } from 'react';
 import { Icon, Modal, Button, Select, Form, Input, message } from 'antd';
+import { questionType } from 'Constants';
 import Header from 'Header';
 import axios from 'Axios';
 import Spin from 'Spin';
@@ -73,6 +74,7 @@ class Banks extends Component {
   render() {
     const { banks, visible, loading } = this.state;
     const { getFieldDecorator } = this.props.form;
+    console.log(questionType);
     return (
       <div>
         <Header
@@ -119,9 +121,11 @@ class Banks extends Component {
               required: true, message: '请选择题型',
             }],
           })(<Select>
-            <Option value="single_select">单选题</Option>
-            <Option value="multi_select">多选题</Option>
-            <Option value="blank">填空题</Option>
+            {
+              Object.keys(questionType).map(type => 
+                <Option value={type}>{questionType[type]}</Option>)              
+            }
+           
           </Select>)}
             </FormItem>
             <FormItem>

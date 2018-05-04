@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from 'react';
-import Constants from 'Constants';
+import { questionType } from 'Constants';
 import SelectQuestion from '../exam/SelectQuestion';
 import QuestionShow from './QuestionShow';
 import ResultShow from '../exam/ResultShow';
@@ -43,8 +43,8 @@ class OnePart extends Component {
     return (
       <div>
         {mode === 'side'
-          ? `${NumberToChinese(index + 1)}、${Constants[type]}`
-          : `${NumberToChinese(index + 1)}、${Constants[type]}（本大题共${num}小题，每题${score}分，共${num * score}分）`
+          ? `${NumberToChinese(index + 1)}、${questionType[type]}`
+          : `${NumberToChinese(index + 1)}、${questionType[type]}（本大题共${num}小题，每题${score}分，共${num * score}分）`
         }
         <div style={{
           display: mode === 'side' && 'flex',

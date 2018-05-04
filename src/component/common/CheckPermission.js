@@ -22,7 +22,7 @@ const CheckPermission = (WrappedComponent, role = ['student']) => {
     checkAuth = () => {
       const { userAuth } = AppState;
       if (!userAuth) {
-        this.props.history.push('/login');
+        this.props.history.replace('/login');
       }
     }
     render() {

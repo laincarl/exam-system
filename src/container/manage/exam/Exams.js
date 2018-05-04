@@ -91,6 +91,11 @@ class Exams extends Component {
   editExam = (id) => {
     AppState.history.push(`/manage/exam/${id}`);
   }
+  closeExam=(id) => {
+    axios.delete(`/api/exams/exam?id=${id}`).then((data) => {
+      console.log(data);
+    });
+  }
   handleCancel = () => {
     this.setState({
       visible: false,
@@ -159,6 +164,9 @@ class Exams extends Component {
           <Action data={[{
             action: () => { this.editExam(record.id); },
             text: '编辑',
+          }, {
+            action: () => { this.closeExam(record.id); },
+            text: '删除',
           }]}
           />
         </div>

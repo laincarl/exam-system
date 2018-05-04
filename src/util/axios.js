@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { message } from 'antd';
 import Cookies from 'js-cookie';
+// import Config from 'config';
 
 const accessTokens = Cookies.get('token');
 // axios 配置
 axios.defaults.timeout = 10000;
-// axios.defaults.baseURL = "http://123.207.142.127:8378";
+// axios.defaults.baseURL = Config.devServer;
 // history.go(0);
 // http request 拦截器);
 axios.interceptors.request.use(

@@ -2,7 +2,7 @@
  * @Author: LainCarl 
  * @Date: 2018-04-17 14:49:45 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-04-17 14:51:12
+ * @Last Modified time: 2018-04-25 12:32:47
  * @Feature: 试题分析函数，包括单选，多选，判断，填空 
  */
 
@@ -21,7 +21,47 @@ const Regs = {
     // 找到答案
     answers: /\*([A-Z])+、/g,
   },
+  select_multi: {
+    // 试题格式示例 数字加顿号开头，选项大写，正确答案前面星号
+    // 1、下面哪个是属性而不是标记（  ）。
+    // A、IMG    B、FORM     *C、 HREF   D、TD
+    // 将问题分割成单个问题
+    question: /[0-9]+、([^]*?)(?=[0-9]+、|$)/g,
+    // 从单个问题找题目
+    title: /[0-9]+、([^]*?)\*?[A-Z]+、/g,
+    // 找到选项
+    selects: /([A-Z])+、([^]*?)(?=\*?[A-Z]+、|$)/g,
+    // 找到答案
+    answers: /\*([A-Z])+、/g,
+  },
 };
+/**
+ * 
+ * 
+ * @param {Object} question 
+ * @param {String} type 
+ * @returns 
+ */
+function checkQuestion(question, type) {
+  switch (type) {
+    case 'select_single':
+      if (question.title &&
+        Object.keys(question.selects).length > 1 && question.answers.length === 1) {
+        return false;
+      }
+      break;
+    case 'select_multi':
+      if (question.title &&
+        Object.keys(question.selects).length > 1 && question.answers.length > 1) {
+        return true;
+      } else {
+        return false;
+      }
+    default:
+      return false;
+  }
+  return true;
+}
 /**
  * 
  * 
@@ -48,12 +88,12 @@ export default function AnalyQuestion(origin, bankId, type) {
     const answersReg = Reg.answers;
     let result;
     const questions = [];
-   
+
     while (result = questionReg.exec(origin)) {
       // console.log(result[1], regex2.lastIndex);
       // console.log(result);
       const question = {
-        type: 'select_single',
+        type,
         bankId,
         title: null,
         answers: [],
@@ -78,9 +118,9 @@ export default function AnalyQuestion(origin, bankId, type) {
         question.title = title[1].trim();
       }
       // 单个试题解析完成后开始判断
-      if (!question.title || !question.selects.length === 0 || question.answers.length === 0) {
+      if (!checkQuestion(question, type)) {
         console.log(question);
-        reject(Error(null, '部分试题解析错误，请检查格式'));
+        reject(new Error('部分试题解析错误，请检查格式'));
       } else {
         questions.push(question);
       }
@@ -89,3 +129,4 @@ export default function AnalyQuestion(origin, bankId, type) {
     resolve(questions);
   });
 }
+

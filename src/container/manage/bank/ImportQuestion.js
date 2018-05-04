@@ -2,7 +2,7 @@
  * @Author: LainCarl 
  * @Date: 2018-03-11 16:56:22 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-28 14:01:24
+ * @Last Modified time: 2018-04-25 12:40:48
  */
 
 import React, { Component } from 'react';
@@ -10,6 +10,7 @@ import { Input, Button, message, Modal, Icon } from 'antd';
 import Header from 'Header';
 import { observer } from 'mobx-react';
 import axios from 'Axios';
+import Spin from 'Spin';
 import QuestionShow from 'component/common/QuestionShow';
 import QuestionStore from 'store/manage/bank/QuestionStore';
 import AnalyQuestion from 'util/AnalyQuestion';
@@ -20,33 +21,52 @@ const { TextArea } = Input;
 class ImportQuestion extends Component {
   state = {
     visible: false,
+    type: '',
+    bankId: null,
     question: '',
+    loading: true,
+  }
+  componentDidMount() {
+    this.getBank();
+  }
+  getBank = () => {
+    this.setState({ loading: true });
+    const { id } = this.props.match.params;
+    axios.get(`/api/banks/bank?id=${id}`).then((bank) => {
+      console.log(bank);
+      const { type } = bank;
+      this.setState({
+        bankId: bank.id,
+        type,
+        loading: false,
+      });
+    });
   }
   handleCancel = () => {
     this.setState({
       visible: false,
     });
   }
-  showModal=() => {
+  showModal = () => {
     this.setState({
       visible: true,
     });
   }
   analyQuestion = () => {
     const data = this.state.question;
-    const { match } = this.props;
-    const bankId = match.params.id;
-    AnalyQuestion(data, bankId, 'select_single').then((questions) => {
+    const { bankId, type } = this.state;
+    AnalyQuestion(data, bankId, type).then((questions) => {
       console.log(questions);
       this.setState({
-        visible: false,     
+        visible: false,
       });
       QuestionStore.setQuestions(questions);
     }).catch((error) => {
-      console.log(error);
+      // console.log(error, error.message);
+      message.error(error.message);
     });
   }
-  handleSubmit=() => {
+  handleSubmit = () => {
     const { questions } = QuestionStore;
     axios.post('/api/questions/new', questions).then((data) => {
       console.log(data);
@@ -61,7 +81,7 @@ class ImportQuestion extends Component {
     });
   }
   render() {
-    const { question, visible } = this.state;
+    const { question, loading, visible } = this.state;
     const { questions } = QuestionStore;
     return (
       <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
@@ -90,18 +110,20 @@ class ImportQuestion extends Component {
               onChange={(e) => { this.setState({ question: e.target.value }); }}
             />
             <div style={{ textAlign: 'right' }}>
-              <Button type="primary" onClick={this.analyQuestion} style={{ marginTop: 10 }}>确定</Button>  
-            </div>       
+              <Button type="primary" onClick={this.analyQuestion} style={{ marginTop: 10 }}>确定</Button>
+            </div>
           </div>
         </Modal>
         <div style={{
-           flex: 1, overflow: 'auto', padding: '10px 20px',
-          }}
+          flex: 1, overflow: 'auto', padding: '10px 20px',
+        }}
         >
-          {questions.length === 0 && '没有可导入试题'}
-          {questions.map((one, i) => <QuestionShow key={one.title} num={i + 1} index={i} />)}
-          <Button type="primary" onClick={this.handleSubmit} style={{ marginTop: 10 }}>确认导入</Button>
-        </div>    
+          <Spin spinning={loading}>
+            {questions.length === 0 && '没有可导入试题'}
+            {questions.map((one, i) => <QuestionShow key={one.title} num={i + 1} index={i} />)}
+            <Button type="primary" onClick={this.handleSubmit} style={{ marginTop: 10 }}>确认导入</Button>
+          </Spin>
+        </div>
       </div>
     );
   }

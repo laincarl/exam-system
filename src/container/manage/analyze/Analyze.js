@@ -18,14 +18,14 @@ export default class Analyze extends Component {
   getInitialState = () => ({ option: this.getOption() });
   componentDidMount() {
     if (this.timeTicket) {
-      clearInterval(this.timeTicket);
+      // clearInterval(this.timeTicket);
     }
-    this.timeTicket = setInterval(this.fetchNewDate, 1000);
+    // this.timeTicket = setInterval(this.fetchNewDate, 1000);
   }
 
   componentWillUnmount() {
     if (this.timeTicket) {
-      clearInterval(this.timeTicket);
+      // clearInterval(this.timeTicket);
     }
   }
   getOption = () => ({
@@ -34,6 +34,7 @@ export default class Analyze extends Component {
     },
     tooltip: {
       trigger: 'axis',
+      
     },
     legend: {
       data: ['最新成交价', '预购队列'],
@@ -133,7 +134,7 @@ export default class Analyze extends Component {
           const res = [];
           let len = 50;
           while (len -= 1) {
-            res.push(Math.round(Math.random() * 1000));
+            res.push({ name: 'ss', value: Math.round(Math.random() * 1000) });
           }
           return res;
         }()),
