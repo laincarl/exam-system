@@ -2,7 +2,7 @@
  * @Author: LainCarl 
  * @Date: 2018-03-22 14:21:10 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-22 14:43:07
+ * @Last Modified time: 2018-05-07 11:37:53
  * @Feature: 根据id展示特定考试结果
  */
 
@@ -11,7 +11,7 @@ import React, { Component } from 'react';
 import { message } from 'antd';
 import Spin from 'Spin';
 import axios from 'Axios';
-import AppState from 'AppState';
+// import AppState from 'AppState';
 import OnePart from 'component/common/OnePart';
 
 class Result extends Component {
@@ -40,7 +40,7 @@ class Result extends Component {
     }).catch((error) => {
       if (error.response) {
         message.error(error.response.data.message);
-        AppState.history.push('/404');
+        // AppState.history.replace('/404');
       } else {
         console.log(error);
       }

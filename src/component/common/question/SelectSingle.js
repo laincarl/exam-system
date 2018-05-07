@@ -1,19 +1,21 @@
-import React, { Component } from 'react';
+/*
+ * @Author: LainCarl 
+ * @Date: 2018-05-07 11:24:58 
+ * @Last Modified by: LainCarl
+ * @Last Modified time: 2018-05-07 11:25:24
+ * @Feature: 单个单选题组件，包括答题，展示以及结果展示 
+ */
 
-import { observer } from 'mobx-react';
-import QuestionStore from 'store/manage/bank/QuestionStore';
+import React, { Component } from 'react';
 
 const radioStyle = {
   height: '30px',
   lineHeight: '30px',
 };
-@observer
-class QuestionShow extends Component {
+class SelectSingle extends Component {
   render() {
     console.log('render');
-
-    const { num, index } = this.props;    
-    const data = QuestionStore.questions[index];
+    const { num, data } = this.props;
     const {
       title, selects, answers,
     } = data;
@@ -42,4 +44,4 @@ class QuestionShow extends Component {
 }
 
 
-export default QuestionShow;
+export default SelectSingle;

@@ -9,6 +9,7 @@ import React, { Component } from 'react';
 import { Form, Icon, Input, Button, message } from 'antd';
 import { withRouter } from 'react-router';
 import { inject } from 'mobx-react';
+import Cookies from 'js-cookie';
 import axios from 'Axios';
 import Spin from 'Spin';
 
@@ -42,6 +43,7 @@ class Login extends Component {
           this.setState({
             spinning: false,
           });
+          Cookies.set('token', data.token);
           message.success('登录成功'); 
           AppState.setUserAuth(true);
           history.push('/');

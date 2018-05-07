@@ -8,9 +8,10 @@
 
 import React, { Component } from 'react';
 import { questionType } from 'Constants';
-import SelectQuestion from '../exam/SelectQuestion';
-import QuestionShow from './QuestionShow';
-import ResultShow from '../exam/ResultShow';
+import { Blank, SelectSingle, SelectMulti } from './question';
+// import SelectQuestion from '../exam/SelectQuestion';
+// import QuestionShow from './QuestionShow';
+// import ResultShow from '../exam/ResultShow';
 import OneQuestionBlock from '../exam/OneQuestionBlock';
 import NumberToChinese from '../../util/NumberToChinese';
 
@@ -19,26 +20,29 @@ class OnePart extends Component {
     const { part, index, mode } = this.props;
     console.log(mode);
     const {
-      type, questions, score, num,
+      type, questions, score, num, 
     } = part;
-    let show = null;
-    switch (mode) {
-      case 'exam':
-        show = questions.map((question, i) =>
-          <SelectQuestion mode={mode} part={index} index={i} num={i + 1} data={question} />);
+    let Question = SelectSingle;
+    switch (type) {
+      case 'select_single':
+        Question = SelectSingle;
         break;
-      case 'side':
-        show = questions.map((question, i) =>
-          <OneQuestionBlock id={question.id} num={i + 1} />);
-        break; 
-      case 'result':
-        show = questions.map((question, i) =>
-          <ResultShow id={question.id} num={i + 1} data={question} />);
+      case 'select_multi':
+        Question = SelectMulti;
+        break;
+      case 'blank':
+        Question = Blank;
         break;
       default:
-        show = questions.map((question, i) =>
-          <QuestionShow part={index} index={i} num={i + 1} data={question} />);
         break;
+    }
+    let show = null;
+    if (mode === 'side') {
+      show = questions.map((question, i) =>
+        <OneQuestionBlock id={question.id} num={i + 1} />);
+    } else {
+      show = questions.map((question, i) =>
+        <Question mode={mode} part={index} index={i} num={i + 1} data={question} />);
     }
     return (
       <div>

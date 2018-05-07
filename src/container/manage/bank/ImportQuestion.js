@@ -11,7 +11,7 @@ import Header from 'Header';
 import { observer } from 'mobx-react';
 import axios from 'Axios';
 import Spin from 'Spin';
-import QuestionShow from 'component/common/QuestionShow';
+import { Blank, SelectSingle, SelectMulti } from 'component/common/question';
 import QuestionStore from 'store/manage/bank/QuestionStore';
 import AnalyQuestion from 'util/AnalyQuestion';
 
@@ -81,7 +81,23 @@ class ImportQuestion extends Component {
     });
   }
   render() {
-    const { question, loading, visible } = this.state;
+    const {
+      type, question, loading, visible, 
+    } = this.state;
+    let Question = SelectSingle;
+    switch (type) {
+      case 'select_single':
+        Question = SelectSingle;
+        break;
+      case 'select_multi':
+        Question = SelectMulti;
+        break;
+      case 'blank':
+        Question = Blank;
+        break;
+      default:
+        break;
+    }
     const { questions } = QuestionStore;
     return (
       <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
@@ -120,7 +136,7 @@ class ImportQuestion extends Component {
         >
           <Spin spinning={loading}>
             {questions.length === 0 && '没有可导入试题'}
-            {questions.map((one, i) => <QuestionShow key={one.title} num={i + 1} index={i} />)}
+            {questions.map((one, i) => <Question mode="show" key={one.title} num={i + 1} index={i} />)}
             <Button type="primary" onClick={this.handleSubmit} style={{ marginTop: 10 }}>确认导入</Button>
           </Spin>
         </div>

@@ -2,7 +2,7 @@
  * @Author: LainCarl 
  * @Date: 2018-03-14 14:03:36 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-03-14 17:06:40
+ * @Last Modified time: 2018-05-07 11:43:18
  */
 
 import React, { Component } from 'react';
@@ -25,7 +25,7 @@ function beforeUpload(file) {
   return isJPG && isLt2M;
 }
 function toDetail(id) {
-  AppState.history.push(`/exam/main/${id}`);
+  AppState.history.push(`/exam/result/${id}`);
 }
 const styles = {
   headIconBig: {
@@ -72,7 +72,7 @@ const columns = [{
           width: 100,
           height: 30,
         }}
-        onClick={() => { toDetail(record.id); }}
+        onClick={() => { toDetail(record.exam_id); }}
       >查看详情
       </Button>
     </div>

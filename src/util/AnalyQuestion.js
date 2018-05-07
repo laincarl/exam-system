@@ -24,7 +24,7 @@ const Regs = {
   select_multi: {
     // 试题格式示例 数字加顿号开头，选项大写，正确答案前面星号
     // 1、下面哪个是属性而不是标记（  ）。
-    // A、IMG    B、FORM     *C、 HREF   D、TD
+    // A、IMG    *B、FORM     *C、 HREF   D、TD
     // 将问题分割成单个问题
     question: /[0-9]+、([^]*?)(?=[0-9]+、|$)/g,
     // 从单个问题找题目
@@ -33,6 +33,19 @@ const Regs = {
     selects: /([A-Z])+、([^]*?)(?=\*?[A-Z]+、|$)/g,
     // 找到答案
     answers: /\*([A-Z])+、/g,
+  },
+  blank: {
+    // 试题格式示例 数字加顿号开头，选项大写，正确答案前面星号
+    // 1、下面哪个是属性而不是标记（  ）。
+    // A、IMG    B、FORM     *C、 HREF   D、TD
+    // 将问题分割成单个问题
+    question: /[0-9]+、([^]*?)(?=[0-9]+、|$)/g,
+    // 从单个问题找题目
+    title: /\{[^]*?\}/g,
+    // 找到选项
+    selects: /([A-Z])+、([^]*?)(?=\*?[A-Z]+、|$)/g,
+    // 找到答案
+    answers: /\{([^]*?)\}/g,
   },
 };
 /**
@@ -47,9 +60,10 @@ function checkQuestion(question, type) {
     case 'select_single':
       if (question.title &&
         Object.keys(question.selects).length > 1 && question.answers.length === 1) {
+        return true;
+      } else {
         return false;
       }
-      break;
     case 'select_multi':
       if (question.title &&
         Object.keys(question.selects).length > 1 && question.answers.length > 1) {
@@ -57,10 +71,15 @@ function checkQuestion(question, type) {
       } else {
         return false;
       }
+    case 'blank':
+      if (question.title && question.answers.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
     default:
       return false;
   }
-  return true;
 }
 /**
  * 
@@ -112,11 +131,19 @@ export default function AnalyQuestion(origin, bankId, type) {
         question.selects[select[1].trim()] = (select[2].trim());
       }
       let title;
-      while (title = titleReg.exec(result[0])) {
+      if (type === 'blank') {
+        title = result[0].replace(/[0-9]+、/g, '').replace(titleReg, '{}');
         // console.log(answer, regex2.lastIndex);
         // console.log('title', title);
-        question.title = title[1].trim();
+        question.title = title;
+      } else {
+        while (title = titleReg.exec(result[0])) {
+          // console.log(answer, regex2.lastIndex);
+          // console.log('title', title);
+          question.title = title[1].trim();
+        }
       }
+
       // 单个试题解析完成后开始判断
       if (!checkQuestion(question, type)) {
         console.log(question);

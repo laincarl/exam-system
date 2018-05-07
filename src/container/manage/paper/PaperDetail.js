@@ -74,7 +74,7 @@ class PaperDetail extends Component {
             // boxShadow: '0 1px 6px rgba(0, 0, 0, .2)',
           }}
             >
-              {parts.map((part, i) => <OnePart index={i + 1} part={part} />)}
+              {parts.map((part, i) => <OnePart index={i} part={part} />)}
             </div>
           </Spin>
         </div>

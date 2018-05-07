@@ -14,7 +14,7 @@ axios.interceptors.request.use(
     const newConfig = config;
     newConfig.headers['Content-Type'] = 'application/json';
     newConfig.headers.Accept = 'application/json';
-    newConfig.headers.Authorization = `bearer ${accessTokens}`;
+    newConfig.headers.Authorization = `${accessTokens}`;
     return newConfig;
   },
   (err) => {

@@ -74,7 +74,7 @@ class Banks extends Component {
   render() {
     const { banks, visible, loading } = this.state;
     const { getFieldDecorator } = this.props.form;
-    console.log(questionType);
+    // console.log(questionType);
     return (
       <div>
         <Header
