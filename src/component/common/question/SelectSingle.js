@@ -7,39 +7,117 @@
  */
 
 import React, { Component } from 'react';
+import { Radio } from 'antd';
+import ExamStore from 'store/exam/ExamStore';
 
+const RadioGroup = Radio.Group;
 const radioStyle = {
+  display: 'block',
+  height: '30px',
+  lineHeight: '30px',
+};
+const showStyle = {
   height: '30px',
   lineHeight: '30px',
 };
 class SelectSingle extends Component {
+  state = {
+    value: 0,
+  }
+  onChange = (e) => {
+    const { part, index } = this.props;
+    const { id } = this.props.data;
+
+    console.log(id, part, index, e.target.value);
+    ExamStore.setAnswer(id, part, index, e.target.value);
+    console.log('radio checked', e.target.value);
+    this.setState({
+      value: e.target.value,
+    });
+  }
+  returnRightColor = (key, user_answer, answers) => {
+    let color = '';
+    if (user_answer === key) {
+      color = 'red';
+    }
+    if (answers.includes(key)) {
+      color = '#52c41a';
+    }
+    return color;
+  }
   render() {
     console.log('render');
-    const { num, data } = this.props;
-    const {
-      title, selects, answers,
+    const { num, data, mode } = this.props;
+    const { 
+      id,
+      title, selects, answers, user_answer,
     } = data;
-    return (
-      <div
-        style={{ margin: '18px 0', position: 'relative', paddingRight: 50 }}
-        // onMouseEnter={() => { this.setState({ hover: true }); }}
-        // onMouseLeave={() => { this.setState({ hover: false }); }}
-      >
-        <div><span style={{ fontWeight: 'bold' }}>{num}.</span> {title}</div>
-        <div style={{ marginTop: '8px' }}>
-          {Object.keys(selects).map(key => (
-            <div style={{ display: 'flex', alignItems: 'center', color: answers.includes(key) && '#52c41a' }}>
-              {/* 选项key */}
-              <div style={{ width: '30px', overflow: 'hidden', fontWeight: 'bold' }}>{key} . </div>
-              {/* {answers.includes(key) && <Icon type="check-circle" />} */}
-              {/* 选项内容 */}
-              <div style={radioStyle}>{selects[key]}</div>
-            </div>))
+    let oneQuestion;
+    switch (mode) {
+      case 'exam':
+        oneQuestion = (<div
+          style={{ margin: '18px 0', position: 'relative' }}
+        >
+          <div><span style={{ fontWeight: 'bold' }}>{num}.</span> {title}</div>
+          <RadioGroup onChange={this.onChange} value={this.state.value}>
+            <div style={{ marginTop: '8px' }}>
+              {Object.keys(selects).map(key => (
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <div style={{ width: '30px', overflow: 'hidden', fontWeight: 'bold' }}>{key} . </div>
+                  {/* {answers.includes(key) && <Icon type="check-circle" />} */}
+                  <Radio key={`${id}${key}`} style={radioStyle} value={key}>{selects[key]}</Radio>
+                </div>))
           }
-        </div>
-
-      </div>
-    );
+            </div>
+          </RadioGroup>
+        </div>);
+        break;
+      case 'result':
+        oneQuestion = (<div
+          style={{ margin: '18px 0', position: 'relative', paddingRight: 50 }}       
+        >
+          <div><span style={{ fontWeight: 'bold' }}>{num}.</span> {title}</div>
+          {!user_answer ? <div style={{ color: 'red', marginTop: 5 }}>未作答</div> : null}
+          <div style={{ marginTop: '8px' }}>
+            {Object.keys(selects).map(key => (
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                color: this.returnRightColor(key, user_answer, answers),
+              }
+              }
+              >
+                <div style={{ width: '30px', overflow: 'hidden', fontWeight: 'bold' }}>{key} . </div>
+                {/* {answers.includes(key) && <Icon type="check-circle" />} */}
+                <div style={radioStyle} >{selects[key]}</div>
+              </div>))
+            }
+          </div>
+  
+        </div>);
+        break;
+      case 'show':
+        oneQuestion = (<div
+          style={{ margin: '18px 0', position: 'relative', paddingRight: 50 }}
+        >
+          <div><span style={{ fontWeight: 'bold' }}>{num}.</span> {title}</div>
+          <div style={{ marginTop: '8px' }}>
+            {Object.keys(selects).map(key => (
+              <div style={{ display: 'flex', alignItems: 'center', color: answers.includes(key) && '#52c41a' }}>
+                {/* 选项key */}
+                <div style={{ width: '30px', overflow: 'hidden', fontWeight: 'bold' }}>{key} . </div>
+                {/* {answers.includes(key) && <Icon type="check-circle" />} */}
+                {/* 选项内容 */}
+                <div style={showStyle}>{selects[key]}</div>
+              </div>))
+      }
+          </div>
+        </div>);
+        break;
+      default:        
+        break;
+    }
+    return oneQuestion;
   }
 }
 

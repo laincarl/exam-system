@@ -39,17 +39,11 @@ class ExamPage extends Component {
         console.log(error);
       }
     });
-    // axios.get('/questions').then(questions => {
-    //   console.log(questions);
-    //   this.setState({
-    //     questions
-    //   })
-    // })
   }
 
   render() {
     const { loading } = this.state;
-    const { parts } = ExamStore.currentExam;
+    const { parts, title } = ExamStore.currentExam;
     console.log(parts);
     return (
       <div>
@@ -63,6 +57,7 @@ class ExamPage extends Component {
             boxShadow: '0 1px 6px rgba(0, 0, 0, .2)',
           }}
           >
+            <div style={{ fontSize: 25, textAlign: 'center', marginTop: 10 }}>{title}</div>
             {
              parts.map((part, i) => <OnePart mode="exam" index={i} part={part} />)
               // questions.map((one, i) => <QuestionShow num={i + 1} data={one} />)

@@ -100,7 +100,7 @@ class ShowAnswers extends Component {
         <div style={{ fontSize: 18, fontWeight: 'bold', margin: '10px 0' }}>正在考试中</div>
         <div>
           {
-           parts.map((part, i) => <OnePart mode="side" index={i + 1} part={part} />)
+           parts.map((part, i) => <OnePart mode="side" index={i} part={part} />)
           }
         </div>
         <div style={{ margin: '15px 0 5px 0' }}>考试倒计时</div>

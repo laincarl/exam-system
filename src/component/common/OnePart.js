@@ -5,7 +5,7 @@
  * @Last Modified time: 2018-04-03 17:08:18
  * @Feature: 一个大题  
  */
-
+  
 import React, { Component } from 'react';
 import { questionType } from 'Constants';
 import { Blank, SelectSingle, SelectMulti } from './question';
