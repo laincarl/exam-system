@@ -42,7 +42,14 @@ class OnePart extends Component {
         <OneQuestionBlock id={question.id} num={i + 1} />);
     } else {
       show = questions.map((question, i) =>
-        <Question mode={mode} part={index} index={i} num={i + 1} data={question} />);
+        (<Question 
+          key={Math.random()}
+          mode={mode}
+          part={index}
+          index={i}
+          num={i + 1}
+          data={question}
+        />));
     }
     return (
       <div>

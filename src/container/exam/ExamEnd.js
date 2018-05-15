@@ -50,8 +50,5 @@ class ExamEnd extends Component {
   }
 }
 
-ExamEnd.propTypes = {
-
-};
 
 export default ExamEnd;

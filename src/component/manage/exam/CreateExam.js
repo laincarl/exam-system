@@ -26,8 +26,8 @@ const { Option } = Select;
 // }
 
 function disabledDate(current) {
-  // Can not select days before today and today
-  return current && current < moment().endOf('day');
+  // 今天之前的天不可选
+  return current && current < moment().endOf('day').subtract(1, 'days');
 }
 
 

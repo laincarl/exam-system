@@ -11,12 +11,13 @@ import { Button } from 'antd';
 import Header from 'Header';
 import axios from 'Axios';
 import Spin from 'Spin';
+import { Blank, SelectSingle, SelectMulti } from 'component/common/question';
 import { questionType } from 'Constants';
 
 
 class BankDetail extends Component {
   state = {
-    bank: {},
+    bank: { questions: [] },
     loading: true,
   }
   componentDidMount() {
@@ -42,11 +43,29 @@ class BankDetail extends Component {
   }
   render() {
     const { loading, bank } = this.state;
-    const { title, type, count } = bank;
+    const {
+      title, type, count, questions, 
+    } = bank;
+    console.log(questions);
+    let Question = SelectSingle;
+    switch (type) {
+      case 'select_single':
+        Question = SelectSingle;
+        break;
+      case 'select_multi':
+        Question = SelectMulti;
+        break;
+      case 'blank':
+        Question = Blank;
+        break;
+      default:
+        break;
+    }
     return (
       <div>
         <Header
           hasBack
+          refresh={this.getBank}
           title="题库详情"
         />
         <Spin spinning={loading}>
@@ -61,6 +80,10 @@ class BankDetail extends Component {
               题数:{count}
             </div>
             <Button onClick={this.toImport}>导入试题</Button>
+            <div>
+              {questions.map((question, i) =>
+                <Question mode="show" index={i} num={i + 1} data={question} />)}
+            </div>
           </div>
         </Spin>
       </div>

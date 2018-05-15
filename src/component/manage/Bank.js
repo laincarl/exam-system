@@ -62,8 +62,5 @@ class Bank extends Component {
   }
 }
 
-Bank.propTypes = {
-
-};
 
 export default withRouter(Bank);

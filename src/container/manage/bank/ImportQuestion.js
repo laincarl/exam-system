@@ -136,7 +136,7 @@ class ImportQuestion extends Component {
         >
           <Spin spinning={loading}>
             {questions.length === 0 && '没有可导入试题'}
-            {questions.map((one, i) => <Question mode="show" key={one.title} num={i + 1} index={i} />)}
+            {questions.map((one, i) => <Question mode="show" key={Math.random()} num={i + 1} data={one} index={i} />)}
             <Button type="primary" onClick={this.handleSubmit} style={{ marginTop: 10 }}>确认导入</Button>
           </Spin>
         </div>

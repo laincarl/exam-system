@@ -8,8 +8,5 @@ class Questions extends Component {
   }
 }
 
-Questions.propTypes = {
-
-};
 
 export default Questions;
