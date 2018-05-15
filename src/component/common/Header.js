@@ -8,6 +8,7 @@
 import React, { Component } from 'react';
 import { Button, Icon } from 'antd';
 import { withRouter } from 'react-router';
+import 'css/header.less';
 
 class Header extends Component {
   render() {
@@ -25,11 +26,12 @@ class Header extends Component {
         <div style={{ marginLeft: 100 }} />
         {buttons && buttons.map(button => (<Button
           className="header-btn"
+          disabled={disabled}
           style={{
             marginLeft: 15,
             alignItems: 'center',
-            color: disabled || button.disabled ? 'rgba(0, 0, 0, 0.26)' : '#3F51B5',
-            pointerEvents: disabled || button.disabled ? 'none' : 'auto',
+            // color: disabled || button.disabled ? 'rgba(0, 0, 0, 0.26)' : '#3F51B5',
+            // pointerEvents: disabled || button.disabled ? 'none' : 'auto',
             display: 'flex',
             height: '28px',
             fontSize: '14px',
@@ -47,18 +49,19 @@ class Header extends Component {
         {
           refresh &&
           <Button
+            disabled={disabled}
             className="header-btn"
             style={{
               marginLeft: 15,
               alignItems: 'center',
-              color: disabled ? 'rgba(0, 0, 0, 0.26)' : '#3F51B5',
-              pointerEvents: disabled ? 'none' : 'auto',
+              // color: disabled ? 'rgba(0, 0, 0, 0.26)' : '#3F51B5',
+              // pointerEvents: disabled ? 'none' : 'auto',
               display: 'flex',
               height: '28px',
               fontSize: '14px',
               lineHeight: '24px',
             }}
-            onClick={refresh}
+            onClick={() => { refresh(); }}
           >
             <div>
               <Icon type="reload" />
