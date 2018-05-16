@@ -8,7 +8,7 @@
 
 import React, { Component } from 'react';
 
-import { Table, Icon } from 'antd';
+import { Table, message, Icon } from 'antd';
 import Header from 'Header';
 import axios from 'Axios';
 import Action from 'Action';
@@ -93,6 +93,8 @@ class Exams extends Component {
   }
   closeExam=(id) => {
     axios.delete(`/exams/exam?id=${id}`).then((data) => {
+      this.getExams();
+      message.success('删除成功');
       console.log(data);
     });
   }
@@ -100,6 +102,7 @@ class Exams extends Component {
     this.setState({
       visible: false,
     });
+    this.getExams();
   }
 
   render() {

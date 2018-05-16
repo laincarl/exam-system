@@ -147,7 +147,7 @@ export default function AnalyQuestion(origin, bankId, type) {
       // 单个试题解析完成后开始判断
       if (!checkQuestion(question, type)) {
         console.log(question);
-        reject(new Error('部分试题解析错误，请检查格式'));
+        reject(new Error(`部分试题解析错误，请检查格式，${result[0]}`));
       } else {
         questions.push(question);
       }

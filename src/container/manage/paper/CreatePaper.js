@@ -11,6 +11,7 @@ import { Form, Input, InputNumber, Button, Icon, Select, message } from 'antd';
 import axios from 'Axios';
 import Header from 'Header';
 import Spin from 'Spin';
+import NumberToChinese from 'util/NumberToChinese';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -94,11 +95,13 @@ class CreatePaper extends Component {
     const { getFieldDecorator, getFieldValue, resetFields } = this.props.form;
     const { items, loading, banks } = this.state;
     const formItemLayout = {
-      labelCol: { span: 2 },
+      labelCol: { span: 3 },
       wrapperCol: { span: 8 },
     };
     const formItems = items.map((item, index) => {
       const type = getFieldValue(`types[${index}]`);
+      const score = getFieldValue(`scores[${index}]`);
+      const num = getFieldValue(`nums[${index}]`);
       const options =
         banks
           .filter(bank => bank.type === type)
@@ -106,6 +109,12 @@ class CreatePaper extends Component {
       return (
         <div style={{ position: 'relative' }}>
           <div>
+            <FormItem
+              {...formItemLayout}
+              label={`第${NumberToChinese(index + 1)}大题：`}
+            >
+              {score * num}分
+            </FormItem>            
             <FormItem
               {...formItemLayout}
               label="题型"

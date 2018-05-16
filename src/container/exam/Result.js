@@ -62,7 +62,7 @@ class Result extends Component {
           }}
           >
             <div>{user_score}</div>
-            {parts.map((part, i) => <OnePart mode="result" index={i + 1} part={part} />)}
+            {parts.map((part, i) => <OnePart mode="result" index={i} part={part} />)}
           </div>
         </Spin>
       </div>

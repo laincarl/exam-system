@@ -46,7 +46,12 @@ class Action extends Component {
     );
     return (
       <Dropdown overlay={menu} trigger={['click']}>
-        <Icon type="ellipsis" style={{ cursor: 'pointer', fontWeight: 'bold', transform: 'rotateZ(90deg)' }} />
+        <Icon
+          type="ellipsis"
+          style={{
+            cursor: 'pointer', fontWeight: 'bold', fontSize: '18px', transform: 'rotateZ(90deg)',
+          }}
+        />
       </Dropdown>);
   }
 }

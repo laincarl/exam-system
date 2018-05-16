@@ -16,7 +16,7 @@ const radioStyle = {
   lineHeight: '30px',
 };
 const showStyle = {
-  height: '30px',
+  // height: '30px',
   lineHeight: '30px',
 };
 class SelectMulti extends Component {
@@ -28,10 +28,10 @@ class SelectMulti extends Component {
     ExamStore.setAnswer(id, part, index, checkedValues);
   }
   render() {
-    console.log('render');   
-    let right = false; 
+    console.log('render');
+    let right = false;
     const { num, data, mode } = this.props;
-    const { 
+    const {
       id,
       title, selects, answers, user_answer,
     } = data;
@@ -50,17 +50,17 @@ class SelectMulti extends Component {
                   {/* {answers.includes(key) && <Icon type="check-circle" />} */}
                   <Checkbox key={`${id}${key}`} style={radioStyle} value={key}>{selects[key]}</Checkbox>
                 </div>))
-          }
+              }
             </div>
           </Checkbox.Group>
         </div>);
         break;
       case 'result':
-        right = 
-        user_answer.length === answers.length && 
-        user_answer.every(one => answers.includes(one));
+        right =
+          user_answer.length === answers.length &&
+          user_answer.every(one => answers.includes(one));
         oneQuestion = (<div
-          style={{ margin: '18px 0', position: 'relative', paddingRight: 50 }}       
+          style={{ margin: '18px 0', position: 'relative', paddingRight: 50 }}
         >
           <div><span style={{ fontWeight: 'bold' }}>{num}.</span> {title}</div>
           {!user_answer ? <div style={{ color: 'red', marginTop: 5 }}>未作答</div> : null}
@@ -81,7 +81,7 @@ class SelectMulti extends Component {
             }
             <div style={{ marginTop: 10, color: !right && 'red' }}>你的答案：{user_answer.join('、')}</div>
           </div>
-  
+
         </div>);
         break;
       case 'show':
@@ -91,18 +91,21 @@ class SelectMulti extends Component {
           <div><span style={{ fontWeight: 'bold' }}>{num}.</span> {title}</div>
           <div style={{ marginTop: '8px' }}>
             {Object.keys(selects).map(key => (
-              <div style={{ display: 'flex', alignItems: 'center', color: answers.includes(key) && '#52c41a' }}>
+              <div style={{ display: 'flex', color: answers.includes(key) && '#52c41a' }}>
                 {/* 选项key */}
-                <div style={{ width: '30px', overflow: 'hidden', fontWeight: 'bold' }}>{key} . </div>
+                <div style={{
+                  width: '30px', lineHeight: '30px', overflow: 'hidden', fontWeight: 'bold',
+                }}
+                >{key} . </div>
                 {/* {answers.includes(key) && <Icon type="check-circle" />} */}
                 {/* 选项内容 */}
                 <div style={showStyle}>{selects[key]}</div>
               </div>))
-      }
+            }
           </div>
         </div>);
         break;
-      default:        
+      default:
         break;
     }
     return oneQuestion;

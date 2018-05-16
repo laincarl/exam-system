@@ -28,11 +28,13 @@ class ImportQuestion extends Component {
   }
   componentDidMount() {
     this.getBank();
+    QuestionStore.setQuestions([]);
   }
   getBank = () => {
     this.setState({ loading: true });
     const { id } = this.props.match.params;
-    axios.get(`/banks/bank?id=${id}`).then((bank) => {
+    axios.get(`/banks/bank?id=${id}`).then((data) => {
+      const { bank } = data;
       console.log(bank);
       const { type } = bank;
       this.setState({
@@ -55,6 +57,7 @@ class ImportQuestion extends Component {
   analyQuestion = () => {
     const data = this.state.question;
     const { bankId, type } = this.state;
+    console.log(bankId, type);
     AnalyQuestion(data, bankId, type).then((questions) => {
       console.log(questions);
       this.setState({
