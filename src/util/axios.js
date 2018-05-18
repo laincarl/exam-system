@@ -6,7 +6,7 @@ import Config from 'config';
 const accessTokens = Cookies.get('token');
 // axios 配置
 axios.defaults.timeout = 10000;
-axios.defaults.baseURL = Config.devServer;
+axios.defaults.baseURL = Config.server;
 // history.go(0);
 // http request 拦截器);
 axios.interceptors.request.use(

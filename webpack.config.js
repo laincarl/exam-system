@@ -1,9 +1,12 @@
 const path = require('path');
+const webpack = require('webpack');
+const moment = require('moment');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const LessThemePlugin = require('webpack-less-theme-plugin');
 
+console.log(process.env.NODE_ENV);
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
   // devtool: 'eval',
@@ -140,7 +143,11 @@ module.exports = {
       names: ['vendor', 'manifest'], // name是提取公共代码块后js文件的名字。
       // chunks: ['vendor'] //只有在vendor中配置的文件才会提取公共代码块至manifest的js文件中
     }),
-
+    new webpack.DefinePlugin({
+      'process.env.BUILD_TIME': JSON.stringify(moment().format('YYYY-MM-DD HH:mm:ss')),
+      // 确保不会覆盖生产环境，采用||
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+    }),
     new HtmlWebpackPlugin({
       title: '首页',
       inject: true,

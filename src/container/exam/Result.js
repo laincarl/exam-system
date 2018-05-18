@@ -48,7 +48,9 @@ class Result extends Component {
   }
   render() {
     const { result, loading } = this.state;
-    const { user_score, parts } = result;
+    const {
+      user_score, total_score, limit_time, exam_title, parts, 
+    } = result;
     console.log(parts);
     return (
       <div>
@@ -61,7 +63,11 @@ class Result extends Component {
             boxShadow: '0 1px 6px rgba(0, 0, 0, .2)',
           }}
           >
-            <div>{user_score}</div>
+            <div style={{ fontSize: 25, textAlign: 'center', marginTop: 10 }}>{exam_title}</div>
+            <div style={{ textAlign: 'center', marginTop: 20 }}>
+              {`本试卷共${parts.length}大题，总分${total_score}分，考试时间${limit_time}分钟`}
+            </div>
+            <div style={{ margin: '10px 0 20px 0', fontSize: 18 }}>得分：{user_score}</div>
             {parts.map((part, i) => <OnePart mode="result" index={i} part={part} />)}
           </div>
         </Spin>

@@ -50,6 +50,7 @@
         "react/require-default-props": "off",
         "no-restricted-globals": "off",
         "no-debugger": "off",
+        "no-console": "off",
         "no-cond-assign": "off",
         "no-param-reassign": "off",
         "react/jsx-closing-tag-location": "off",

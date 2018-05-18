@@ -2,9 +2,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const webpackProConfig = require('./webpack.config');
 // const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-
 process.env.NODE_ENV = 'production';
-
 module.exports = merge(webpackProConfig, {
   // entry: './src/index.prod',
   devtool: false,
@@ -24,7 +22,7 @@ module.exports = merge(webpackProConfig, {
       minimize: true,
     }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
+      'process.env.NODE_ENV': JSON.stringify('production'),
     }),
     // Transfer Files
     /* new CopyWebpackPlugin([

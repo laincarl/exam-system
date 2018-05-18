@@ -58,7 +58,7 @@ class Blank extends Component {
     const { num, data, mode } = this.props;
     const {
       // id,
-      title, selects, answers, user_answer,
+      title, answers, user_answer,
     } = data;
     let oneQuestion;
     const arr = [];
@@ -95,26 +95,36 @@ class Blank extends Component {
 
       </div>);
     } else if (mode === 'result') {
+      let current = 0;
+      console.log(user_answer);
+      const blank = arr.map((one) => {
+        if (one === '{}') {
+          current += 1;
+          if (!user_answer || !user_answer[current - 1]) {
+            return (<input 
+              type="text" 
+              title={answers[current - 1]} 
+              style={{ ...styles.input, ...{ textAlign: 'center', color: 'orange' } }} 
+              readOnly="readonly" 
+              value={answers[current - 1]}
+            />);
+          } else {
+            return (<input 
+              type="text" 
+              title={user_answer[current - 1]} 
+              style={{ ...styles.input, ...{ textAlign: 'center', color: user_answer[current - 1] === answers[current - 1] ? '#52c41a' : 'red' } }} 
+              readOnly="readonly" 
+              value={user_answer[current - 1]}
+            />);
+          }
+        } else {
+          return one;
+        }
+      });
       oneQuestion = (<div
         style={{ margin: '18px 0', position: 'relative', paddingRight: 50 }}
       >
-        <div><span style={{ fontWeight: 'bold' }}>{num}.</span> {title}</div>
-        {!user_answer ? <div style={{ color: 'red', marginTop: 5 }}>未作答</div> : null}
-        <div style={{ marginTop: '8px' }}>
-          {Object.keys(selects).map(key => (
-            <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            color: this.returnRightColor(key, user_answer, answers),
-          }
-          }
-            >
-              <div style={{ width: '30px', overflow: 'hidden', fontWeight: 'bold' }}>{key} . </div>
-
-            </div>))
-        }
-        </div>
-
+        <div><span style={{ fontWeight: 'bold' }}>{num}.</span> {blank}</div>
       </div>);
     } else if (mode === 'show') {
       let current = 0;
