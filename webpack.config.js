@@ -1,23 +1,22 @@
 const path = require('path');
 const webpack = require('webpack');
-const moment = require('moment');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const LessThemePlugin = require('webpack-less-theme-plugin');
+const moment = require('moment');
 
-console.log(process.env.NODE_ENV);
 module.exports = {
+  mode: 'development',
   devtool: 'cheap-module-eval-source-map',
   // devtool: 'eval',
   entry: {
-    app: ['react-hot-loader/patch', 'babel-polyfill', './src/index.js'],
+    app: ['babel-polyfill', './src/index.js'],
     // vendor: ['react', 'react-dom'], //分离第三方库
   },
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/', // 以保证 hot reloading 会在嵌套的路由有效。
+    // publicPath: '/', // 以保证 hot reloading 会在嵌套的路由有效。
     filename: 'app/[name]_[hash:8].js',
     chunkFilename: 'app/chunks/[name].[chunkhash:5].chunk.js',
   },
@@ -138,15 +137,33 @@ module.exports = {
   },
   plugins: [
     new LessThemePlugin({ theme: './theme.less' }), // 使antd主题可以热加载
-    new ExtractTextPlugin('styles.css'),
-    new CommonsChunkPlugin({
-      names: ['vendor', 'manifest'], // name是提取公共代码块后js文件的名字。
-      // chunks: ['vendor'] //只有在vendor中配置的文件才会提取公共代码块至manifest的js文件中
+    // new ExtractTextPlugin('styles.css'),
+    new webpack.optimize.SplitChunksPlugin({
+      chunks: 'async',
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      name: true,
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+      },
     }),
+    // new CommonsChunkPlugin({
+    //   names: ['vendor', 'manifest'], // name是提取公共代码块后js文件的名字。
+    //   // chunks: ['vendor'] //只有在vendor中配置的文件才会提取公共代码块至manifest的js文件中
+    // }),
     new webpack.DefinePlugin({
       'process.env.BUILD_TIME': JSON.stringify(moment().format('YYYY-MM-DD HH:mm:ss')),
-      // 确保不会覆盖生产环境，采用||
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
     }),
     new HtmlWebpackPlugin({
       title: '首页',
@@ -165,6 +182,7 @@ module.exports = {
       // chunks:['vendor','app'],
       template: './src/index.ejs', // Load a custom template (ejs by default see the FAQ for details)
     }),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     // new webpack.HotModuleReplacementPlugin(),
   ],
 };

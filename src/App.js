@@ -6,6 +6,7 @@
  */
 
 import React, { Component } from 'react';
+import { hot } from 'react-hot-loader';
 import { createBrowserHistory } from 'history';
 import { HashRouter as Router } from 'react-router-dom';
 import { Provider } from 'mobx-react';
@@ -24,7 +25,7 @@ const stores = {
   // ...other stores
 };
 
-export default class App extends Component {
+class App extends Component {
   render() {
     return (
       <Provider {...stores}>
@@ -51,3 +52,5 @@ export default class App extends Component {
     );
   }
 }
+export default hot(module)(App);
+
