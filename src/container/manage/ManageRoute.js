@@ -2,7 +2,7 @@
  * @Author: LainCarl 
  * @Date: 2018-03-05 20:33:52 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-05-19 11:26:33
+ * @Last Modified time: 2018-05-19 16:24:04
  */
 
 import React, { Component } from 'react';
@@ -23,6 +23,12 @@ let menus = [{
   text: '基本信息',
   component: Main,
 }, {
+  path: 'user',
+  icon: 'user',
+  text: '用户管理',
+  permission: ['admin'],
+  component: Permission(UserRoute, ['admin']),
+}, {
   path: 'exam',
   icon: 'switcher',
   text: '考试管理',
@@ -33,21 +39,15 @@ let menus = [{
   text: '试卷管理',
   component: PaperRoute,
 }, {
-  path: 'analyze',
-  icon: 'calculator',
-  text: '统计信息',
-  component: Analyze,
-}, {
   path: 'bank',
   icon: 'profile',
   text: '题库管理',
   component: BankRoute,
 }, {
-  path: 'user',
-  icon: 'user',
-  text: '用户管理',
-  permission: ['admin'],
-  component: Permission(UserRoute, ['admin']),
+  path: 'analyze',
+  icon: 'bar-chart',
+  text: '统计信息',
+  component: Analyze,
 }];
 class Manage extends Component {
   render() {

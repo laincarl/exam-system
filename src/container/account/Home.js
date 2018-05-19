@@ -2,17 +2,19 @@
  * @Author: LainCarl 
  * @Date: 2018-03-14 14:03:36 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-05-07 11:43:18
+ * @Last Modified time: 2018-05-19 16:38:33
  */
 
 import React, { Component } from 'react';
-import { message, Table, Button } from 'antd';
+import { message, Table, Button, Tabs, Icon, Form, Input } from 'antd';
 import { observer } from 'mobx-react';
 import AppState from 'AppState';
 import axios from 'Axios';
 import moment from 'moment';
 import 'css/account.css';
 
+const FormItem = Form.Item;
+const { TabPane } = Tabs;
 function beforeUpload(file) {
   const isJPG = file.type === 'image/jpeg' || file.type === 'image/png';
   if (!isJPG) {
@@ -88,7 +90,6 @@ class Home extends Component {
   componentDidMount() {
     this.getResults();
   }
-
   getResults = () => {
     axios.get('/exams/results').then((results) => {
       this.setState({
@@ -96,6 +97,9 @@ class Home extends Component {
         results,
       });
     });
+  }
+  callback=(key) => {
+    console.log(key);
   }
   handleUpload = (e) => {
     if (beforeUpload(e.target.files[0])) {
@@ -111,7 +115,11 @@ class Home extends Component {
   render() {
     const { loading, results } = this.state;
     const { name, url } = AppState.userInfo;
-
+    const { getFieldDecorator } = this.props.form;
+    const formItemLayout = {
+      labelCol: { span: 3 },
+      wrapperCol: { span: 8 },
+    };
     return (
       <div style={{ margin: '20px 100px', padding: 20, boxShadow: '0 1px 6px rgba(0, 0, 0, .2)' }}>
         <h2>个人中心</h2>
@@ -135,16 +143,61 @@ class Home extends Component {
             更换头像
           </div>
         </div>
-        考试记录
-        <Table
-          columns={columns}
-          dataSource={results.map(result => ({ ...result, ...{ key: result.id } }))}
-          loading={loading}
-        />
+        <Tabs defaultActiveKey="1" onChange={this.callback}>
+          <TabPane tab={<span><Icon type="file-text" />考试记录</span>} key="1"><Table
+            columns={columns}
+            dataSource={results.map(result => ({ ...result, ...{ key: result.id } }))}
+            loading={loading}
+          />
+          </TabPane>
+          <TabPane tab={<span><Icon type="form" />更改密码</span>} key="2">
+            <div />
+            <Form onSubmit={this.handleSubmit}>
+              <FormItem
+                {...formItemLayout}
+                label="旧密码"
+              >
+                {getFieldDecorator('password_old', {
+                  rules: [{
+                    required: true,
+                    message: '请输入旧密码',
+                  }],
+                })(<Input />)}
+              </FormItem> 
+              <FormItem
+                {...formItemLayout}
+                label="新密码"
+              >
+                {getFieldDecorator('password', {
+                  rules: [{
+                    required: true,
+                    message: '请输入密码',
+                  }],
+                })(<Input />)}
+              </FormItem>          
+              <FormItem
+                {...formItemLayout}
+                label="再次输入密码"
+              >
+                {getFieldDecorator('password_repeat', {
+                  rules: [{
+                    required: true,
+                    message: '请输入密码',
+                  }],
+                })(<Input />)}
+              </FormItem>                      
+              <FormItem>              
+                <Button type="primary" htmlType="submit" style={{ marginLeft: 100, width: 100 }}>更改</Button>         
+              </FormItem>
+            </Form>
+          
+          </TabPane>
+          <TabPane tab={<span><Icon type="bar-chart" />统计信息</span>} key="3">Content of Tab Pane 3</TabPane>
+        </Tabs>        
       </div>
     );
   }
 }
 
 
-export default Home;
+export default Form.create()(Home);
