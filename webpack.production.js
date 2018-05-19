@@ -1,13 +1,13 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const webpackProConfig = require('./webpack.config');
+const baseConfig = require('./webpack.config');
 
 // const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+
 
 process.env.NODE_ENV = 'production';
 
-module.exports = merge(webpackProConfig, {
+module.exports = merge(baseConfig, {
   mode: 'production',
   // entry: './src/index.prod',
   devtool: false,
@@ -25,8 +25,7 @@ module.exports = merge(webpackProConfig, {
     // }),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
-    }),
-    new BundleAnalyzerPlugin(),
+    }),  
 
     // Transfer Files
     /* new CopyWebpackPlugin([
