@@ -2,13 +2,14 @@
  * @Author: LainCarl 
  * @Date: 2018-03-05 20:33:52 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-04-02 21:55:36
+ * @Last Modified time: 2018-05-19 11:26:33
  */
 
 import React, { Component } from 'react';
-import CheckPermission from 'CheckPermission';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import ManageMenu from 'component/manage/ManageMenu';
+import Permission from 'Permission';
+import PermissionMenu from 'component/common/PermissionMenu';
+import CheckPermission from 'util/CheckPermission';
 import Main from './Main';
 import ExamRoute from './exam/ExamRoute';
 import PaperRoute from './paper/PaperRoute';
@@ -16,21 +17,58 @@ import UserRoute from './user/UserRoute';
 import BankRoute from './bank/BankRoute';
 import Analyze from './analyze/Analyze';
 
+let menus = [{
+  path: 'main',
+  icon: 'home',
+  text: '基本信息',
+  component: Main,
+}, {
+  path: 'exam',
+  icon: 'switcher',
+  text: '考试管理',
+  component: ExamRoute,
+}, {
+  path: 'paper',
+  icon: 'copy',
+  text: '试卷管理',
+  component: PaperRoute,
+}, {
+  path: 'analyze',
+  icon: 'calculator',
+  text: '统计信息',
+  component: Analyze,
+}, {
+  path: 'bank',
+  icon: 'profile',
+  text: '题库管理',
+  component: BankRoute,
+}, {
+  path: 'user',
+  icon: 'user',
+  text: '用户管理',
+  permission: ['admin'],
+  component: Permission(UserRoute, ['admin']),
+}];
 class Manage extends Component {
   render() {
     const { match } = this.props;
     // console.log(this.props);
+    menus = menus.filter(menu => !menu.permission || CheckPermission(menu.permission));
+    // console.log(menus);
     return (
       <div style={{ display: 'flex', height: '100%' }}>
-        <ManageMenu match />
+        <PermissionMenu menus={menus} />
         <div style={{ flex: 1 }}>
           <Switch>
-            <Route exact path={`${match.url}/main`} component={Main} />
+            {
+              menus.map(menu => <Route path={`${match.url}/${menu.path}`} component={menu.component} />)
+            }
+            {/* <Route path={`${match.url}/main`} component={Main} />
             <Route path={`${match.url}/exam`} component={ExamRoute} />
             <Route path={`${match.url}/paper`} component={PaperRoute} />           
             <Route path={`${match.url}/analyze`} component={Analyze} />
             <Route path={`${match.url}/bank`} component={BankRoute} />
-            <Route path={`${match.url}/user`} component={UserRoute} />
+            <Route path={`${match.url}/user`} component={UserRoute} /> */}
             <Redirect from={`${match.url}`} to={`${match.url}/main`} />
           </Switch>
         </div>
@@ -40,4 +78,4 @@ class Manage extends Component {
 }
 
 
-export default CheckPermission(Manage, 'admin');
+export default Permission(Manage, ['admin', 'teacher']);

@@ -6,7 +6,7 @@
  */
 
 import React, { Component } from 'react';
-import CheckPermission from 'CheckPermission';
+import Permission from 'Permission';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import ExamPage from './ExamPage';
 import Result from './Result';
@@ -32,4 +32,4 @@ class ExamRoute extends Component {
 }
 
 
-export default CheckPermission(ExamRoute, ['admin', 'student']);
+export default Permission(ExamRoute, ['admin', 'student']);

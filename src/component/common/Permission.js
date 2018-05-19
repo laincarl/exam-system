@@ -10,7 +10,7 @@ import { withRouter } from 'react-router';
 import { observer } from 'mobx-react';
 import AppState from 'AppState';
 
-const CheckPermission = (WrappedComponent, role = ['student']) => {
+const Permission = (WrappedComponent, role = ['student']) => {
   @observer
   class WrapComponent extends Component {
     componentDidMount() {
@@ -33,4 +33,4 @@ const CheckPermission = (WrappedComponent, role = ['student']) => {
   return withRouter(WrapComponent);
 };
 
-export default CheckPermission;
+export default Permission;

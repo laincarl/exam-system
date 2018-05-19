@@ -6,7 +6,7 @@
  */
 
 import React, { Component } from 'react';
-import CheckPermission from 'CheckPermission';
+import Permission from 'Permission';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Home from './Home';
 
@@ -26,4 +26,4 @@ class Account extends Component {
 }
 
 
-export default CheckPermission(Account, ['admin', 'student']);
+export default Permission(Account, ['admin', 'student']);
