@@ -66,7 +66,7 @@ class SelectMulti extends Component {
         break;
       case 'result':
         right =
-          user_answer.length === answers.length &&
+          user_answer && user_answer.length === answers.length &&
           user_answer.every(one => answers.includes(one));
         oneQuestion = (<div
           style={{ margin: '18px 0', position: 'relative', paddingRight: 50 }}
@@ -87,7 +87,9 @@ class SelectMulti extends Component {
                 <div style={radioStyle} >{selects[key]}</div>
               </div>))
             }
-            <div style={{ marginTop: 10, color: !right && 'red' }}>你的答案：{user_answer.join('、')}</div>
+            {
+              user_answer && <div style={{ marginTop: 10, color: !right && 'red' }}>你的答案：{user_answer.join('、')}</div>
+            }            
           </div>
 
         </div>);

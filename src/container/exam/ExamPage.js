@@ -10,10 +10,11 @@ import { observer } from 'mobx-react';
 import axios from 'Axios';
 import Spin from 'Spin';
 // import { message } from 'antd';
-import AppState from 'AppState';
+// import AppState from 'AppState';
 import ShowAnswers from 'component/exam/ShowAnswers';
 import OnePart from 'component/common/OnePart';
 import ExamStore from 'store/exam/ExamStore';
+import ExamEnd from './ExamEnd';
 
 @observer
 class ExamPage extends Component {
@@ -21,6 +22,8 @@ class ExamPage extends Component {
     super();
     this.state = {
       loading: true,
+      end: false,
+      message: '',
     };
   }
   componentDidMount() {
@@ -34,7 +37,9 @@ class ExamPage extends Component {
     }).catch((error) => {
       if (error.response) {
         // message.error(error.response.data.message);
-        AppState.history.replace('/exam/end');
+        // AppState.history.replace('/exam/end');
+        console.log(error.response);
+        this.setState({ end: true, message: error.response.data });
       } else {
         console.log(error);
       }
@@ -42,11 +47,11 @@ class ExamPage extends Component {
   }
 
   render() {
-    const { loading } = this.state;
+    const { loading, end, message } = this.state;
     const { parts, title } = ExamStore.currentExam;
     console.log(parts);
     return (
-      <div>
+      end ? <ExamEnd message={message} /> : <div>
         <ShowAnswers />
         <Spin spinning={loading}>
           <div style={{
@@ -59,7 +64,7 @@ class ExamPage extends Component {
           >
             <div style={{ fontSize: 25, textAlign: 'center', marginTop: 10 }}>{title}</div>
             {
-             parts.map((part, i) => <OnePart mode="exam" index={i} part={part} />)
+              parts.map((part, i) => <OnePart mode="exam" index={i} part={part} />)
               // questions.map((one, i) => <QuestionShow num={i + 1} data={one} />)
             }
           </div>

@@ -12,6 +12,7 @@ import { Button } from 'antd';
 
 class ExamEnd extends Component {
   render() {
+    const { message } = this.props;
     return (
       <div
         style={{
@@ -31,7 +32,7 @@ class ExamEnd extends Component {
             fontSize: 30,
           }}
         >
-          当前考试不在开启范围
+          {message}
         </div>
         <Button
           onClick={() => { AppState.history.goBack(); }}
