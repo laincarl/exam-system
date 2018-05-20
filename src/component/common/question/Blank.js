@@ -53,7 +53,7 @@ class Blank extends Component {
   }
   render() {
     console.log('render');
-    console.log(this.props);
+    // console.log(this.props);
     this.amount = 0;
     const { num, data, mode } = this.props;
     const {
@@ -74,8 +74,12 @@ class Blank extends Component {
         arr.push('{}');
         this.amount += 1;
         pre = i + 2;
+        // 当遇到末尾时，将末尾字符串写入
+      } else if (i === title.length - 1) {
+        arr.push(title.substring(pre));
       }
     }
+    // console.log(arr);
     // console.log(title, arr);
     // console.log(title, title.split(/{}/));
     if (mode === 'exam') {
@@ -131,7 +135,7 @@ class Blank extends Component {
       const blank = arr.map((one) => {
         if (one === '{}') {
           current += 1;
-          return <input type="text" title={answers[current - 1]} style={{ ...styles.input, ...{ textAlign: 'center' } }} readOnly="readonly" value={answers[current - 1]} />;
+          return <input type="text" title={answers[current - 1]} style={{ ...styles.input, ...{ textAlign: 'center', color: '#52c41a' } }} readOnly="readonly" value={answers[current - 1]} />;
         } else {
           return one;
         }

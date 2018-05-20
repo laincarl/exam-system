@@ -149,10 +149,12 @@ export default function AnalyQuestion(origin, bankId, type) {
         console.log(question);
         reject(new Error(`部分试题解析错误，请检查格式，${result[0]}`));
       } else {
+        console.log(question);
         questions.push(question);
       }
     }
     // 解析完成后开始判断
+    // console.log(questions);
     resolve(questions);
   });
 }

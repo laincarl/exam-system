@@ -113,7 +113,7 @@ class CreatePaper extends Component {
               {...formItemLayout}
               label={`第${NumberToChinese(index + 1)}大题：`}
             >
-              {score * num}分
+              {score * num || 0}分
             </FormItem>            
             <FormItem
               {...formItemLayout}

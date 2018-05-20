@@ -2,7 +2,7 @@
  * @Author: LainCarl 
  * @Date: 2018-03-14 14:03:36 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-05-19 17:23:27
+ * @Last Modified time: 2018-05-19 22:26:19
  */
 
 import React, { Component } from 'react';
@@ -192,7 +192,7 @@ class Home extends Component {
             </Form>
           
           </TabPane>
-          <TabPane tab={<span><Icon type="bar-chart" />统计信息</span>} key="3">统计2</TabPane>
+          <TabPane tab={<span><Icon type="bar-chart" />统计信息</span>} key="3">统计22</TabPane>
         </Tabs>        
       </div>
     );

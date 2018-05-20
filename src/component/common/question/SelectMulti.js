@@ -10,14 +10,22 @@ import React, { Component } from 'react';
 import { Checkbox } from 'antd';
 import ExamStore from 'store/exam/ExamStore';
 
-const radioStyle = {
-  display: 'block',
-  height: '30px',
-  lineHeight: '30px',
-};
-const showStyle = {
-  // height: '30px',
-  lineHeight: '30px',
+const styles = {
+  keyStyle: {
+    width: '30px',
+    lineHeight: '30px',
+    fontWeight: 'bold',
+  },
+  radioStyle: {
+    flex: 1,
+    display: 'block',
+    // height: '30px',
+    lineHeight: '30px',
+  },
+  showStyle: {
+    flex: 1,
+    lineHeight: '30px',
+  },
 };
 class SelectMulti extends Component {
   onChange = (checkedValues) => {
@@ -35,6 +43,7 @@ class SelectMulti extends Component {
       id,
       title, selects, answers, user_answer,
     } = data;
+    const { keyStyle, radioStyle, showStyle } = styles;
     let oneQuestion;
     switch (mode) {
       case 'exam':
@@ -45,8 +54,8 @@ class SelectMulti extends Component {
           <Checkbox.Group onChange={this.onChange}>
             <div style={{ marginTop: '8px' }}>
               {Object.keys(selects).map(key => (
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <div style={{ width: '30px', overflow: 'hidden', fontWeight: 'bold' }}>{key} . </div>
+                <div style={{ display: 'flex' }}>
+                  <div style={keyStyle}>{key} . </div>
                   {/* {answers.includes(key) && <Icon type="check-circle" />} */}
                   <Checkbox key={`${id}${key}`} style={radioStyle} value={key}>{selects[key]}</Checkbox>
                 </div>))
@@ -67,14 +76,13 @@ class SelectMulti extends Component {
           <div style={{ marginTop: '8px' }}>
             {Object.keys(selects).map(key => (
               <div style={{
-                display: 'flex',
-                alignItems: 'center',
+                display: 'flex',           
                 // 正确答案绿色
                 color: answers.includes(key) && '#52c41a',
               }
               }
               >
-                <div style={{ width: '30px', overflow: 'hidden', fontWeight: 'bold' }}>{key} . </div>
+                <div style={keyStyle}>{key} . </div>
                 {/* {answers.includes(key) && <Icon type="check-circle" />} */}
                 <div style={radioStyle} >{selects[key]}</div>
               </div>))
@@ -93,10 +101,7 @@ class SelectMulti extends Component {
             {Object.keys(selects).map(key => (
               <div style={{ display: 'flex', color: answers.includes(key) && '#52c41a' }}>
                 {/* 选项key */}
-                <div style={{
-                  width: '30px', lineHeight: '30px', overflow: 'hidden', fontWeight: 'bold',
-                }}
-                >{key} . </div>
+                <div style={keyStyle}>{key} . </div>
                 {/* {answers.includes(key) && <Icon type="check-circle" />} */}
                 {/* 选项内容 */}
                 <div style={showStyle}>{selects[key]}</div>
