@@ -16,7 +16,7 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    // publicPath: '/', // 以保证 hot reloading 会在嵌套的路由有效。
+    publicPath: '/', // 以保证资源路径正确。
     filename: 'app/[name]_[hash:8].js',
     chunkFilename: 'app/chunks/[name].[chunkhash:5].chunk.js',
   },
@@ -102,6 +102,11 @@ module.exports = {
           }, 
           {
             loader: 'postcss-loader',
+            options: {
+              config: {
+                path: './config', // 写到目录即可，文件名强制要求是postcss.config.js
+              },
+            },
           },
         ],
       },

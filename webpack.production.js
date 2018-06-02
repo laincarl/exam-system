@@ -4,9 +4,6 @@ const baseConfig = require('./webpack.config');
 
 // const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
-
-process.env.NODE_ENV = 'production';
-
 module.exports = merge(baseConfig, {
   mode: 'production',
   // entry: './src/index.prod',

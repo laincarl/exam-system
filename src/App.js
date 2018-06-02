@@ -8,7 +8,9 @@
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
 import { createBrowserHistory } from 'history';
-import { HashRouter as Router } from 'react-router-dom';
+// import { HashRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+
 import { Provider } from 'mobx-react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import MainHeader from 'MainHeader';

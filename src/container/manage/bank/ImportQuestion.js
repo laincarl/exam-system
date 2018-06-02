@@ -22,7 +22,7 @@ class ImportQuestion extends Component {
   state = {
     visible: false,
     type: '',
-    bankId: null,
+    bank_id: null,
     question: '',
     loading: true,
   }
@@ -33,12 +33,12 @@ class ImportQuestion extends Component {
   getBank = () => {
     this.setState({ loading: true });
     const { id } = this.props.match.params;
-    axios.get(`/banks/bank?id=${id}`).then((data) => {
+    axios.get(`/banks/bank?id=${id}&page=0`).then((data) => {
       const { bank } = data;
       console.log(bank);
       const { type } = bank;
       this.setState({
-        bankId: bank.id,
+        bank_id: bank.id,
         type,
         loading: false,
       });
@@ -56,9 +56,9 @@ class ImportQuestion extends Component {
   }
   analyQuestion = () => {
     const data = this.state.question;
-    const { bankId, type } = this.state;
-    console.log(bankId, type);
-    AnalyQuestion(data, bankId, type).then((questions) => {
+    const { bank_id, type } = this.state;
+    console.log(bank_id, type);
+    AnalyQuestion(data, bank_id, type).then((questions) => {
       console.log(questions);
       this.setState({
         visible: false,
@@ -85,7 +85,7 @@ class ImportQuestion extends Component {
   }
   render() {
     const {
-      type, question, loading, visible, 
+      type, question, loading, visible,
     } = this.state;
     let Question = SelectSingle;
     switch (type) {

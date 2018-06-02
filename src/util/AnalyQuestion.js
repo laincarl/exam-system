@@ -86,11 +86,11 @@ function checkQuestion(question, type) {
  * 
  * @export
  * @param {Object} origin 初始数据
- * @param {Number} bankId 题库id
+ * @param {Number} bank_id 题库id
  * @param {String} type 题型
  * @returns 
  */
-export default function AnalyQuestion(origin, bankId, type) {
+export default function AnalyQuestion(origin, bank_id, type) {
   return new Promise((resolve, reject) => {
     // 当传过来的试题类型不存在，返回空数组
     const Reg = Regs[type];
@@ -113,7 +113,7 @@ export default function AnalyQuestion(origin, bankId, type) {
       // console.log(result);
       const question = {
         type,
-        bankId,
+        bank_id,
         title: null,
         answers: [],
         selects: {},
