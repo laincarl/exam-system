@@ -8,6 +8,11 @@ const accessTokens = Cookies.get('token');
 axios.defaults.timeout = 10000;
 axios.defaults.baseURL = Config.server;
 // history.go(0);
+axios.defaults.validateStatus = (status) => {
+  console.log(status);
+  console.log(status >= 200 && status < 300);
+  return status >= 200 && status < 300;
+};
 // http request 拦截器);
 axios.interceptors.request.use(
   (config) => {
@@ -30,12 +35,12 @@ axios.interceptors.response.use(
     }
     // continue sending response to the then() method
     console.log(response);
-    const { data, success, type } = response.data;
+    const { data, status, type } = response.data;
     const Message = response.data.message;
-    if (success !== undefined && success === false) {
+    if (status !== undefined && status === 0) {
       message.error(`${type} : ${Message}`);
       return Promise.reject(response.data);
-    } else if (success !== undefined && success === true) {
+    } else if (status !== undefined && status === 1) {
       console.log('true');
       return Promise.resolve(data);
     } else {
@@ -43,6 +48,7 @@ axios.interceptors.response.use(
     }
   },
   (error) => {
+    console.log(error.response);
     const { response } = error;
     if (response) {
       const { status } = response;

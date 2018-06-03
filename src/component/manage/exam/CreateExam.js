@@ -72,17 +72,14 @@ class CreateExam extends Component {
         // moment(range[0]).format('YYYY-MM-DD HH:mm:ss')
         console.log(values);
         const { range } = values;
-        axios.post('/exams/new', { ...values, ...{ range: { start_time: range[0], end_time: range[1] } } }).then((data) => {
+        const exam = { ...values, ...{ range: { start_time: range[0], end_time: range[1] } } };
+        axios.post('/exams/new', exam).then((data) => {
           console.log(data);
           message.success('创建成功');
           this.setState({ loading: false });
           this.props.handleCancel();
-        }).catch((error) => {
-          if (error.response) {
-            message.error(error.response.data.message);
-          } else {
-            console.log(error);
-          }
+        }).catch(() => {
+          this.setState({ loading: false });
         });
       }
     });
@@ -130,7 +127,7 @@ class CreateExam extends Component {
                   required: true, message: '请选择开始和结束日期',
                 }],
               })(<RangePicker
-                style={{ width: '100%' }} 
+                style={{ width: '100%' }}
                 disabledDate={disabledDate}
                 // disabledTime={disabledRangeTime}
                 showTime={{

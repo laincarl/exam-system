@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
-import { Button, Modal, message } from 'antd';
+import { Button, Modal } from 'antd';
 import axios from 'Axios';
 import AppState from 'AppState';
 import moment from 'moment';
@@ -77,7 +77,8 @@ class ShowAnswers extends Component {
       // ExamStore.setResult(result);
       AppState.history.push(`/exam/finish/${currentExam.id}`);
     }).catch((error) => {
-      message.error(error.response.data.message);
+      console.log(error);
+      // message.error(error.response.data.message);
       this.setState({
         loading: false,
       });

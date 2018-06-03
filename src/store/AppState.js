@@ -20,6 +20,8 @@ class AppState {
         this.setUserInfo(userInfo);
         this.setUserAuth(true);
       }
+    }).catch((error) => {
+      console.log(error);
     });
   }
   @action
@@ -34,7 +36,7 @@ class AppState {
   setUserAuth(flag) {
     this.userAuth = flag;
   }
-  @action 
+  @action
   setHistory(history) {
     this.history = history;
   }
