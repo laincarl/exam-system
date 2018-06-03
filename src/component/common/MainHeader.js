@@ -11,6 +11,7 @@ import { inject, observer } from 'mobx-react';
 // import axios from 'Axios';
 import Cookies from 'js-cookie';
 import './MainHeader.less';
+import './MainHeader.css';
 
 const styles = {
   container: {
@@ -84,7 +85,7 @@ class MainHeader extends Component {
           role="none"
           className="header_btn"
           style={{
-            userSelect: 'none',
+            // userSelect: 'none',
             cursor: 'pointer',
             height: '100%',
             width: 80,

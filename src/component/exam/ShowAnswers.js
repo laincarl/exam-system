@@ -3,6 +3,7 @@ import { observer } from 'mobx-react';
 import { Button, Modal, message } from 'antd';
 import axios from 'Axios';
 import AppState from 'AppState';
+import moment from 'moment';
 import OnePart from '../common/OnePart';
 import ExamStore from '../../store/exam/ExamStore';
 
@@ -18,28 +19,43 @@ class ShowAnswers extends Component {
     loading: false,
   }
   componentDidMount() {
-    this.setTime();
+    // this.setTime();
     this.start();
+    window.onbeforeunload = function () {
+      return 'You have unsaved changes!';
+    };
   }
-  componentWillUnmount() { 
+  componentWillUnmount() {
+    window.onbeforeunload = null;
     clearInterval(this.timer);
   }
-  setTime = () => {
-    const startTime = new Date();
-    startTime.setMinutes(startTime.getMinutes() + 1);
-    localStorage.setItem('start_time', startTime);
-  }
+  // setTime = () => {
+  //   const startTime = new Date();
+  //   startTime.setMinutes(startTime.getMinutes() + 1);
+  //   localStorage.setItem('start_time', startTime);
+  // }
   start = () => {
+    // 设置timer，更新倒计时
     this.timer = setInterval(() => {
-      let during = new Date(localStorage.getItem('start_time')) - new Date();
-      if (during > 0) {
-        during = new Date(during);
-        this.setState({
-          time: { sec: during.getSeconds(), min: during.getMinutes(), hour: during.getHours() - 8 },
-        });
-      } else {
-        console.log('clear');
-        clearInterval(this.timer);
+      const { end_time } = ExamStore.currentExam;
+      if (end_time) {
+        // 取卷时间加考试时间限制，算出截止时间
+        // const end_time = moment(start_time).add(limit_time, 'minutes');
+        // 截止时间减去当前时间，算出时差，单位毫秒
+        const during = moment.duration(moment(end_time) - moment(), 'ms');
+        // console.log(during);
+        // 如果时间差大于0则还没到时间限制
+        if (during > 0) {
+          const hour = during.get('hours');
+          const min = during.get('minutes');
+          const sec = during.get('seconds');
+          this.setState({
+            time: { sec, min, hour },
+          });
+        } else {
+          console.log('时间到');
+          clearInterval(this.timer);
+        }
       }
     }, 1000);
   }
@@ -51,7 +67,7 @@ class ShowAnswers extends Component {
       loading: true,
     });
     axios.post('/exams/submit', {
-      id, title, paper_id, answers, 
+      id, title, paper_id, answers,
     }).then((result) => {
       console.log(result);
       // const { score, results } = result;
@@ -105,11 +121,11 @@ class ShowAnswers extends Component {
         <div style={{ fontSize: 18, fontWeight: 'bold', margin: '10px 0' }}>正在考试中</div>
         <div>
           {
-           parts.map((part, i) => <OnePart mode="side" index={i} part={part} />)
+            parts.map((part, i) => <OnePart mode="side" index={i} part={part} />)
           }
         </div>
         <div style={{ margin: '15px 0 5px 0' }}>考试倒计时</div>
-        <div>{`${hour}:${min}:${sec}`}</div>
+        <div>{`${hour}时${min}分${sec}秒`}</div>
         <div className="flex-space" />
         <Button
           loading={loading}

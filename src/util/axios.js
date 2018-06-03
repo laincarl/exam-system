@@ -30,12 +30,13 @@ axios.interceptors.response.use(
     }
     // continue sending response to the then() method
     console.log(response);
-    const { data, status, type } = response.data;
+    const { data, success, type } = response.data;
     const Message = response.data.message;
-    if (status !== undefined && status === 0) {
+    if (success !== undefined && success === false) {
       message.error(`${type} : ${Message}`);
-      return Promise.resolve(data);
-    } else if (status !== undefined && status === 1) {
+      return Promise.reject(response.data);
+    } else if (success !== undefined && success === true) {
+      console.log('true');
       return Promise.resolve(data);
     } else {
       return Promise.resolve(response.data);

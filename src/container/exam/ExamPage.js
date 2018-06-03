@@ -29,20 +29,26 @@ class ExamPage extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
     axios.get(`/exams/exam?id=${id}`).then((exam) => {
+      if (exam.message) {
+        this.setState({ end: true, message: exam.message });
+      }
       console.log(exam);
       ExamStore.setCurrentExam(exam);
       this.setState({
         loading: false,
       });
     }).catch((error) => {
-      if (error.response) {
-        // message.error(error.response.data.message);
-        // AppState.history.replace('/exam/end');
-        console.log(error.response);
-        this.setState({ end: true, message: error.response.data });
-      } else {
-        console.log(error);
+      if (error.message) {
+        this.setState({ end: true, message: error.message });
       }
+      // if (error.response) {
+      //   // message.error(error.response.data.message);
+      //   // AppState.history.replace('/exam/end');
+      //   console.log(error.response);
+      //   this.setState({ end: true, message: error.message.data });
+      // } else {
+      //   console.log(error);
+      // }
     });
   }
 
