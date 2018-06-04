@@ -15,7 +15,7 @@ class Account extends Component {
     const { match } = this.props;
     // console.log(this.props);
     return (
-      <div>
+      <div style={{ display: 'flex', height: '100%' }}>
         <Switch>
           <Route exact path={`${match.url}/home`} component={Home} />
           <Redirect from={`${match.url}`} to={`${match.url}/home`} />

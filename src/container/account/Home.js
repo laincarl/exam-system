@@ -98,7 +98,7 @@ class Home extends Component {
       });
     });
   }
-  callback=(key) => {
+  callback = (key) => {
     console.log(key);
   }
   handleUpload = (e) => {
@@ -111,17 +111,56 @@ class Home extends Component {
       });
     }
   }
-
+  handleSubmit=(e) => {
+    e.preventDefault();
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      if (!err) {        
+        console.log(values);         
+        axios.post('/user/reset_password', values).then((data) => {
+          console.log(data);
+          message.success('更改成功');
+          this.setState({ loading: false });
+        }).catch(() => {
+          this.setState({ loading: false });
+        });
+      }
+    });
+  }
   render() {
     const { loading, results } = this.state;
     const { name, url } = AppState.userInfo;
     const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
-      labelCol: { span: 3 },
-      wrapperCol: { span: 8 },
+      labelCol: {
+        xs: { span: 24 },
+        sm: { span: 3 },
+      },
+      wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 8 },
+      },
+    };
+    const tailFormItemLayout = {
+      wrapperCol: {
+        xs: {
+          span: 24,
+          offset: 0,
+        },
+        sm: {
+          span: 16,
+          offset: 3,
+        },
+      },
     };
     return (
-      <div style={{ margin: '20px 100px', padding: 20, boxShadow: '0 1px 6px rgba(0, 0, 0, .2)' }}>
+      <div style={{
+        margin: '20px auto',
+        width: '70%',
+        minHeight: 500,
+        padding: 20,
+        boxShadow: '0 1px 6px rgba(0, 0, 0, .2)',
+      }}
+      >
         <h2>个人中心</h2>
         <div className="title">{name}</div>
         <div style={{ width: 100, height: 100, position: 'relative' }} className="head-upload-container">
@@ -151,49 +190,51 @@ class Home extends Component {
           />
           </TabPane>
           <TabPane tab={<span><Icon type="form" />更改密码</span>} key="2">
-            <div />
-            <Form onSubmit={this.handleSubmit}>
-              <FormItem
-                {...formItemLayout}
-                label="旧密码"
-              >
-                {getFieldDecorator('password_old', {
+            <div style={{ marginTop: 20 }}>            
+              <Form onSubmit={this.handleSubmit}>
+                <FormItem
+                  {...formItemLayout}
+                  label="旧密码"
+                >
+                  {getFieldDecorator('password_old', {
                   rules: [{
                     required: true,
                     message: '请输入旧密码',
                   }],
                 })(<Input />)}
-              </FormItem> 
-              <FormItem
-                {...formItemLayout}
-                label="新密码"
-              >
-                {getFieldDecorator('password', {
+                </FormItem>
+                <FormItem
+                  {...formItemLayout}
+                  label="新密码"
+                >
+                  {getFieldDecorator('password', {
                   rules: [{
                     required: true,
                     message: '请输入密码',
                   }],
                 })(<Input />)}
-              </FormItem>          
-              <FormItem
-                {...formItemLayout}
-                label="再次输入密码"
-              >
-                {getFieldDecorator('password_repeat', {
+                </FormItem>
+                <FormItem
+                  {...formItemLayout}
+                  label="再次输入密码"
+                >
+                  {getFieldDecorator('password_repeat', {
                   rules: [{
                     required: true,
                     message: '请输入密码',
                   }],
                 })(<Input />)}
-              </FormItem>                      
-              <FormItem>              
-                <Button type="primary" htmlType="submit" style={{ marginLeft: 100, width: 100 }}>更改</Button>         
-              </FormItem>
-            </Form>
-          
+                </FormItem>
+                <FormItem
+                  {...tailFormItemLayout}
+                >
+                  <Button type="primary" htmlType="submit" style={{ width: 100 }}>更改</Button>
+                </FormItem>
+              </Form>
+            </div>
           </TabPane>
           <TabPane tab={<span><Icon type="bar-chart" />统计信息</span>} key="3">统计22</TabPane>
-        </Tabs>        
+        </Tabs>
       </div>
     );
   }
