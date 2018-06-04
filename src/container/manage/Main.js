@@ -20,10 +20,16 @@ function toDetail(id) {
   AppState.history.push(`/exam/result/${id}`);
 }
 const columns = [{
-  title: '学生名字',
+  title: '学号',
   dataIndex: 'user',
   key: 'user',
   render: user => user.name,
+  // sorter: (a, b) => compare(a.title, b.title),
+}, {
+  title: '学生名字',
+  dataIndex: 'user',
+  key: 'real_name',
+  render: user => user.real_name,
   // sorter: (a, b) => compare(a.title, b.title),
 }, {
   title: '考试名称',
@@ -73,6 +79,7 @@ const columns = [{
 class Main extends Component {
   state = {
     loading: true,
+    filter: 'real_name',
     current_page: 0,
     total_page: 0,
     results: [],
@@ -81,12 +88,12 @@ class Main extends Component {
     this.getResults();
   }
 
-  getResults = (page = 0) => {
+  getResults = (page = 0, filter = '', filterText = '') => {
     console.log(page);
     this.setState({
       loading: true,
     });
-    axios.get(`/exams/manage/results?page=${page || 0}`).then((data) => {
+    axios.get(`/exams/manage/results?page=${page || 0}&filter=${filter}&filterText=${filterText}`).then((data) => {
       const {
         total_page, current_page, count, results,
       } = data;
@@ -99,9 +106,15 @@ class Main extends Component {
       console.log({ total_page, current_page, count });
     });
   }
+  search = (e) => {
+    const { filter } = this.state;
+    const filterText = e.target.value;
+    console.log(this.state.filter, e.target.value);
+    this.getResults(0, filter, filterText);
+  }
   render() {
     const {
-      loading, results, current_page, total_page,
+      loading, results, filter, current_page, total_page,
     } = this.state;
     return (
       <div>
@@ -113,11 +126,14 @@ class Main extends Component {
         {/* <div>manage</div> */}
         <Spin spinning={loading}>
           <InputGroup compact>
-            <Select defaultValue="user_name">
-              <Option value="user_name">学生名字</Option>
-              <Option value="exam_name">考试名称</Option>
+            <Select
+              defaultValue={filter}
+              onChange={(value) => { this.setState({ filter: value }); }}
+            >
+              <Option value="real_name">学生名字</Option>
+              <Option value="exam_title">考试名称</Option>
             </Select>
-            <Input style={{ width: '50%' }} placeholder="输入关键字" />
+            <Input style={{ width: '50%' }} placeholder="输入关键字" onPressEnter={this.search} />
           </InputGroup>
           <Table
             pagination={false}

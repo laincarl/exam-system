@@ -8,11 +8,11 @@ const accessTokens = Cookies.get('token');
 axios.defaults.timeout = 10000;
 axios.defaults.baseURL = Config.server;
 // history.go(0);
-axios.defaults.validateStatus = (status) => {
-  console.log(status);
-  console.log(status >= 200 && status < 300);
-  return status >= 200 && status < 300;
-};
+// axios.defaults.validateStatus = (status) => {
+//   console.log(status);
+//   console.log(status >= 200 && status < 300);
+//   return status >= 200 && status < 300;
+// };
 // http request 拦截器);
 axios.interceptors.request.use(
   (config) => {
@@ -34,7 +34,7 @@ axios.interceptors.response.use(
       return Promise.resolve(response);
     }
     // continue sending response to the then() method
-    console.log(response);
+    // console.log(response);
     const { data, status, type } = response.data;
     const Message = response.data.message;
     if (status !== undefined && status === 0) {
