@@ -4,16 +4,16 @@ body {
     /* height: auto; */
 }
 
-#root {
+:global(#root) {
     height: 100%;
 }
 
-.flex-space {
+:global(.flex-space) {
     flex: 1;
     visibility: hidden;
 }
 
-.text-dot {
+:global(.text-dot) {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

@@ -101,6 +101,10 @@ module.exports = {
           },
           {
             loader: 'css-loader',
+            options: {
+              modules: true,
+              localIndexName: '[name]__[local]___[hash:base64:5]',
+            },
           },
           {
             loader: 'postcss-loader',
@@ -113,8 +117,55 @@ module.exports = {
         ],
       },
       {
+        test: /\.css$/,
+        include: /node_modules/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            // options: {
+            //   modules: true,
+            //   localIndexName: '[name]__[local]___[hash:base64:5]',
+            // },
+          },
+        ],
+      },
+      {
         test: /\.less$/,
-        // exclude: /node_modules/,
+        exclude: [/node_modules/, /theme\.less/],
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIndexName: '[name]__[local]___[hash:base64:5]',
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              config: {
+                path: path.resolve(ROOT_DIR, './config'), // 写到目录即可，文件名强制要求是postcss.config.js
+              },
+            },
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              // sourceMap: process.env.NODE_ENV !== 'production',
+              javascriptEnabled: true,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.less$/,
+        include: [/node_modules/, /theme\.less/],
         use: [
           {
             loader: 'style-loader',
@@ -125,11 +176,13 @@ module.exports = {
           {
             loader: 'less-loader',
             options: {
-              sourceMap: process.env.NODE_ENV !== 'production',
+              // sourceMap: process.env.NODE_ENV !== 'production',
+              javascriptEnabled: true,
             },
-          },          
+          },
         ],
       },
+
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,

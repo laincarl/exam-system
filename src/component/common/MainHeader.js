@@ -10,8 +10,7 @@ import { withRouter } from 'react-router';
 import { inject, observer } from 'mobx-react';
 // import axios from 'Axios';
 import Cookies from 'js-cookie';
-import './MainHeader.less';
-import './MainHeader.css';
+import style from './MainHeader.less';
 
 const styles = {
   container: {
@@ -83,7 +82,7 @@ class MainHeader extends Component {
       <div style={styles.container}>
         <div
           role="none"
-          className="header_btn"
+          className={style.header_btn}
           style={{
             // userSelect: 'none',
             cursor: 'pointer',
@@ -103,7 +102,7 @@ class MainHeader extends Component {
           AppState.userAuth && ['admin', 'teacher'].includes(AppState.userInfo.role) &&
           <div
             role="none"
-            className="header_btn"
+            className={style.header_btn}
             style={{
               userSelect: 'none',
               cursor: 'pointer',
@@ -129,8 +128,7 @@ class MainHeader extends Component {
           </Popover>
           :
           <div
-            role="none"
-            className="to-mainPage"
+            role="none" 
             style={{
               userSelect: 'none',
               cursor: 'pointer',

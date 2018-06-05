@@ -8,7 +8,7 @@
 import React, { Component } from 'react';
 import { Button, Icon } from 'antd';
 import { withRouter } from 'react-router';
-import 'css/header.less';
+import style from 'css/header.less';
 
 class Header extends Component {
   render() {
@@ -25,7 +25,7 @@ class Header extends Component {
         <div style={{ fontSize: 18, marginLeft: 10 }}>{title}</div>
         <div style={{ marginLeft: 100 }} />
         {buttons && buttons.map(button => (<Button
-          className="header-btn"
+          className={style.headerBtn}
           disabled={disabled}
           style={{
             marginLeft: 15,
@@ -50,7 +50,7 @@ class Header extends Component {
           refresh &&
           <Button
             disabled={disabled}
-            className="header-btn"
+            className={style.headerBtn}
             style={{
               marginLeft: 15,
               alignItems: 'center',
