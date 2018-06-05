@@ -2,7 +2,7 @@
  * @Author: LainCarl 
  * @Date: 2018-04-03 14:40:15 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-04-05 17:30:55
+ * @Last Modified time: 2018-06-04 20:35:02
  * @Feature: 展示考试列表 
  */
 
@@ -88,8 +88,8 @@ class Exams extends Component {
       visible: true,
     });
   }
-  editExam = (id) => {
-    AppState.history.push(`/manage/exam/${id}`);
+  toDetail = (id) => {
+    AppState.history.push(`/manage/exam/detail/${id}`);
   }
   closeExam=(id) => {
     axios.delete(`/exams/exam?id=${id}`).then((data) => {
@@ -165,8 +165,8 @@ class Exams extends Component {
           onClick={(e) => { e.stopPropagation(); }}
         >
           <Action data={[{
-            action: () => { this.editExam(record.id); },
-            text: '编辑',
+            action: () => { this.toDetail(record.id); },
+            text: '详情',
           }, {
             action: () => { this.closeExam(record.id); },
             text: '删除',

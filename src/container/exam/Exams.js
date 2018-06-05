@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import axios from 'Axios';
 import { Table, Button } from 'antd';
 import AppState from 'AppState';
+import Header from 'Header';
 import moment from 'moment';
 
 function compare(param1, param2) {
@@ -108,12 +109,12 @@ const columns = [{
       onClick={(e) => { e.stopPropagation(); console.log(record); }}
     >
       <Button
-        disabled={record.status !== '进行中'}
+        disabled={record.status !== '进行中' || record.join}
         type="primary"
         style={{
           width: 100,
           height: 30,
-          color: record.status === '进行中' && 'white',
+          // color: record.status === '进行中' && 'white',
         }}
         onClick={() => { toExam(record.id); }}
       >进入考试
@@ -167,7 +168,7 @@ class Exams extends Component {
     const { exams, loading } = this.state;
     return (
       <div>
-        考试列表
+        <Header hasBack title="考试列表" />
         <div style={{ padding: 20 }}>
           <Table
             columns={columns}
