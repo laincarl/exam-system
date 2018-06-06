@@ -11,7 +11,7 @@ import { observer } from 'mobx-react';
 import AppState from 'AppState';
 import axios from 'Axios';
 import moment from 'moment';
-import 'css/account.css';
+import style from 'css/account.less';
 
 const FormItem = Form.Item;
 const { TabPane } = Tabs;
@@ -111,11 +111,11 @@ class Home extends Component {
       });
     }
   }
-  handleSubmit=(e) => {
+  handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {        
-        console.log(values);         
+      if (!err) {
+        console.log(values);
         axios.post('/user/reset_password', values).then((data) => {
           console.log(data);
           message.success('更改成功');
@@ -162,12 +162,12 @@ class Home extends Component {
       }}
       >
         <h2>个人中心</h2>
-        <div className="title">{name}</div>
-        <div style={{ width: 100, height: 100, position: 'relative' }} className="head-upload-container">
+        <div className={style.title}>{name}</div>
+        <div style={{ width: 100, height: 100, position: 'relative' }} className={style.container}>
           <input
             type="file"
             title="更换头像"
-            className="input-upload"
+            className={style.input_upload}
             onChange={this.handleUpload}
             style={{
               position: 'absolute', width: '100%', height: '100%', borderRadius: '50%',
@@ -178,7 +178,7 @@ class Home extends Component {
             src={url}
             alt=""
           />
-          <div className="replace_icon">
+          <div className={style.replace_icon}>
             更换头像
           </div>
         </div>
@@ -190,40 +190,40 @@ class Home extends Component {
           />
           </TabPane>
           <TabPane tab={<span><Icon type="form" />更改密码</span>} key="2">
-            <div style={{ marginTop: 20 }}>            
+            <div style={{ marginTop: 20 }}>
               <Form onSubmit={this.handleSubmit}>
                 <FormItem
                   {...formItemLayout}
                   label="旧密码"
                 >
                   {getFieldDecorator('password_old', {
-                  rules: [{
-                    required: true,
-                    message: '请输入旧密码',
-                  }],
-                })(<Input />)}
+                    rules: [{
+                      required: true,
+                      message: '请输入旧密码',
+                    }],
+                  })(<Input />)}
                 </FormItem>
                 <FormItem
                   {...formItemLayout}
                   label="新密码"
                 >
                   {getFieldDecorator('password', {
-                  rules: [{
-                    required: true,
-                    message: '请输入密码',
-                  }],
-                })(<Input />)}
+                    rules: [{
+                      required: true,
+                      message: '请输入密码',
+                    }],
+                  })(<Input />)}
                 </FormItem>
                 <FormItem
                   {...formItemLayout}
                   label="再次输入密码"
                 >
                   {getFieldDecorator('password_repeat', {
-                  rules: [{
-                    required: true,
-                    message: '请输入密码',
-                  }],
-                })(<Input />)}
+                    rules: [{
+                      required: true,
+                      message: '请输入密码',
+                    }],
+                  })(<Input />)}
                 </FormItem>
                 <FormItem
                   {...tailFormItemLayout}

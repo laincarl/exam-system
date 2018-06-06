@@ -103,7 +103,7 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: true,
-              localIndexName: '[name]__[local]___[hash:base64:5]',
+              localIdentName: '[name]__[local]___[hash:base64:5]',
             },
           },
           {
@@ -143,7 +143,7 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: true,
-              localIndexName: '[name]__[local]___[hash:base64:5]',
+              localIdentName: '[name]__[local]___[hash:base64:5]',
             },
           },
           {

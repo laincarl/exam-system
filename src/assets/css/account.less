@@ -1,0 +1,33 @@
+.container:hover {
+  .replace_icon {
+    opacity: 1;
+  }
+}
+
+.input_upload {
+  cursor: pointer;
+  opacity: 0;
+  z-index: 100;
+  filter: alpha(opacity=0);
+}
+
+.replace_icon {
+  opacity: 0;
+  line-height: 100px;
+  color: white;
+  text-align: center;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  user-select: none;
+  /* z-index: 10; */
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  transition: all 0.2s ease-in-out;
+}
+
+.title {
+  color: white
+}

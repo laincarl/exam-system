@@ -1,0 +1,36 @@
+body {
+  /* background: #faf7f7 !important; */
+  padding-top: 50px;
+  /* background-color: rgb(240, 242, 245); */
+  /* height: auto; */
+}
+
+:global {
+  #root {
+    height: 100%;
+  }
+  .flex-space {
+    flex: 1;
+    visibility: hidden;
+  }
+  .text-dot {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  /* 覆盖antd默认样式 */
+  .ant-menu-item-selected {
+    // color:white !important;
+    // background: @primary-color !important;
+  }
+  .ant-menu-item:after,
+  .ant-menu-item-selected:after {
+    border: none !important;
+  }
+  .ant-modal-body {
+    padding: 10px 24px !important;
+  }
+  .ant-upload-select-picture-card {
+    border-radius: 50% !important;
+  }
+}

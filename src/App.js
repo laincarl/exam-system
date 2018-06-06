@@ -18,8 +18,7 @@ import { Home, NotFoundPage, Login, ManageRoute, Account, ExamRoute } from './co
 import RouterContainer from './RouterContainer';
 
 import AppState from './store/AppState';
-import './App.css';
-import './main.less';
+import './App.less';
 
 const stores = {
   // Key can be whatever you want

@@ -18,7 +18,12 @@ class Header extends Component {
     return (
       <div
         style={{
-          height: 50, borderBottom: '1px solid #ddd', display: 'flex', alignItems: 'center', width: '100%',
+          background: 'white',
+          height: 50, 
+          borderBottom: '1px solid #ddd', 
+          display: 'flex', 
+          alignItems: 'center', 
+          width: '100%',
         }}
       >
         {hasBack && <Icon type="arrow-left" style={{ fontSize: 18, marginLeft: 10, cursor: 'pointer' }} onClick={() => { history.goBack(); }} />}
