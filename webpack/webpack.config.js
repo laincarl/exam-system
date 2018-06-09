@@ -265,6 +265,7 @@ module.exports = {
       // excludeChunks:['contact'],
       chunks: ['manifest', 'vendor', 'app'],
       // chunks:['vendor','app'],
+      favicon: path.resolve(ROOT_DIR, './favicon.ico'),
       template: path.resolve(ROOT_DIR, './src/index.ejs'), // Load a custom template (ejs by default see the FAQ for details)
     }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),

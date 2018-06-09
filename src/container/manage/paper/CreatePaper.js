@@ -98,10 +98,12 @@ class CreatePaper extends Component {
       labelCol: { span: 3 },
       wrapperCol: { span: 8 },
     };
+    let total_score = 0;
     const formItems = items.map((item, index) => {
       const type = getFieldValue(`types[${index}]`);
       const score = getFieldValue(`scores[${index}]`);
       const num = getFieldValue(`nums[${index}]`);
+      total_score += score * num || 0;
       const options =
         banks
           .filter(bank => bank.type === type)
@@ -114,24 +116,24 @@ class CreatePaper extends Component {
               label={`第${NumberToChinese(index + 1)}大题：`}
             >
               {score * num || 0}分
-            </FormItem>            
+            </FormItem>
             <FormItem
               {...formItemLayout}
               label="题型"
             >
-              <div style={{ position: 'relative' }}>           
+              <div style={{ position: 'relative' }}>
                 {getFieldDecorator(`types[${index}]`, {
-                rules: [{
-                  required: true,
-                  message: "Please input passenger's name or delete this field.",
-                }],
-              })(<Select     
-                onSelect={() => { resetFields(`banks[${index}]`); }}
-              >
-                <Option value="select_single">单选题</Option>
-                <Option value="select_multi">多选题</Option>
-                <Option value="blank">填空题</Option>
-              </Select>)}
+                  rules: [{
+                    required: true,
+                    message: "Please input passenger's name or delete this field.",
+                  }],
+                })(<Select
+                  onSelect={() => { resetFields(`banks[${index}]`); }}
+                >
+                  <Option value="select_single">单选题</Option>
+                  <Option value="select_multi">多选题</Option>
+                  <Option value="blank">填空题</Option>
+                </Select>)}
                 <Icon
                   style={{ position: 'absolute', top: 9, right: -28 }}
                   className="dynamic-delete-button"
@@ -176,7 +178,7 @@ class CreatePaper extends Component {
                 }],
               })(<InputNumber min={1} max={20} />)}
             </FormItem>
-          </div>          
+          </div>
         </div>
       );
     });
@@ -208,9 +210,15 @@ class CreatePaper extends Component {
                   }],
                 })(<Input />)}
               </FormItem>
+              <FormItem
+                {...formItemLayout}
+                label="总分："
+              >
+                {total_score}分
+              </FormItem>
               {formItems}
-              <FormItem>              
-                <Button type="primary" htmlType="submit" style={{ marginLeft: 100, width: 100 }}>保存</Button>         
+              <FormItem>
+                <Button type="primary" htmlType="submit" style={{ marginLeft: 100, width: 100 }}>保存</Button>
               </FormItem>
             </Form>
           </Spin>

@@ -11,7 +11,10 @@ import Header from 'Header';
 import Spin from 'Spin';
 import axios from 'Axios';
 import { Card, Tooltip, Icon, Tabs, Table, Button } from 'antd';
-import { Chart, Geom, Axis } from 'bizcharts';
+// import { Chart, Geom, Axis } from 'bizcharts';
+import Chart from 'bizcharts/lib/components/Chart';
+import Geom from 'bizcharts/lib/components/Geom';
+import Axis from 'bizcharts/lib/components/Axis';
 import AppState from 'AppState';
 import moment from 'moment';
 import ChartTooltip from 'bizcharts/lib/components/Tooltip';
@@ -105,7 +108,9 @@ class ExamDetail extends Component {
   }
   render() {
     const { loading, exam, current } = this.state;
-    const { title, results, limit_time } = exam;
+    const {
+      title, results, limit_time, total_score,
+    } = exam;
     const num = results.length;
     console.log(current);
     const data = results.map((result) => {
@@ -158,7 +163,7 @@ class ExamDetail extends Component {
               title="考试总分"
             >
               <div className={style.content}>
-                100 分
+                {total_score} 分
               </div>
             </Card>
             <Card
@@ -190,7 +195,7 @@ class ExamDetail extends Component {
               </TabPane>
               <TabPane tab="列表" key="2">
                 <Table
-                  // pagination={false}
+                  pagination={{ pageSize: 5 }}
                   columns={columns}
                   dataSource={results.map(result => ({ ...result, ...{ key: result.id } }))}
                 />

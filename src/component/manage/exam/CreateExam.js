@@ -141,7 +141,7 @@ class CreateExam extends Component {
               label="考试时间（分钟）"
             >
               {getFieldDecorator('limit_time', {
-                initialValue: 10,
+                initialValue: 50,
                 rules: [{
                   required: true, message: '请填写考试时间',
                 }],

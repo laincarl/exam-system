@@ -15,7 +15,7 @@ import ExamRoute from './exam/ExamRoute';
 import PaperRoute from './paper/PaperRoute';
 import UserRoute from './user/UserRoute';
 import BankRoute from './bank/BankRoute';
-import Analyze from './analyze/Analyze';
+// import Analyze from './analyze/Analyze';
 
 let menus = [{
   path: 'main',
@@ -43,12 +43,14 @@ let menus = [{
   icon: 'profile',
   text: '题库管理',
   component: BankRoute,
-}, {
-  path: 'analyze',
-  icon: 'bar-chart',
-  text: '统计信息',
-  component: Analyze,
-}];
+}, 
+// {
+//   path: 'analyze',
+//   icon: 'bar-chart',
+//   text: '统计信息',
+//   component: Analyze,
+// }
+];
 class Manage extends Component {
   render() {
     const { match } = this.props;
