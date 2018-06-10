@@ -29,20 +29,20 @@ let menus = [{
   permission: ['admin'],
   component: Permission(UserRoute, ['admin']),
 }, {
-  path: 'exam',
-  icon: 'switcher',
-  text: '考试管理',
-  component: ExamRoute,
+  path: 'bank',
+  icon: 'profile',
+  text: '题库管理',
+  component: BankRoute,
 }, {
   path: 'paper',
   icon: 'copy',
   text: '试卷管理',
   component: PaperRoute,
 }, {
-  path: 'bank',
-  icon: 'profile',
-  text: '题库管理',
-  component: BankRoute,
+  path: 'exam',
+  icon: 'switcher',
+  text: '考试管理',
+  component: ExamRoute,
 }, 
 // {
 //   path: 'analyze',

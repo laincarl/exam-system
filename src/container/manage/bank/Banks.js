@@ -60,13 +60,9 @@ class Banks extends Component {
           console.log(data);
           message.success('创建成功');
           this.setState({ visible: false, loading: false });
-        }).catch((error) => {
-          if (error.response) {
-            console.log(error.response.data.message);
-            message.error(error.response.data.message);
-          } else {
-            console.log(error);
-          }
+          this.getBanks();
+        }).catch(() => {
+
         });
       }
     });
