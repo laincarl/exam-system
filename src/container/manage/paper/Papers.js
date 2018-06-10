@@ -39,11 +39,13 @@ class Papers extends Component {
       title: '名称',
       dataIndex: 'title',
       key: 'title',
-    }, {
-      title: '状态',
-      dataIndex: 'status',
-      key: 'status',
-    }, {
+    }, 
+    // {
+    //   title: '状态',
+    //   dataIndex: 'status',
+    //   key: 'status',
+    // }, 
+    {
       title: '创建时间',
       dataIndex: 'create_time',
       key: 'create_time',

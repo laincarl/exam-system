@@ -63,7 +63,7 @@ class PaperDetail extends Component {
           <Spin spinning={loading}>
             <div style={{ fontSize: 25, textAlign: 'center', marginTop: 10 }}>{title}</div>
             <div style={{ textAlign: 'center', marginTop: 20 }}>
-              {`本试卷共${parts.length}大题，总分${score_total}分，考试时间${50}分钟`}
+              {`本试卷共${parts.length}大题，总分${score_total}分`}
             </div>
                     
             <div style={{

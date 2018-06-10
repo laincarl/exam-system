@@ -10,12 +10,15 @@ import { observer } from 'mobx-react';
 import axios from 'Axios';
 import Spin from 'Spin';
 // import { message } from 'antd';
-// import AppState from 'AppState';
+import { Modal } from 'antd';
+import AppState from 'AppState';
 import ShowAnswers from 'component/exam/ShowAnswers';
 import OnePart from 'component/common/OnePart';
 import ExamStore from 'store/exam/ExamStore';
 import ExamEnd from './ExamEnd';
 
+
+const { confirm } = Modal;
 @observer
 class ExamPage extends Component {
   constructor() {
@@ -27,6 +30,19 @@ class ExamPage extends Component {
     };
   }
   componentDidMount() {
+    const that = this;
+    confirm({
+      title: '确认参加考试?',
+      content: '每位同学只能参加一次考试',
+      onOk() {
+        that.getExam();
+      },
+      onCancel() {
+        AppState.history.goBack();
+      },
+    });
+  }
+  getExam=() => {
     const { id } = this.props.match.params;
     axios.get(`/exams/exam?id=${id}`).then((exam) => {
       if (exam.message) {
@@ -43,7 +59,6 @@ class ExamPage extends Component {
       }
     });
   }
-
   render() {
     const { loading, end, message } = this.state;
     const { parts, title } = ExamStore.currentExam;

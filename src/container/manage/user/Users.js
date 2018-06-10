@@ -67,13 +67,8 @@ class UserManage extends Component {
   deleteUser = (id) => {
     console.log(id);
     axios.delete(`/user/deluser?id=${id}`).then((data) => {
-      // console.log(data);
-      if (data.success) {
-        message.success(data.message);
-        this.getAllUser();
-      } else {
-        message.error(data.message);
-      }
+      message.success(data);
+      this.getAllUser();
     });
   }
   columns = [{
@@ -140,6 +135,7 @@ class UserManage extends Component {
 
         <div style={{ padding: '20px' }}>
           <Table
+            pagination={{ pageSize: 8 }}
             rowKey="id"
             columns={this.columns}
             dataSource={users.map(one => ({ ...one, ...{ key: one.id } }))}

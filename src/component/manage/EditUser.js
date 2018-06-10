@@ -35,14 +35,10 @@ class EditUser extends Component {
         this.setState({          
           loading: true,
         });
-        axios.put('/user/edituser', { ...values, ...{ id: this.props.currentEditId } }).then((data) => {
-          if (data.success) {
-            hideModal();
-            message.success('修改成功');
-            reload();
-          } else {
-            message.error(data.message);
-          }
+        axios.put('/user/edituser', { ...values, ...{ id: this.props.currentEditId } }).then(() => {
+          hideModal();
+          message.success('修改成功');
+          reload();      
           // console.log(data);
         }).catch((error) => {
           if (error.response) {
