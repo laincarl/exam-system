@@ -1,0 +1,305 @@
+﻿1、下面哪个是属性而不是标记（  ）。
+A、IMG    B、FORM     *C、 HREF   D、TD
+2、 App_Data目录用来放置（  ）。
+*A、共享的数据库文件    B、共享文件    C、 被保护的文件    D、代码文件
+3、 下面关于绝对路径的说法，正确的是（  ）。
+A、绝对路径是被链接文档的完整URL,不包括使用的传输协议
+B、使用绝对路径需要考虑源文件的位置
+C、在绝对路径中，如果目标文件被移动，则链接同样可用 
+*D、创建外部链接时，必须使用绝对路径
+4、系统提供数据库通用接口的目的是为了（  ）。
+A、提高程序运行的效率
+*B、应用程序设计不必考虑数据库的类型
+C、保证程序安全
+D、易于维护
+5、在配置GridView控件的SqlDataSource数据源控件过程中，单击【高级】按钮的目的是（  ）。
+A、打开其他窗口    B、输入新参数    *C、生成SQL编辑语句    D、优化代码
+6、下面几个图形控件中，不能执行鼠标单击事件的控件是（  ）。
+A、ImageButton    *B、Image    C、ImageMap    D、ImageURL
+7、web.config文件不能用于（  ）。
+*A、Application事件定义          B、数据库连接字符串定义    
+C、对文件夹访问授权             D、基于角色的安全性控制
+8、CSS样式不包括（  ）。
+A、基于元素的样式   B、基于类的样式   C、基于ID的样式   *D、基于文件的样式
+9、下面对protected修饰符说法正确的是（  ）。
+A、只有在派生类中访问            B、只能在所属的类中访问
+C、能在当前应用程序中访问        *D、能在所属的类或派生类中访问
+10、使用ValidatorSummary控件需要以对话框形式显示错误信息，则应（  ）。
+A、设置属性ShowSummary值为true
+*B、设置属性ShowMessageBox值为true
+C、设置属性ShowSummary值为false
+D、设置属性ShowMessageBox值为false
+11、Session状态和Cookie状态的最大区别是（  ）。
+*A、存储的位置不同   B、类型不同   C、生命周期不同   D、容量不同
+12、下面有关SqlDataSource控件的描述中错误的是（  ）。
+A、可连接Access数据库
+B、可执行SQL Server中的存储过程
+C、可插入、修改、删除、查询数据
+*D、在数据操作时，不能使用参数
+13、Login控件的属性DestinationPageUrl的作用是（  ）。
+A、登陆成功时的提示                B、登录失败时的提示
+C、登录失败时转向的网页            *D、登录成功时转向的网页
+14、母版页中使用导航控件，要求（  ）。
+A、母版页必须在根文件夹下
+B、母版页名字必须为Web.master
+C、与普通页一样使用，浏览母版页时就可以查看效果
+*D、必须有内容页才能查看效果
+15、如果类名为Myclass，那么（  ）可以作为它的构造函数。
+A、~Myclass（）                  *B、Myclass（double a）  
+C、~Myclass（double a）           D、void Myclass（）
+16、下面对于抽象类描述不正确的是（  ）。
+A、抽象类只能作为基类使用           *B、抽象类不能定义对象
+C、抽象类可以定义实例对象           D、可以实现多态
+17、下面控件中，（  ） 可以将其他控件包含在其中，所以它常用来包含一组控件。
+A、AdRatator控件   B、Button控件   *C、Panel控件   D、Wizard控件
+18、下面SqlComand对象方法中，可以连接执行Transact-SQL语句并返回受影响行数的是（  ）。
+A、ExecuteReader    B、ExecuteScalar   C、Connection    *D、ExecuteNonQuery
+19、下面哪些不是ASP.NET页面间传递参数的方式？（  ）。
+A、使用QueryString                B、使用Session变量
+C、使用Server.Transfer               *D、使用ViewState
+20、如果需要确保用户输入大于30且小于60的值，应该使用（  ）验证控件较合理。
+A、RequiredFieldValidator             B、CompareValidator
+*C、RangeValidator                    D、RegularExpressionValidator
+21、如果要在网页上添加一个计算器来统计人数的话，我们可以选用（  ）对象对计数变量Count的加法操作来实现。
+A、Session   *B、Application   C、Server   D、Page
+22、下面哪一个对象用于与数据源建立连接：（  ）。
+A、Command   *B、Connection   C、DataReader   D、DataAdapter
+23、Global.asax文件中Session_Start事件何时激发（  ）。
+A、在每个请求开始时激发
+*B、尝试对使用进行身份验证时激发
+C、启动会话时激发
+D、在应用程序启动时激发
+24、在ASP.NET应用程序中访问SqlServer数据库时，需要导入的命名空间为（  ）。
+A、System.Data.Oracle           *B、System.Data.SqlClient
+C、System.Data. ODBC          D、System.Data.OleDB
+25、ASP.NET框架中，服务器控件是为配合Web表单工作而专门设计的。服务器控件有两种类型，它们是（  ）。
+*A、HTML控件和Web控件             B、HTML控件和XML控件
+C、XML控件和Web控件              D、HTML控件和IIS控件
+26、下列关于构造函数的描述正确的是（  ）。
+A、构造函数可以声明返回类型。
+B、构造函数不可以用private修饰
+*C、构造函数必须与类名相同
+D、构造函数不能带参数
+27、Session对象的默认有效期为多少分钟：（  ）。
+A、10        B、15      *C、20         D、应用程序从启动到结束
+28、当需要用控件来输入性别（男，女）或婚姻状况（已婚，未婚）时，为了简化输入，应该选用的控件是（  ）。
+*A、RadioButton   B、CheckBoxList   C、CheckBox   D、RadioButtonList
+29、Global.asax文件中Session_Start事件何时激发（  ）。
+A、在每个请求开始时激发
+*B、尝试对使用进行身份验证时激发
+C、启动会话时激发
+D、在应用程序启动时激发
+30、下列选项中，只有（  ）是错误的。
+A、asp.net提供了多种语言支持 。
+B、asp.net 提供了多种平台支持。
+*C、asp.net提供跨平台支持，也可以在Unix下执行
+D、asp.net采取编译执行的方式，极大的提高了运行的性能。
+31、下列选项中，哪一个是.net应用的基础？（  ）。
+*A、公共语言运行类    B、虚拟机    C、基类库    D、类库
+32、在ADO.NET对象模型中，.NET数据提供程序包括以下的对象，除了（  ）。
+A、DataReader    B、DataAdapter    *C、DataTable   D、Command
+33、网页重定向功能可以有内置对象（  ）的方法Redirect实现。 
+A、Server       *B、Response          C、Request          D、Application
+34、下列对象可以向dataset中填充数据的是（  ）。
+A、SqlConnection      B、SqlCommand     C、SqlDataReader      *D、SqlDataAdapter
+35、表示只有所属的成员才能访问的修饰符是（  ） 
+A、public       B、protected      *C、private        D、Internal
+36、需要写入与HTML标记相同的文本时，应利用以下何种方法进行编码：（  ）。
+A、Response.Server.(HtmlEncode (“<B>”)) 
+B、Response.Write(“Server.HtmlEncode (“<B>”)”)
+C、Response.Write(Server.HtmlEncode (“<B>”))
+*D、Server.Server(Write.HtmlEncode (“<B>”))
+37、当一种服务器端控件有多种外貌的定义时，用（  ）属性来区别它们的定义。
+A、ID    B、Color    C、BackColor    *D、SkinID
+38、在图片校验码的图片中增加一些线条或点阵是为了（  ）。
+A、使图片更美观   B、是图片更加规整   *C、干扰机器人的识别   D、使图像更丰富
+39、用户控件是后缀为（  ）的文件。
+A、.master    B、.asax    C、.aspx     *D、.ascx
+40、在三层架构中，客户端是系统的前台，负责用户界面的显示；后台负责数据的存储和管理；而中间层负责（  ）。
+*A、非UI的逻辑处理    B、安全监督   C、代码优化   D、协助后台管理
+1、下面哪一个不是JSP本身已加载的基本类？（）
+ A、java、lang、*    *B、java、io、*  C、javax、servlet、*  D、javax、servlet、jsp、*
+2、以下关于JavaBeans的说法中，错误的是（）。
+ A、JavaBeans是基于JAVA语言的。
+ *B、JavaBeans是JSP的内置对象之一。
+ C、JavaBeans是一种Java类。
+ D、JavaBeans是一个可重复使用的软件组件。
+3、下面的说法错误的是：（）
+ A、Jsp可以处理动态内容和静态内容
+ B、在Jsp最终会编译成字节码后执行
+ C、在jsp中可以使用脚本控制Html的标签生成
+ *D、Jsp中不能使用//注释Java脚本中的代码
+4、下述选项中不属于JDBC基本功能的是：（）
+ A、 与数据库建立连接  	
+ B、 提交SQL语句  
+ C、 处理查询结果  
+ *D、 数据库维护管理
+5、JSP 页面经过编译之后，将创建一个（）
+ A、 applet    *B、 severlet    C、 application    D、 exe文件
+6、在jsp中，要定义一个方法，需要用到以下（）元素。
+ A、<%=  %>   B、 <%   %>   *C、 <%!   %>    D、 <%@  %>
+7、JSP在WEB服务器上运行结果：（）
+ *A、可以在WEB浏览器看到，
+ B、只能在ＷＥＢ浏览器看到。
+ C、可能在WEB浏览器看到，
+ D、不可能在WEB浏览器看到。
+8、Page指令用于定义JSP文件中的全局属性，下列关于该指令用法的描述不正确的是：（） 
+ A、 <%@ page %>作用于整个JSP页面。 
+ B、 可以在一个页面中使用多个<%@ page %>指令。 
+ C、 为增强程序的可读性，建议将<%@ page %>指令放在JSP文件的开头，但不是必须的。 
+ *D、 <%@ page %>指令中的属性只能出现一次。
+9、()的范围是从Web应用服务器一开始执行服务一直到Web应用服务器结束服务为止。
+ A、页内有效    B、请求有效    C、会话有效    *D、应用有效
+10、选择、在JSP中使用<jsp:getProperty>标记时，不会出现的属性是：（）
+ A、name        B、property     *C、value       D、以上皆不会出现
+11、对于预定义<%!预定义%>的说法错误的是：（）
+ A、一次可声明多个变量和方法，只要以“;”结尾就行   
+ B、一个声明仅在一个页面中有效
+ *C、声明的变量将作为局部变量         
+ D、在预定义中声明的变量将在JSP页面初始化时初始化
+12、从 “员工” 表的“姓名”字段中找出名字包含“玛丽”的人，下面哪条select语句正确：（）
+ A、 Select * from员工 where 姓名 =’_玛丽_’  
+ B、Select * from员工 where 姓名 =’%玛丽_’
+ C、 Select * from员工 where 姓名 like ‘_玛丽%’  
+ *D、 Select * from员工 where 姓名 like ‘%玛丽%’
+13、在JSP中调用JavaBean时不会用到的标记是：（）
+ *A、<javabean>	 B、<jsp:useBean>    C、<jsp:setProperty>    D、<jsp:getProperty>
+14、关于JavaBean正确的说法是：（）
+ *A、Java文件与Bean所定义的类名可以不同，但一定要注意区分字母的大小写
+ B、在JSP文件中引用Bean，其实就是用<jsp:useBean>语句
+ C、被引用的Bean文件的文件名后缀为、java  
+ D、Bean文件放在任何目录下都可以被引用
+15、Servlet程序的入口点是：（）
+ *A、init（）     B、main（）       C、service（）      D、doGet（）
+16、不能在不同用户之间共享数据的方法是（）
+ *A、通过cookie  B、利用文件系统   C、利用数据库     D、通过ServletContext对象
+17、page指令通过（）属性指定当前页面的内容类型和字符集？
+ *A、contentType  B、 buffer   C、 language   D、 isErrorPage
+18、()指令指定自定义标签的描述器所在位置？
+ A、 page       *B、 taglib      C、 include      D、 config
+19、在传统的HTML页面中加入（）就构成了一个JSP页面文件。
+A、JAVA程序片 			B、JSP标签
+C、用“<%”、“%>”标记符号括起来的程序	  *D、JAVA程序片和JSP标签
+20、假设在helloapp应用中有一个hello、jsp，它的文件路径如下:
+%JAVA_HOME%/webapps/helloapp/hello/hello、jsp 那么在浏览器端访问hello、jsp的URL是什么? （ ）
+A、http://localhost:8080/hello、jsp
+B、http://localhost:8080/helloapp/hello、jsp
+*C、http://localhost:8080/helloapp/hello/hello、jsp
+D、http://localhost:8080/webapps/helloapp/hello/dello、jsp
+
+
+
+
+21、配置JSP运行环境，若WEB应用服务器选用TOMCAT，以下说法正确的是：（ ）
+A、先安装TOMCAT，再安装JDK
+*B、先安装JDK，再安装TOMCAT
+C、不需安装JDK，安装TOMCAT就可以了
+D、JDK和TOMCAT只要都安装就可以了，安装顺序没关系
+22、对于“<%!”、“%>”之间声明的变量，以下说法正确的是：（ ）
+A、不是JSP页面的成员变量
+B、多个用户同时访问该页面时，任何一个用户对这些变量的操作，都会影响到其他用户
+*C、多个用户同时访问该页面时，每个用户对这些变量的操作都是互相独立的，不会互相影响
+D、是JSP页面的局部变量
+
+
+23、假设在helloapp应用中有一个Javabean文件HelloServlet，它位于org、javathinker包下，那么这个bean的class文件应该放在什么目录下? ( )
+A、helloapp/HelloServlet、class
+B、 helloapp/WEB-INF/HelloServlet、class
+C、helloapp/WEB-INF/classes/HelloServlet、class
+*D、helloapp/WEB-INF/classes/org/javathinker/HelloServlet、class
+24、在客户端浏览器的源代码中可以看到（ ）
+A、JSP注释					B、HTML注释
+*C、JSP注释和HTML注释		D、JAVA注释
+25、page指令的作用是：（ ）
+*A、用来定义整个JSP页面的一些属性和这些属性的值
+B、用来在JSP页面内某处嵌入一个文件
+C、使该JSP页面动态包含一个文件
+D、指示JSP页面加载Java plugin
+26、page指令的import属性的作用是（ ）
+A、定义JSP页面响应的MIME类型
+B、定义JSP页面使用的脚本语言
+*C、为JSP页面引入JAVA包中的类
+D、定义JSP页面字符的编码
+27、page指令的（ ）属性可以设置JSP页面是否可多线程访问
+A、session		B、buffer	 *C、isThreadSafe		D、info
+28、（ ）可在JSP页面出现该指令的位置处，静态插入一个文件。
+A、page指令标签			B、page指令的import属性
+*C、include指令标签		D、include动作标签
+29、以下对象中的（ ）不是JSP的内置对象。
+A、request		B、session	  C、application		*D、bean
+30、在JSP中，内置对象（ ）封装了用户提交的信息，使用该对象可以获取用户提交的信息。
+A、session      *B、request	  C、response 		D、out
+31、request对象可以使用（ ）方法获取表单中某输入框提交的信息。
+*A、getParameter(String s)			B、getValue(String s)
+C、getParameterNames(String s)		D、getParameterValue(String s)
+32、JSP的内置对象中（ ）对象可对客户的请求作出动态响应，向客户端发送数据。
+*A、response		B、request		C、application		D、out
+33、从（ ）开始，到（ ）结束，被称为一个会话。
+*A、访问者连接到服务器，访问者关闭浏览器离开该服务器
+B、服务器启动，服务器关闭
+C、访问者连接到服务器，服务器关闭
+D、服务器启动，访问者关闭浏览器离开该服务器 
+34、下列代码编译后不会出现警告或错误的是 (   )。
+A、 char c = "a";  B、 byte b = 255;  C、 float c = 10.0;  *D、 double d = 1.0f;
+35、下边哪个不是FORM的元素？（）
+A、Input	  B、textarea     C、select       *D、table
+
+36、下面哪个是空格（）
+A、&amp;   *B、&nbsp;     C、&copy;      D、&lt;
+37、<td align=”xxxx”>中的align属性是什么含意？（）
+A、加粗	   B、斜体      *C、对齐方式     D、边框样式
+38、下边哪个不是JSP的内置对象？（）
+A、session   B、request     *C、cookie       D、out
+39、哪个是JSP指令标记？（）
+A、<% …… %>    B、<%! …… %>    *C、<%@ …… %>    D、<%= …… %>
+40、当在JSP文件中要使用到Vector对象时，应在JSP文件中加入以下哪个语句？（）
+A、<jsp:include file=”java、util、*”  />          B、<jsp:include page=”java、util、*”  />
+*C、<%@ page import=”java、util、*”  %>       D、<%@ page include=”java、util、*”  %>
+41、 关于JavaBean的说法，哪个是正确的？（）
+A、 JavaBean的具体类可以不是public的。    B、 JavaBean可以只提供一个带参数的构造器。
+C、 jsp:userBean可以向HTML标记一样不关闭。    *D、 JavaBean可以保存状态。
+42、 JavaBean的生命周期中，哪个是用来跟踪用户的会话的？（）
+*A、 session    B、 request       C、 page      D、 application
+43、 要在session对象中保存属性，可以使用以下哪个语句？（）
+*A、 session、getAttribute(“key”,”value”);
+B、 session、setAttribute(“key”,”value”);
+C、 session、setAtrribute(“key”);
+D、 session、getAttribute(“key”);
+44、 jsp:forward和sendRedirect都是用来做页面跳转的，描述错误的是？（）
+A、 forward之后可以使用原来的request对象，而且效率较高。
+B、 sendRedirect之后不可以使用原来的request对象，而且效率较低。
+C、 forward地址栏不变化，只能在Web应用程序内的页面间跳转。
+*D、 forward地址栏变化，可以跳转到任何页面和机器。
+45、关于get和post两种请求，下列说法正确的是？（）
+*A、 get请求是默认的。
+B、 get请求处理的数据量大小不受到限制。//get处理小数据量
+C、 post请求地址栏里是能看到数据的。
+D、 post请求可以由doGet方法处理。
+46、 如果Tomcat安装后，想要修改它的端口号，可以通过修改<tomcat安装目录>/conf下的（）文件来实现。
+A、 web、xml
+*B、 server、xml
+C、 server-minimal、xml
+D、 tomcat-user、xml
+47、 下边哪个不是MVC中的组成部分？（）
+A、 JavaBean
+*B、 FrameWork
+C、 JSP
+D、 Servlet
+
+
+48、 哪个不是Servlet接口的方法？（）
+A、 doGet方法
+B、 doPost方法
+C、 init方法
+*D、 forward方法
+49、 Oracle数据库的JDBC驱动程序类名及完整包路径为：（）
+A、 jdbc、driver、oracle、OracleDriver
+B、 jdbc、oracle、driver、OracleDriver
+C、 driver、oracle、jdbc、OracleDriver
+*D、 oracle、jdbc、driver、OracleDriver
+50、 下面哪一个是正确使用JavaBean的方式？（）
+*A、 <jsp:useBean id="address" class="AddressBean" />
+B、 <jsp:useBean name="address" class="AddressBean"/>
+C、 <jsp:useBean bean="address" class="AddressBean" />
+D、 <jsp:useBean beanName="address" class="AddressBean" />
+

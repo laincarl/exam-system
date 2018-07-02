@@ -1,0 +1,44 @@
+1、这是一个{填空}题的{空}
+1、这是一个{填空}题的{空}
+1、这是一个{填空}题的{空}
+1、这是一个{填空}题的{空}
+1、这是一个{填空}{空}题的{空}{空}{空}
+1、企业应用开发经常使用三层架构，这样可以方便维护。这三层分别是{表示逻辑层}{商务逻辑层}{数据库层}。
+2、ASP.NET支持三种控件：{HTML服务器端控件}、{验证控件}和{用户自定义控件}，其中第2种控件是.NET推荐使用的控件。
+3、下面程序代码写在页面的Page_Load事件中，IsPostBack变量起什么作用？{用于检查页面是否已经回传给服务器端}
+if (!IsPostBack) {
+      lblMessage.Text = "第一次访问！";
+   }
+
+6、要在ASP.NET中能够对Access数据库进行读写，需要引入哪两个命名空间：{Using System.data.oledb};  
+7、列举ASP.NET中的七个内置对象：{Page,Response,Request,Session,Application,Cookie, Server}
+8、几乎所有的HTML标记都可以转化为HTML Server控件，只需要在标记中加入{.runat="server"}即可
+9、控件TextBox的AutoPostBack属性的作用是{是否响应服务器事件,值为true/false;}
+10、Server.MapPath()方法的主要功能是{获取文件对象绝对路径}
+11、当一个Web控件上发生的事件需要立即得到响时，应该将他的{AutoPostBack}属性设置为true。
+13、比如在应聘表单的界面上要放入【保存】和 【复位】两个按钮，其中【复位】按钮采用的HTML Reset按钮控件，而【保存】按钮则必须是{服务器}按钮控件。
+14、在设计阶段须将各验证控件的{ControlToValidate}属性指向被验证的控件。
+15、下面是设置和取出Session对象的代码。
+设置Session的代码是：
+Session[“greeting”]=“hello wang !”;
+取出该Session对象的语句如下：
+string Myvar ={Session[“greeting”].ToString();}
+16、下面是使用Application对象时防止竞争的代码。
+Application.{lock()};       //锁定Application对象
+Application[“counter”]=(int) Application[“counter”]+1;
+Application.{unlock()};     //解除对Application对象的锁定
+17、在浏览器已经封闭Cookie的条件下，为了识别用户应该在应用程序的根本目录下的Wob.config文件中，对节点做如下配置：
+{<sessionstate  cookieless=” useUri”/>}或：
+{<sessionstate   cookieless=“  Auto Detect   ”/>}
+18、要使用 SQL Server数据操作组件来存取数据，必须加载{System.Data.SQLClient}这个名称空间。要使用Access数据操作组件来存取数据，必须家族  {System.Data.OleDB}这个命名空间。
+19、服务器端Web控件语法格式: {<asp: 控件名称id=”控件名称” … runat=”server”>}。Web 控件还拥有一个非常重要的功能，那就是支持{数据捆绑}，可以和数据源连接，用来显示或修改数据源的数据。　　　　　　　　　　　　　　　　　　　　　
+20、使用{POST}传送方式可以传送保密、信息量大的应用，asp.net提交Web表单信息是用{POST}传送方式。
+21、网页表单把网络应用程序的用户界面分割成为两部分：{可视的用户界面}部分和{用户界面逻辑}部分。{可视的用户界面}部分由一个包括标记语言的标记和网页表单指定元素的文件构成。这部分就好像是一个容器，开发者可以在其中放人如文本、控件等用于显示的元素。{用户界面逻辑}部分由开发者编写的用于与网页表单相互作用的代码组成，代码可以由基于公共语言运行环境的语言编写。
+22、对文件及文件夹进行读写操作时，要去掉文件的只读属性，如果windows2000/xp/2003操作系统的文件系统采用了NTFS格式，还要在文件或文件夹的安全属性里添加一个{EveryOne}用户，操作权限设置为{完全控制}。
+23、{.NET Framework}提供了一个包含许多高度可重用的接口、类型的类库，该类库是一个完全面向对象的类库。.NET类库的组织是以命名空间（或Name Space）为基础的。
+24、改变Session的有效时间的语句是：{Session.Timeout=60;} 
+25、NET与XML紧密结合的最大好处是{跨平台传送数据}。
+26、Command对象ExecuteNOQuery()方法的功能是{返回SQL语句影响行数,值为int型}
+27、在SQLConnection对象中可以使用{ConnectionString}属性来获取或设置打开SQL数据库的连接字符串。
+28、在操作数据库时有查询、更新和删除等操作，在ADO.NET中一般使用{Command}对象来完成。
+29、ADO.NET允许以两种方式从数据库中检索数据；一种是使用{DataReader}对象；第二种是使用{DataAdapter}对象
