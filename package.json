@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "dev": "webpack-dev-server --config ./webpack/webpack.config.js --hot",
+        "dev": "webpack-dev-server --config ./webpack/webpack.config.js --hot --https",
         "build": "npm run clean && webpack --config ./webpack/webpack.production.js",
         "analyze": "npm run clean && webpack --config ./webpack/webpack.analyze.js",
         "clean": "rimraf ./dist/*"
