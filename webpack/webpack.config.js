@@ -1,10 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const LessThemePlugin = require('webpack-less-theme-plugin');
 const moment = require('moment');
 
+const devMode = process.env.NODE_ENV !== 'production';
 const ROOT_DIR = path.resolve(__dirname, '../');
 module.exports = {
   mode: 'development',
@@ -97,7 +99,7 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: 'style-loader',
+            loader: MiniCssExtractPlugin.loader,
           },
           {
             loader: 'css-loader',
@@ -121,7 +123,8 @@ module.exports = {
         include: /node_modules/,
         use: [
           {
-            loader: 'style-loader',
+            // loader: devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+            loader: MiniCssExtractPlugin.loader,
           },
           {
             loader: 'css-loader',
@@ -137,7 +140,7 @@ module.exports = {
         exclude: [/node_modules/, /theme\.less/],
         use: [
           {
-            loader: 'style-loader',
+            loader: MiniCssExtractPlugin.loader,
           },
           {
             loader: 'css-loader',
@@ -168,7 +171,7 @@ module.exports = {
         include: [/node_modules/, /theme\.less/],
         use: [
           {
-            loader: 'style-loader',
+            loader: MiniCssExtractPlugin.loader,
           },
           {
             loader: 'css-loader',
@@ -182,7 +185,6 @@ module.exports = {
           },
         ],
       },
-
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
@@ -241,7 +243,13 @@ module.exports = {
     // },
   },
   plugins: [
-    new LessThemePlugin({ theme: path.resolve(ROOT_DIR, './theme.less') }), // 使antd主题可以热加载
+    new LessThemePlugin({ theme: path.resolve(ROOT_DIR, './theme.less') }), // 使antd主题可以热加载    
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: '[name].[hash].css',
+      chunkFilename: '[id].[hash].css',
+    }),
     // new ExtractTextPlugin('styles.css'),
     // new CommonsChunkPlugin({
     //   names: ['vendor', 'manifest'], // name是提取公共代码块后js文件的名字。
