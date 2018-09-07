@@ -46,9 +46,9 @@ class Login extends Component {
           // Cookies.set('token', data.token);
           localStorage.setItem('token', data.token);
           message.success('登录成功'); 
-          AppState.setUserAuth(true);
+          AppState.Login(data);         
           history.push('/');
-          window.location.reload();
+          // window.location.reload();
         }).catch((error) => {
           this.setState({
             spinning: false,

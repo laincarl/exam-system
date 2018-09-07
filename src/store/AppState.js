@@ -16,13 +16,19 @@ class AppState {
   constructor() {
     axios.get('/user/info').then((userInfo) => {
       if (userInfo) {
-        // console.log('origin', userInfo);
-        this.setUserInfo(userInfo);
-        this.setUserAuth(true);
+        this.Login(userInfo);
       }
     }).catch((error) => {
       console.log(error);
     });
+  }
+  @action Login(userInfo) {
+    this.setUserInfo(userInfo);
+    this.setUserAuth(true);
+  }
+  @action loginOut() {
+    this.setUserInfo({});
+    this.setUserAuth(false);
   }
   @action
   setUserInfo(userInfo) {

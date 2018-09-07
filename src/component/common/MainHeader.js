@@ -54,8 +54,11 @@ class MainHeader extends Component {
   signOut = () => {
     // Cookies.remove('token');
     localStorage.removeItem('token');
+    
+    const { AppState } = this.props;
+    AppState.loginOut();
     // 退出登录，刷新页面
-    window.location.reload();
+    // window.location.reload();
   }
   render() {
     const { AppState } = this.props;
