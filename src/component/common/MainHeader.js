@@ -9,7 +9,7 @@ import { Popover, Button, Icon } from 'antd';
 import { withRouter } from 'react-router';
 import { inject, observer } from 'mobx-react';
 // import axios from 'Axios';
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 import style from './MainHeader.less';
 
 const styles = {
@@ -52,7 +52,8 @@ class MainHeader extends Component {
     history.push(url);
   }
   signOut = () => {
-    Cookies.remove('token');
+    // Cookies.remove('token');
+    localStorage.removeItem('token');
     // 退出登录，刷新页面
     window.location.reload();
   }

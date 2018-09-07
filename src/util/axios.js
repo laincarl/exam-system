@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { message } from 'antd';
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 import Config from 'config';
 
-const accessTokens = Cookies.get('token');
+// const accessTokens = Cookies.get('token');
+const accessTokens = localStorage.getItem('token');
 // axios 配置
 axios.defaults.timeout = 10000;
 axios.defaults.baseURL = Config.server;

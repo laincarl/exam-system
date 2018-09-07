@@ -10,7 +10,7 @@ import { hot } from 'react-hot-loader';
 import { createBrowserHistory } from 'history';
 // import { HashRouter as Router } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
-
+import DevTools from 'mobx-react-devtools';
 import { Provider } from 'mobx-react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import MainHeader from 'MainHeader';
@@ -33,6 +33,7 @@ class App extends Component {
         <Router history={createBrowserHistory}>
           <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
             <MainHeader />
+            <DevTools />
             <RouterContainer>
               <Switch>
                 <Route exact path="/" component={Home} />

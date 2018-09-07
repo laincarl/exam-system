@@ -33,6 +33,7 @@
         "less": "^2.7.3",
         "less-loader": "^4.0.5",
         "mini-css-extract-plugin": "^0.4.2",
+        "mobx-react-devtools": "^6.0.3",
         "postcss-loader": "^2.1.4",
         "react-hot-loader": "^4.1.2",
         "rimraf": "^2.6.1",
